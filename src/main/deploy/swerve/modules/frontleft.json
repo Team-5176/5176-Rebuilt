@@ -12,7 +12,7 @@
   "angle": {
     "type": "talonfx",
     "id": 8,
-    "canbus": "rio"
+    "canbus": null
   },
   "encoder": {
     "type": "thrifty",
