@@ -10,7 +10,7 @@
     "canbus": null
   },
   "angle": {
-    "type": "talonfx",
+    "type": "krakenx44",
     "id": 6,
     "canbus": null
   },
