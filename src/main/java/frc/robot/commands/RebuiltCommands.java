@@ -8,10 +8,8 @@ import frc.robot.Robot;
 public class RebuiltCommands {
 
 
-         public static final Command shootFuel = new InstantCommand(()-> Robot.shooterSubsystem.runRoller(20), Robot.shooterSubsystem);
+         public static final Command shootFuel = new InstantCommand(()-> Robot.shooterSubsystem.runRoller(0.3), Robot.shooterSubsystem);
 
-
-    
 
 
     //many other cool possibilities with "WaitUntilCommand"

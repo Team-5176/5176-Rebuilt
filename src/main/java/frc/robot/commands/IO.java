@@ -15,7 +15,8 @@ public class IO {
 
     public XboxController operatorXbox = new XboxController(1);
 
-    Trigger shootButton = new Trigger(() -> operatorXbox.getRightTriggerAxis() > 0.7);//XboxControl..........Right Trigger
+    // Trigger shootButton = new Trigger(() -> operatorXbox.getRightTriggerAxis() > 0.7);//XboxControl..........Right Trigger
+    JoystickButton shootButton = new JoystickButton(operatorXbox, 1); // XboxControl..........A
     
     // LED Button
     // JoystickButton ledoff = new JoystickButton(operatorXbox, 4)    .whenPressed(m_turnOnLEDsCommand);
