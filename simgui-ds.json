@@ -1,9 +1,12 @@
 {
+<<<<<<< HEAD
   "System Joysticks": {
     "window": {
       "enabled": false
     }
   },
+=======
+>>>>>>> a86dd6ea379197d92fd8f5cea2c8d0ede891ff9e
   "keyboardJoysticks": [
     {
       "axisConfig": [
