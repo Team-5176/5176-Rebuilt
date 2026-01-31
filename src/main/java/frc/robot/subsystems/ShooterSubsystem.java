@@ -24,9 +24,8 @@ public class ShooterSubsystem extends SubsystemBase {
         shooterLeaderConfig.idleMode(IdleMode.kBrake);
         shooterLeaderConfig.voltageCompensation(12);
         shooterLeaderConfig.smartCurrentLimit(40);
-        
-        shooterFollowerConfig = shooterLeaderConfig;
 
+        shooterFollowerConfig.apply(shooterLeaderConfig);
         shooterFollowerConfig.follow(12, true);
 
 
