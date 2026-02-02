@@ -40,6 +40,7 @@ public class ShooterSubsystem extends SubsystemBase {
     public void runRoller(double speed) {
     shooterLeader.set(speed);
     }
+    
     public boolean isShooting() {
         return shooterLeader.get() > 0;
     }
