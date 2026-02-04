@@ -42,7 +42,7 @@ public class ShooterSubsystem extends SubsystemBase {
       shooterLeaderConfig.closedLoop
             .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
             .pid(Constants.ShooterConstants.kP, Constants.ShooterConstants.kI, Constants.ShooterConstants.kD)
-            // .iZone(Constants.ShooterConstants.kIz);
+            // .iZone(Constants.ShooterConstants.kIz)
             .outputRange(-1, 1);
 
 
@@ -65,7 +65,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
     
     public boolean isShooting() {
-        return Math.abs(shooterLeader.getEncoder().getVelocity()) > 100; // Check if velocity > 100 RPM
+        return Math.abs(shooterLeader.getEncoder().getVelocity()) > 2000; // Check if velocity > 100 RPM
     }
     
     /** Check if shooter is at target speed (within tolerance) */

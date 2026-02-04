@@ -63,4 +63,35 @@ public final class Constants
     public static final int CANTimeoutMs = 250; // milliseconds
   }
 
+  public static class IntakeConstants {
+
+    public static final double kRollerS = 0;
+    public static final double kRollerV = 0;
+    public static final double kRollerA = 0;
+
+
+    public static final double kRollerP = 0.01;
+    public static final double kRollerI = 0;
+    public static final double kRollerD = 0;
+
+
+
+    public static final double kArmS = 0;
+    public static final double kArmV = 0;
+    public static final double kArmA = 0;
+
+
+    public static final double kArmP = 0.01;
+    public static final double kArmI = 0;
+    public static final double kArmD = 0;
+
+    public static final int INTAKE_ROLLER_MOTORS_CURRENT_LIMIT = 40; // Amps
+    public static final double INTAKE_ROLLER_MOTORS_VOLTAGE = 12.0; // Volts
+
+
+    public static final int INTAKE_ARM_MOTORS_CURRENT_LIMIT = 40; // Amps
+    public static final double INTAKE_ARM_MOTORS_VOLTAGE = 12.0; // Volts
+
+  }
+
 }

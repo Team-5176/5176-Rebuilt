@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class TransportSubsystem extends SubsystemBase {
     
-    SparkFlex transport = new SparkFlex(12, MotorType.kBrushless);
+    SparkFlex transport = new SparkFlex(0, MotorType.kBrushless);
 
 
     public TransportSubsystem()
