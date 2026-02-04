@@ -9,8 +9,10 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SpindexerSubsystem;
+import frc.robot.subsystems.TransportSubsystem;
 import frc.robot.commands.IO;
 
 
@@ -25,8 +27,9 @@ public class Robot extends TimedRobot
   private Command m_autonomousCommand;
 
   public static SpindexerSubsystem spindexerSubsystem = new SpindexerSubsystem();
-
+  public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public static ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  public static TransportSubsystem transportSubsystem = new TransportSubsystem();
   public static IO io = new IO();
 
 

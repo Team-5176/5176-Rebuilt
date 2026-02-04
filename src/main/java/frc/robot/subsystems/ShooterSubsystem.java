@@ -38,7 +38,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     /** This is a method that makes the roller spin */
     public void runRoller(double speed) {
-    shooterLeader.set(speed);
+      shooterLeader.set(speed);
     }
     
     public boolean isShooting() {
