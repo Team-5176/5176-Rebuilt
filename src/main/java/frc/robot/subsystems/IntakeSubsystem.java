@@ -79,11 +79,6 @@ public class IntakeSubsystem extends SubsystemBase  {
         intakeRoller.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
     }
 
-    public void stopIntake(double velocityRPM)
-    {
-        intakeRoller.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
-    }
-
     public void deployIntake(double deployPoint) {
 
         intakeArm.getClosedLoopController().setSetpoint(deployPoint, ControlType.kPosition);
