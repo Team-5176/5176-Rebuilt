@@ -19,8 +19,8 @@ import frc.robot.Constants;
 public class IntakeSubsystem extends SubsystemBase  {
 
     
-    SparkFlex intakeRoller = new SparkFlex(0, MotorType.kBrushless);
-    SparkMax intakeArm = new SparkMax(0, MotorType.kBrushless);
+    private final SparkFlex intakeRoller = new SparkFlex(Constants.IntakeConstants.ROLLERID, MotorType.kBrushless);
+    private final SparkMax intakeArm = new SparkMax(Constants.IntakeConstants.ARMID, MotorType.kBrushless);
 
     public IntakeSubsystem(){ 
 
@@ -76,6 +76,11 @@ public class IntakeSubsystem extends SubsystemBase  {
 
     public void spinIntake(double velocityRPM) {
 
+        intakeRoller.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
+    }
+
+    public void stopIntake(double velocityRPM)
+    {
         intakeRoller.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
     }
 

@@ -58,6 +58,9 @@ public final class Constants
     // Shooter Motor Current Limit and Voltage
     public static final int SHOOTER_MOTORS_CURRENT_LIMIT = 40; // Amps
     public static final double SHOOTER_MOTORS_VOLTAGE = 12.0; // Volts
+
+    public static final int LEADERSHOOTERID = 0; // Can ID constant for the lead shoter motor
+    public static final int FOLLOWERSHOOTERID = 0; // Can ID constant for the follower shoter motor
     
     // CAN Timeout is milliseconds between motor controller communication with the rio. Frees up space in the command scheduler and on the CAN bus.
     public static final int CANTimeoutMs = 250; // milliseconds
@@ -91,6 +94,55 @@ public final class Constants
 
     public static final int INTAKE_ARM_MOTORS_CURRENT_LIMIT = 40; // Amps
     public static final double INTAKE_ARM_MOTORS_VOLTAGE = 12.0; // Volts
+
+    public static final int ARMID = 0;
+    public static final int ROLLERID = 0;
+
+  }
+
+  public static class TransportConstants {
+
+    public static final double kTransportS = 0;
+    public static final double kTransportV = 0;
+    public static final double kTransportA = 0;
+
+
+    public static final double kTransportP = 0.01;
+    public static final double kTransportI = 0;
+    public static final double kTransportD = 0;
+
+    public static final int Transport_MOTORS_CURRENT_LIMIT = 40; // Amps
+    public static final double Transport_MOTORS_VOLTAGE = 12.0; // Volts
+
+    public static final int TRANSPORTID = 0;
+
+  } 
+
+  public static class SpindexerConstants {
+
+    public static final double kSpindexS = 0;
+    public static final double kSpindexV = 0;
+    public static final double kSpindexA = 0;
+
+
+    public static final double kSpindexP = 0.01;
+    public static final double kSpindexI = 0;
+    public static final double kSpindexD = 0;
+
+    public static final int SPINDEX_MOTORS_CURRENT_LIMIT = 40; // Amps
+    public static final double SPINDEX_MOTORS_VOLTAGE = 12.0; // Volts
+
+    public static final int SPINDEXERID = 0;
+  }
+
+  public static class TowerConstants {
+
+    public static final double kCLIMB_P = 0;
+    public static final double kCLIMB_I = 0;
+    public static final double kCLIMB_D = 0;
+
+    public static final int LEADERCLIMBID = 0;
+    public static final int FOLLOWERCLIMBID = 0;
 
   }
 

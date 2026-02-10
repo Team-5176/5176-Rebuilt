@@ -16,8 +16,8 @@ import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
     
-    SparkFlex shooterLeader = new SparkFlex(12, MotorType.kBrushless);
-    SparkFlex shooterFollower = new SparkFlex(11, MotorType.kBrushless);
+    private final SparkFlex shooterLeader = new SparkFlex(Constants.ShooterConstants.LEADERSHOOTERID, MotorType.kBrushless);
+    private final SparkFlex shooterFollower = new SparkFlex(Constants.ShooterConstants.FOLLOWERSHOOTERID, MotorType.kBrushless);
 
 
     public ShooterSubsystem()
@@ -65,6 +65,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
     
     public boolean isShooting() {
+
         return Math.abs(shooterLeader.getEncoder().getVelocity()) > 2000; // Check if velocity > 100 RPM
     }
     
