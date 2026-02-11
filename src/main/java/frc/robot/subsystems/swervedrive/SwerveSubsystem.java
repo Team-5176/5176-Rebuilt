@@ -61,13 +61,25 @@ public class SwerveSubsystem extends SubsystemBase
   {
     swerveDrive.zeroGyro();
   }
-
+  // This method checks the current alliance color from the DriverStation and returns true if it's the Red alliance, false otherwise. If the alliance information is not available, it defaults to false (Blue Alliance).
   private boolean isRedAlliance()
   {
     var alliance = DriverStation.getAlliance();
     return alliance.isPresent() ? alliance.get() == DriverStation.Alliance.Red : false;
   }
 
+  // This method calculates the heading of the robot based on its current velocity vector. It returns the field oriented heading in degrees.
+  public double getHeading() {
+    ChassisSpeeds fieldVelocity = swerveDrive.getFieldVelocity();
+
+    // Calculate the direction angle from the velocity components
+    double velocityDirection = Math.atan2(fieldVelocity.vyMetersPerSecond, 
+                                          fieldVelocity.vxMetersPerSecond);
+    // Convert to degrees if needed
+    double velocityDirectionDegrees = Math.toDegrees(velocityDirection);
+
+    return velocityDirectionDegrees;
+  }
   /**
    * This will zero (calibrate) the robot to assume the current position is facing forward
    * <p>

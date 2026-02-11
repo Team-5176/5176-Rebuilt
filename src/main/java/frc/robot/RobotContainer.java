@@ -49,6 +49,14 @@ public class RobotContainer
                                                                     .deadband(OperatorConstants.DEADBAND)
                                                                     .scaleTranslation(0.8)
                                                                     .allianceRelativeControl(true);
+                                                                    
+  SwerveInputStream driveSnakeMode = SwerveInputStream.of(drivebase.getSwerveDrive(),
+                                                                    () -> driverXbox.getLeftY() * -1.0,
+                                                                    () -> driverXbox.getLeftX() * -1.0)
+                                                                    .withControllerRotationAxis(() -> drivebase.getHeading())
+                                                                    .deadband(OperatorConstants.DEADBAND)
+                                                                    .scaleTranslation(0.8)
+                                                                    .allianceRelativeControl(true);
   SwerveInputStream driveDirectAngle = driveAngularVelocity.copy()
                                                            .withControllerHeadingAxis((((driverXbox::getRightX))),
                                                                                          driverXbox::getRightY)
