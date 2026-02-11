@@ -79,7 +79,7 @@ public class SwerveSubsystem extends SubsystemBase
   }
 
   // This method calculates the heading of the robot based on its current velocity vector. It returns the field oriented heading in degrees.
-  public double getHeading() {
+  public Rotation2d getHeading() {
     ChassisSpeeds fieldVelocity = swerveDrive.getFieldVelocity();
 
     // Calculate the direction angle from the velocity components
@@ -88,7 +88,9 @@ public class SwerveSubsystem extends SubsystemBase
     // Convert to degrees if needed
     double velocityDirectionDegrees = Math.toDegrees(velocityDirection);
 
-    return velocityDirectionDegrees;
+    Rotation2d velocityRotation2d = new Rotation2d(velocityDirectionDegrees);
+
+    return velocityRotation2d;
   }
   /**
    * This will zero (calibrate) the robot to assume the current position is facing forward

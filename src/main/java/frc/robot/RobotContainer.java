@@ -7,6 +7,7 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -53,7 +54,7 @@ public class RobotContainer
   SwerveInputStream driveSnakeMode = SwerveInputStream.of(drivebase.getSwerveDrive(),
                                                                     () -> driverXbox.getLeftY() * -1.0,
                                                                     () -> driverXbox.getLeftX() * -1.0)
-                                                                    .withControllerRotationAxis(() -> drivebase.getHeading())
+                                                                    .aim(new Pose2d(null, drivebase.getHeading()))
                                                                     .deadband(OperatorConstants.DEADBAND)
                                                                     .scaleTranslation(0.8)
                                                                     .allianceRelativeControl(true);
