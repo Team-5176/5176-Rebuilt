@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.Vision;
 import swervelib.parser.SwerveParser;
 import swervelib.telemetry.SwerveDriveTelemetry;
 import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
@@ -28,6 +29,7 @@ public class SwerveSubsystem extends SubsystemBase
 {
   File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(),"swerve");
   SwerveDrive swerveDrive;
+  private Vision vision;
 
   public SwerveSubsystem(){
     try {
@@ -45,6 +47,14 @@ public class SwerveSubsystem extends SubsystemBase
 
   public SwerveDrive getSwerveDrive() {
       return swerveDrive;
+  }
+
+    /**
+   * Setup the photon vision class.
+   */
+  public void setupPhotonVision()
+  {
+    vision = new Vision(swerveDrive::getPose, swerveDrive.field);
   }
 
   public void driveFieldOriented(ChassisSpeeds velocity) {

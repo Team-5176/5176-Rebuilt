@@ -21,6 +21,7 @@ import edu.wpi.first.networktables.NetworkTablesJNI;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 import java.awt.Desktop;
 import java.util.ArrayList;
@@ -42,8 +43,7 @@ import swervelib.telemetry.SwerveDriveTelemetry;
  * Example PhotonVision class to aid in the pursuit of accurate odometry. Taken from
  * https://gitlab.com/ironclad_code/ironclad-2024/-/blob/master/src/main/java/frc/robot/vision/Vision.java?ref_type=heads
  */
-public class Vision
-{
+public class Vision extends SubsystemBase {
 
   /**
    * April Tag Field Layout of the year.
