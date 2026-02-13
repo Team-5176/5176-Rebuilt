@@ -37,6 +37,8 @@ public class RobotContainer
     //Have the autoChooser pull in all PathPlanner autos as options
     autoChooser = AutoBuilder.buildAutoChooser();
 
+    drivebase.setupPathPlanner();
+
     drivebase.setDefaultCommand(driveFieldOrientedAngularVelocity);
     DriverStation.silenceJoystickConnectionWarning(true);
     drivebase.zeroGyroWithAlliance();
@@ -51,13 +53,6 @@ public class RobotContainer
                                                                     .scaleTranslation(0.8)
                                                                     .allianceRelativeControl(true);
                                                                     
-  SwerveInputStream driveSnakeMode = SwerveInputStream.of(drivebase.getSwerveDrive(),
-                                                                    () -> driverXbox.getLeftY() * -1.0,
-                                                                    () -> driverXbox.getLeftX() * -1.0)
-                                                                    .aim(new Pose2d(null, drivebase.getHeading()))
-                                                                    .deadband(OperatorConstants.DEADBAND)
-                                                                    .scaleTranslation(0.8)
-                                                                    .allianceRelativeControl(true);
   SwerveInputStream driveDirectAngle = driveAngularVelocity.copy()
                                                            .withControllerHeadingAxis((((driverXbox::getRightX))),
                                                                                          driverXbox::getRightY)

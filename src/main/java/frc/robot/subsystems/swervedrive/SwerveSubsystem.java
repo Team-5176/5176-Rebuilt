@@ -7,7 +7,16 @@ package frc.robot.subsystems.swervedrive;
 import static edu.wpi.first.units.Units.Meter;
 
 import java.io.File;
+import java.util.Optional;
 import java.util.function.Supplier;
+
+import org.photonvision.targeting.PhotonPipelineResult;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathfindingCommand;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.config.RobotConfig;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
@@ -19,6 +28,7 @@ import swervelib.parser.SwerveParser;
 import swervelib.telemetry.SwerveDriveTelemetry;
 import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 import swervelib.SwerveDrive;
+import swervelib.SwerveInputStream;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -67,10 +77,7 @@ public class SwerveSubsystem extends SubsystemBase
     });
   }
 
-  public void zeroGyro()
-  {
-    swerveDrive.zeroGyro();
-  }
+  
   // This method checks the current alliance color from the DriverStation and returns true if it's the Red alliance, false otherwise. If the alliance information is not available, it defaults to false (Blue Alliance).
   private boolean isRedAlliance()
   {
@@ -78,23 +85,8 @@ public class SwerveSubsystem extends SubsystemBase
     return alliance.isPresent() ? alliance.get() == DriverStation.Alliance.Red : false;
   }
 
-  // This method calculates the heading of the robot based on its current velocity vector. It returns the field oriented heading in degrees.
-  public Rotation2d getHeading() {
-    ChassisSpeeds fieldVelocity = swerveDrive.getFieldVelocity();
-
-    // Calculate the direction angle from the velocity components
-    double velocityDirection = Math.atan2(fieldVelocity.vyMetersPerSecond, 
-                                          fieldVelocity.vxMetersPerSecond);
-    // Convert to degrees if needed
-    double velocityDirectionDegrees = Math.toDegrees(velocityDirection);
-
-    Rotation2d velocityRotation2d = new Rotation2d(velocityDirectionDegrees);
-
-    return velocityRotation2d;
-  }
   /**
    * This will zero (calibrate) the robot to assume the current position is facing forward
-   * <p>
    * If red alliance rotate the robot 180 after the drviebase zero command
    */
   public void zeroGyroWithAlliance()
@@ -109,6 +101,90 @@ public class SwerveSubsystem extends SubsystemBase
             zeroGyro();
           }
   }
+  public void zeroGyro()
+  {
+    swerveDrive.zeroGyro();
+  }
+
+  public Command driveRobotOriented(Supplier<ChassisSpeeds> velocity){
+    return run(() -> {
+      swerveDrive.drive(velocity.get());
+    });
+  }
+
+  public ChassisSpeeds getRobotVelocity() {
+    return swerveDrive.getRobotVelocity();
+  }  
+
+  public void setupPathPlanner()
+  {
+    // Load the RobotConfig from the GUI settings. You should probably
+    // store this in your Constants file
+    RobotConfig config;
+    try
+    {
+      config = RobotConfig.fromGUISettings();
+
+      final boolean enableFeedforward = true;
+      // Configure AutoBuilder last
+      AutoBuilder.configure(
+          this::getPose,
+          // Robot pose supplier
+          this::resetOdometry,
+          // Method to reset odometry (will be called if your auto has a starting pose)
+          this::getRobotVelocity,
+          // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+          (speedsRobotRelative, moduleFeedForwards) -> {
+            if (enableFeedforward)
+            {
+              swerveDrive.drive(
+                  speedsRobotRelative,
+                  swerveDrive.kinematics.toSwerveModuleStates(speedsRobotRelative),
+                  moduleFeedForwards.linearForces()
+                               );
+            } else
+            {
+              swerveDrive.setChassisSpeeds(speedsRobotRelative);
+            }
+          },
+          // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
+          new PPHolonomicDriveController(
+              // PPHolonomicController is the built in path following controller for holonomic drive trains
+              new PIDConstants(1, 0.0, 0.1),
+              // Translation PID constants
+              new PIDConstants(1, 0.0, 0.1)
+              // Rotation PID constants
+          ),
+          config,
+          // The robot configuration
+          () -> {
+            // Boolean supplier that controls when the path will be mirrored for the red alliance
+            // This will flip the path being followed to the red side of the field.
+            // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+
+            var alliance = DriverStation.getAlliance();
+            if (alliance.isPresent())
+            {
+              return alliance.get() == DriverStation.Alliance.Red;
+            }
+            return false;
+          },
+          this
+          // Reference to this subsystem to set requirements
+                           );
+
+    } catch (Exception e)
+    {
+      // Handle exception as needed
+      e.printStackTrace();
+    }
+
+    //Preload PathPlanner Path finding
+    // IF USING CUSTOM PATHFINDER ADD BEFORE THIS LINE
+    PathfindingCommand.warmupCommand().schedule();
+  }
+
+
   /**
    * Resets odometry to the given pose. Gyro angle and module positions do not need to be reset when calling this
    * method.  However, if either gyro angle or module position is reset, this must be called in order for odometry to

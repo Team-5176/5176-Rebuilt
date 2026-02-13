@@ -15,10 +15,13 @@ public class IO {
     // public XboxController driverXbox = new XboxController(0); add back????
 
     public XboxController operatorXbox = new XboxController(1);
+    public XboxController driverXbox = new XboxController(1);
+
 
     // Trigger shootButton = new Trigger(() -> operatorXbox.getRightTriggerAxis() > 0.7);//XboxControl..........Right Trigger
     JoystickButton toggleShootButton = new JoystickButton(operatorXbox, 1);//XboxController...A
     JoystickButton toggleIntakeButton = new JoystickButton(operatorXbox, 2);//XboxController...B
+
     // LED Button
     // JoystickButton ledoff = new JoystickButton(operatorXbox, 4)    .whenPressed(m_turnOnLEDsCommand);
     
