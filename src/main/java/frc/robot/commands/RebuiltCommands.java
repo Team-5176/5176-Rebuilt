@@ -18,10 +18,17 @@ public class RebuiltCommands {
 
     public static final Command startIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(0.5), Robot.intakeSubsystem);
     public static final Command stopIntake = new InstantCommand(()->Robot.intakeSubsystem.spinIntake(0.0),Robot.intakeSubsystem);
+   
     public static final ConditionalCommand toggleShoot = new ConditionalCommand(
         stopShoot.andThen(stopSpindexer),
         shootFuel.andThen(runSpindexer),
         Robot.shooterSubsystem::isShooting
+    );
+    
+    public static final ConditionalCommand toggleIntake = new ConditionalCommand(
+        stopIntake,
+        startIntake,
+        Robot.intakeSubsystem::isIntaking
     );
 
 
