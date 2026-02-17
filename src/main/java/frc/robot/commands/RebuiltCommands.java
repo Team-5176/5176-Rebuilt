@@ -17,18 +17,19 @@ public class RebuiltCommands {
     public static final Command stopSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(0.0), Robot.spindexerSubsystem);
 
     public static final Command startIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(0.5), Robot.intakeSubsystem);
-    public static final Command stopIntake = new InstantCommand(()->Robot.intakeSubsystem.spinIntake(0.0),Robot.intakeSubsystem);
+    public static final Command stopIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(0.0),Robot.intakeSubsystem);
 
     public static final Command startTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(0.5), Robot.transportSubsystem);
     public static final Command stopTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(0), Robot.transportSubsystem);
+    
+    public static final Command climberPos1 = new InstantCommand(()-> Robot.towerClimbSubsystem.setTowerClimbPosition(2),Robot.towerClimbSubsystem);
 
-   
     public static final ConditionalCommand toggleShoot = new ConditionalCommand(
         stopShoot.andThen(stopSpindexer).andThen(stopTransport),
-        shootFuel.andThen(runSpindexer).andThen(stopTransport),
+        shootFuel.andThen(runSpindexer).andThen(startTransport),
         Robot.shooterSubsystem::isShooting
     );
-    
+
     public static final ConditionalCommand toggleIntake = new ConditionalCommand(
         stopIntake,
         startIntake,
