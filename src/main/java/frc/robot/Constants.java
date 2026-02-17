@@ -139,6 +139,17 @@ public final class Constants
 
   public static class TowerConstants {
 
+    public static final int FLIPPERS_MOTOR_CURRENT_LIMIT = 40;
+    public static final double FLIPPERS_MOTOR_VOLTAGE = 12;
+
+    public static final double kFlippersP = 0;
+    public static final double kFlippersI = 0;
+    public static final double kFlippersD = 0;
+
+    public static final double kFlippersS = 0;
+    public static final double kFlippersV = 0;
+    public static final double kFlippersA = 0;
+
     public static final double kCLIMB_P = 0;
     public static final double kCLIMB_I = 0;
     public static final double kCLIMB_D = 0;
