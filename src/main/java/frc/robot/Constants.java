@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
 import swervelib.math.Matter;
@@ -144,6 +146,28 @@ public final class Constants
     public static final int LEADERCLIMBID = 0;
     public static final int FOLLOWERCLIMBID = 0;
 
+  }
+
+  public static class driveToPoseConstants {
+    public static final Translation2d BlueLeftTranslation = new Translation2d(0,0);
+    public static final Translation2d BlueCenterTranslation = new Translation2d(0,0);
+    public static final Translation2d BlueRightTranslation = new Translation2d(0,0);
+
+    public static final Rotation2d BlueLeftRotation = new Rotation2d(0);
+    public static final Rotation2d BlueCenterRotation = new Rotation2d(0);
+    public static final Rotation2d BlueRightRotation = new Rotation2d(0);
+
+    public static final Translation2d RedLeftTranslation = new Translation2d(0,0);
+    public static final Translation2d RedCenterTranslation = new Translation2d(0,0);
+    public static final Translation2d RedRightTranslation = new Translation2d(0,0);
+
+    public static final Rotation2d RedLeftRotation = new Rotation2d(0);
+    public static final Rotation2d RedCenterRotation = new Rotation2d(0);
+    public static final Rotation2d RedRightRotation = new Rotation2d(0);
+
+
+
+    
   }
 
 }

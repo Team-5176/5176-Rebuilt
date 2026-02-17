@@ -6,9 +6,10 @@ import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class TowerClimbSubsystem {
+public class TowerClimbSubsystem extends SubsystemBase {
 
     private final TalonFX towerClimbLead = new TalonFX(Constants.TowerConstants.LEADERCLIMBID);
     private final TalonFX towerClimbFollow = new TalonFX(Constants.TowerConstants.FOLLOWERCLIMBID);
@@ -23,8 +24,8 @@ public class TowerClimbSubsystem {
         TalonFXConfiguration towerClimbConfig = new TalonFXConfiguration();
 
         towerClimbConfig.Slot0.kP = Constants.TowerConstants.kCLIMB_P;
-        towerClimbConfig.Slot0.kP = Constants.TowerConstants.kCLIMB_I;
-        towerClimbConfig.Slot0.kP = Constants.TowerConstants.kCLIMB_D;
+        towerClimbConfig.Slot0.kI = Constants.TowerConstants.kCLIMB_I;
+        towerClimbConfig.Slot0.kD = Constants.TowerConstants.kCLIMB_D;
 
         towerClimbConfig.Voltage.withPeakForwardVoltage(12)
                                 .withPeakReverseVoltage(12);

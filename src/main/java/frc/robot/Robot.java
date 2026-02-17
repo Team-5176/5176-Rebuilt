@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SpindexerSubsystem;
+import frc.robot.subsystems.TowerClimbSubsystem;
 import frc.robot.subsystems.TransportSubsystem;
 import frc.robot.subsystems.Vision;
 import frc.robot.commands.IO;
@@ -31,6 +32,7 @@ public class Robot extends TimedRobot
   public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public static ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   public static TransportSubsystem transportSubsystem = new TransportSubsystem();
+  public static TowerClimbSubsystem towerClimbSubsystem = new TowerClimbSubsystem();
   public static IO io = new IO();
 
 

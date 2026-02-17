@@ -9,6 +9,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -38,7 +39,7 @@ public class RobotContainer
     autoChooser = AutoBuilder.buildAutoChooser();
 
     drivebase.setupPathPlanner();
-
+    configureDriveToPose();
     drivebase.setDefaultCommand(driveFieldOrientedAngularVelocity);
     DriverStation.silenceJoystickConnectionWarning(true);
     drivebase.zeroGyroWithAlliance();
@@ -66,6 +67,27 @@ public class RobotContainer
     // Pass in the selected auto from the SmartDashboard as our desired autnomous commmand 
     return autoChooser.getSelected();
   }
+
+  private void configureDriveToPose() {
+
+    if(!drivebase.isRedAlliance()) {
+        driverXbox.x().whileTrue(drivebase.driveToPose(
+          new Pose2d(Constants.driveToPoseConstants.BlueLeftTranslation, Constants.driveToPoseConstants.BlueLeftRotation)));
+        driverXbox.a().whileTrue(drivebase.driveToPose(
+          new Pose2d(Constants.driveToPoseConstants.BlueCenterTranslation, Constants.driveToPoseConstants.BlueCenterRotation)));
+        driverXbox.b().whileTrue(drivebase.driveToPose(
+          new Pose2d(Constants.driveToPoseConstants.BlueRightTranslation, Constants.driveToPoseConstants.BlueRightRotation)));
+      }else {
+        driverXbox.x().whileTrue(drivebase.driveToPose(
+          new Pose2d(Constants.driveToPoseConstants.RedLeftTranslation, Constants.driveToPoseConstants.RedLeftRotation)));
+        driverXbox.a().whileTrue(drivebase.driveToPose(
+          new Pose2d(Constants.driveToPoseConstants.BlueCenterTranslation, Constants.driveToPoseConstants.RedCenterRotation)));
+        driverXbox.b().whileTrue(drivebase.driveToPose(
+          new Pose2d(Constants.driveToPoseConstants.BlueRightTranslation, Constants.driveToPoseConstants.RedRightRotation)));
+      }
+    }
+
+
 
 };
 
