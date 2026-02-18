@@ -140,6 +140,13 @@ public final class Constants
 
   public static class TowerConstants {
 
+    public static final Pose2d TOWERALIGN = new Pose2d();
+    public static final Translation2d TOWERTRANSLATION = new Translation2d(0,0);
+    public static final Rotation2d TOWERROTATION = new Rotation2d(0);
+
+    public static final double CLIMBCONVERSIONFACTOR = 5.2935836213; // DO NOT TOUCH. CALCULATED CONVERSION
+    public static final double CLIMBDISTANCE = 0 * CLIMBCONVERSIONFACTOR;//inches you want the bike chain to move * conversion factor
+
     public static final int FLIPPERS_MOTOR_CURRENT_LIMIT = 40;
     public static final double FLIPPERS_MOTOR_VOLTAGE = 12;
 
