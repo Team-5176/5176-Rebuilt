@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
@@ -168,6 +169,10 @@ public final class Constants
     public static final Rotation2d BlueCenterRotation = new Rotation2d(0);
     public static final Rotation2d BlueRightRotation = new Rotation2d(0);
 
+    public static final Pose2d BLUELEFTPOSE2D = new Pose2d(BlueLeftTranslation, BlueLeftRotation);
+    public static final Pose2d BLUECENTERPOSE2D = new Pose2d(BlueCenterTranslation, BlueCenterRotation);
+    public static final Pose2d BLUERIGHTPOSE2D = new Pose2d(BlueRightTranslation, BlueRightRotation);
+
     public static final Translation2d RedLeftTranslation = new Translation2d(0,0);
     public static final Translation2d RedCenterTranslation = new Translation2d(0,0);
     public static final Translation2d RedRightTranslation = new Translation2d(0,0);
@@ -175,6 +180,10 @@ public final class Constants
     public static final Rotation2d RedLeftRotation = new Rotation2d(0);
     public static final Rotation2d RedCenterRotation = new Rotation2d(0);
     public static final Rotation2d RedRightRotation = new Rotation2d(0);
+
+    public static final Pose2d REDLEFTPOSE2D = new Pose2d(RedLeftTranslation, RedLeftRotation);
+    public static final Pose2d REDCENTERPOSE2D = new Pose2d(RedCenterTranslation, RedCenterRotation);
+    public static final Pose2d REDRIGHTPOSE2D = new Pose2d(RedRightTranslation, RedRightRotation);
     
   }
 }

@@ -70,9 +70,10 @@ public class RobotContainer
 
   private void configureDriveToPose() {
 
+    driverXbox.y().whileTrue(drivebase.driveToPose(drivebase.getClosestPoint()));
+
     if(!drivebase.isRedAlliance()) {
-        driverXbox.x().whileTrue(drivebase.driveToPose(
-          new Pose2d(Constants.driveToPoseConstants.BlueLeftTranslation, Constants.driveToPoseConstants.BlueLeftRotation)));
+        driverXbox.x().whileTrue(drivebase.driveToPose(Constants.driveToPoseConstants.BLUELEFTPOSE2D));
         driverXbox.a().whileTrue(drivebase.driveToPose(
           new Pose2d(Constants.driveToPoseConstants.BlueCenterTranslation, Constants.driveToPoseConstants.BlueCenterRotation)));
         driverXbox.b().whileTrue(drivebase.driveToPose(

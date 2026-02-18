@@ -36,6 +36,7 @@ import swervelib.telemetry.SwerveDriveTelemetry;
 import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 import swervelib.SwerveDrive;
 import swervelib.SwerveInputStream;
+import swervelib.imu.NavX3Swerve;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -211,6 +212,61 @@ public class SwerveSubsystem extends SubsystemBase
           constraints,
           edu.wpi.first.units.Units.MetersPerSecond.of(0) // Goal end velocity in meters/sec
                                       );
+    }
+
+    public Pose2d getClosestPoint() {
+      Translation2d currentPose = swerveDrive.getPose().getTranslation();
+      Pose2d bestPose = new Pose2d();
+
+      if(isRedAlliance()){
+        double redDistanceFromLeft;
+        double redDistanceFromCenter;
+        double redDistanceFromRight;
+
+        double rLXDist = Constants.driveToPoseConstants.RedLeftTranslation.getX() - currentPose.getX();
+        double rLYDist = Constants.driveToPoseConstants.RedLeftTranslation.getY() - currentPose.getY();
+        double rCXDist = Constants.driveToPoseConstants.RedCenterTranslation.getX() - currentPose.getX();
+        double rCYDist = Constants.driveToPoseConstants.RedCenterTranslation.getY() - currentPose.getY();
+        double rRXDist = Constants.driveToPoseConstants.RedRightTranslation.getX() - currentPose.getX();
+        double rRYDist = Constants.driveToPoseConstants.RedRightTranslation.getY() - currentPose.getY();
+
+        redDistanceFromLeft = Math.sqrt((Math.pow(rLXDist, 2) + Math.pow(rLYDist, 2)));
+        redDistanceFromCenter = Math.sqrt((Math.pow(rCXDist, 2) + Math.pow(rCYDist, 2)));
+        redDistanceFromRight = Math.sqrt((Math.pow(rRXDist, 2) + Math.pow(rRYDist, 2)));
+
+        if(redDistanceFromLeft < redDistanceFromCenter && redDistanceFromLeft < redDistanceFromRight) {
+          bestPose = Constants.driveToPoseConstants.BLUELEFTPOSE2D;
+        } else if(redDistanceFromCenter < redDistanceFromRight) {
+          bestPose = Constants.driveToPoseConstants.BLUECENTERPOSE2D;
+        } else {
+          bestPose = Constants.driveToPoseConstants.BLUERIGHTPOSE2D;
+        }
+      } else {
+        double blueDistanceFromLeft;
+        double blueDistanceFromCenter;
+        double blueDistanceFromRight;
+
+        double bLXDist = Constants.driveToPoseConstants.BlueLeftTranslation.getX() - currentPose.getX();
+        double bLYDist = Constants.driveToPoseConstants.BlueLeftTranslation.getY() - currentPose.getY();
+        double bCXDist = Constants.driveToPoseConstants.BlueCenterTranslation.getX() - currentPose.getX();
+        double bCYDist = Constants.driveToPoseConstants.BlueCenterTranslation.getY() - currentPose.getY();
+        double bRXDist = Constants.driveToPoseConstants.BlueRightTranslation.getX() - currentPose.getX();
+        double bRYDist = Constants.driveToPoseConstants.BlueRightTranslation.getY() - currentPose.getY();
+
+        blueDistanceFromLeft = Math.sqrt((Math.pow(bLXDist, 2) + Math.pow(bLYDist, 2)));
+        blueDistanceFromCenter = Math.sqrt((Math.pow(bCXDist, 2) + Math.pow(bCYDist, 2)));
+        blueDistanceFromRight = Math.sqrt((Math.pow(bRXDist, 2) + Math.pow(bRYDist, 2)));
+
+        if(blueDistanceFromLeft < blueDistanceFromCenter && blueDistanceFromLeft < blueDistanceFromRight) {
+          bestPose = Constants.driveToPoseConstants.BLUELEFTPOSE2D;
+        } else if(blueDistanceFromCenter < blueDistanceFromRight) {
+          bestPose = Constants.driveToPoseConstants.BLUECENTERPOSE2D;
+        } else {
+          bestPose = Constants.driveToPoseConstants.BLUERIGHTPOSE2D;
+        }
+      }
+
+      return bestPose;
     }
 
 
