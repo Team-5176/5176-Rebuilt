@@ -86,6 +86,9 @@ public class SwerveSubsystem extends SubsystemBase
     });
   }
 
+   public void driveRobotOriented(ChassisSpeeds velocity) {
+    swerveDrive.driveFieldOrientedAndRobotOriented(null, velocity);
+  }
   
   // This method checks the current alliance color from the DriverStation and returns true if it's the Red alliance, false otherwise. If the alliance information is not available, it defaults to false (Blue Alliance).
   public boolean isRedAlliance()
