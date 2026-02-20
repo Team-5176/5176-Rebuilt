@@ -191,6 +191,10 @@ public final class Constants
     public static final Pose2d REDLEFTPOSE2D = new Pose2d(RedLeftTranslation, RedLeftRotation);
     public static final Pose2d REDCENTERPOSE2D = new Pose2d(RedCenterTranslation, RedCenterRotation);
     public static final Pose2d REDRIGHTPOSE2D = new Pose2d(RedRightTranslation, RedRightRotation);
+
+    public static final double SHOOTERPOS1RPM = 500;
+    public static final double SHOOTERPOS2RPM = 500;
+    public static final double SHOOTERPOS3RPM = 500;
     
   }
 }
