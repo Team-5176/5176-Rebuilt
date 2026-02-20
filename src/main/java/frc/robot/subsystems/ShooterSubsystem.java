@@ -22,9 +22,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public ShooterSubsystem()
     {
-
-      shooterLeader.setCANTimeout(Constants.ShooterConstants.CANTimeoutMs);
-
       SparkFlexConfig shooterLeaderConfig = new SparkFlexConfig();
       SparkFlexConfig shooterFollowerConfig = new SparkFlexConfig();
 
