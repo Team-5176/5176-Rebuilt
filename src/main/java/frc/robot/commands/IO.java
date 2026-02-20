@@ -14,7 +14,7 @@ public class IO {
 
     // public XboxController driverXbox = new XboxController(0); add back????
 
-    public XboxController driverXbox = new XboxController(1);
+    public static XboxController driverXbox = new XboxController(1);
 
 
     Trigger shootButton = new Trigger(() -> driverXbox.getRightTriggerAxis() > 0.7);//XboxController...RightTrigger
