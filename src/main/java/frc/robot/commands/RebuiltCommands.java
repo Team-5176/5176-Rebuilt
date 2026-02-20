@@ -19,16 +19,16 @@ public class RebuiltCommands {
     public static final Command stopSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(0.0), Robot.spindexerSubsystem);
 
     public static final Command startIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(0.5), Robot.intakeSubsystem);
-    public static final Command stopIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(0.0),Robot.intakeSubsystem);
+    public static final Command stopIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(0.0), Robot.intakeSubsystem);
 
-    public static final Command deployIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(0.5),Robot.intakeSubsystem);
-    public static final Command retractIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(0),Robot.intakeSubsystem);
+    public static final Command deployIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(0.5) ,Robot.intakeSubsystem);
+    public static final Command retractIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(0), Robot.intakeSubsystem);
 
     public static final Command startTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(0.5), Robot.transportSubsystem);
     public static final Command stopTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(0), Robot.transportSubsystem);
     
-    public static final Command deployClimber = new InstantCommand(()-> Robot.towerClimbSubsystem.setFlippersPosition(0), Robot.towerClimbSubsystem);
-    public static final Command climberPos1 = new InstantCommand(()-> Robot.towerClimbSubsystem.setTowerClimbPosition(2),Robot.towerClimbSubsystem);
+    public static final Command climberTopPose = new InstantCommand(()-> Robot.towerClimbSubsystem.setTowerClimbPosition(2), Robot.towerClimbSubsystem);
+    public static final Command climberBottomPose = new InstantCommand(()-> Robot.towerClimbSubsystem.setTowerClimbPosition(0), Robot.towerClimbSubsystem);
 
     public static final ConditionalCommand toggleShoot = new ConditionalCommand(
         stopShoot.andThen(stopSpindexer).andThen(stopTransport),
@@ -41,13 +41,6 @@ public class RebuiltCommands {
         startIntake,
         Robot.intakeSubsystem::isIntaking
     );
-
-    public static final SequentialCommandGroup readyClimber = new SequentialCommandGroup(
-        retractIntake,
-        new WaitCommand(2),
-        deployClimber
-    );
-
 
 
     //many other cool possibilities with "WaitUntilCommand"
