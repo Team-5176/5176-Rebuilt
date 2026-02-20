@@ -60,6 +60,10 @@ public class TowerClimbSubsystem extends SubsystemBase {
 
         TalonFXConfiguration towerClimbConfig = new TalonFXConfiguration();
 
+        towerClimbConfig.Slot0.kS = Constants.TowerConstants.kCLIMB_S;
+        towerClimbConfig.Slot0.kS = Constants.TowerConstants.kCLIMB_S;
+        towerClimbConfig.Slot0.kS = Constants.TowerConstants.kCLIMB_S;
+
         towerClimbConfig.Slot0.kP = Constants.TowerConstants.kCLIMB_P;
         towerClimbConfig.Slot0.kI = Constants.TowerConstants.kCLIMB_I;
         towerClimbConfig.Slot0.kD = Constants.TowerConstants.kCLIMB_D;
