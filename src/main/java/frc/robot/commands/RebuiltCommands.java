@@ -49,12 +49,6 @@ public class RebuiltCommands {
         Robot.intakeSubsystem::isIntaking
     );
 
-    public static final SequentialCommandGroup readyClimber = new SequentialCommandGroup(
-        retractIntake,
-        new WaitCommand(2),
-        deployClimber
-    );
-
     public static final SequentialCommandGroup rumble = new SequentialCommandGroup(
         startRumble,
         new WaitCommand(1),
