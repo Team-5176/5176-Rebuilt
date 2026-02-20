@@ -16,6 +16,7 @@ import com.revrobotics.spark.config.FeedForwardConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -59,6 +60,10 @@ public class TowerClimbSubsystem extends SubsystemBase {
         towerClimbFollow.getConfigurator().apply(new TalonFXConfiguration());
 
         TalonFXConfiguration towerClimbConfig = new TalonFXConfiguration();
+
+        towerClimbConfig.Slot0.kS = Constants.TowerConstants.kCLIMB_S;
+        towerClimbConfig.Slot0.kS = Constants.TowerConstants.kCLIMB_S;
+        towerClimbConfig.Slot0.kS = Constants.TowerConstants.kCLIMB_S;
 
         towerClimbConfig.Slot0.kP = Constants.TowerConstants.kCLIMB_P;
         towerClimbConfig.Slot0.kI = Constants.TowerConstants.kCLIMB_I;
