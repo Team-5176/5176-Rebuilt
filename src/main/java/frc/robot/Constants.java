@@ -62,8 +62,8 @@ public final class Constants
     public static final int SHOOTER_MOTORS_CURRENT_LIMIT = 40; // Amps
     public static final double SHOOTER_MOTORS_VOLTAGE = 12.0; // Volts
 
-    public static final int LEADERSHOOTERID = 0; // Can ID constant for the lead shoter motor
-    public static final int FOLLOWERSHOOTERID = 0; // Can ID constant for the follower shoter motor
+    public static final int LEADERSHOOTERID = 11; // Can ID constant for the lead shoter motor
+    public static final int FOLLOWERSHOOTERID = 12; // Can ID constant for the follower shoter motor
     
     // CAN Timeout is milliseconds between motor controller communication with the rio. Frees up space in the command scheduler and on the CAN bus.
     public static final int CANTimeoutMs = 250; // milliseconds
@@ -98,8 +98,9 @@ public final class Constants
     public static final int INTAKE_ARM_MOTORS_CURRENT_LIMIT = 40; // Amps
     public static final double INTAKE_ARM_MOTORS_VOLTAGE = 12.0; // Volts
 
-    public static final int ARMID = 0;
-    public static final int ROLLERID = 0;
+    public static final int ARMID = 32;
+    public static final int ROLLERID1 = 33;
+    // public static final int ROLLERID2 = 32;
 
   }
 
@@ -117,7 +118,7 @@ public final class Constants
     public static final int Transport_MOTORS_CURRENT_LIMIT = 40; // Amps
     public static final double Transport_MOTORS_VOLTAGE = 12.0; // Volts
 
-    public static final int TRANSPORTID = 0;
+    public static final int TRANSPORTID = 13;
 
   } 
 
@@ -135,7 +136,7 @@ public final class Constants
     public static final int SPINDEX_MOTORS_CURRENT_LIMIT = 40; // Amps
     public static final double SPINDEX_MOTORS_VOLTAGE = 12.0; // Volts
 
-    public static final int SPINDEXERID = 0;
+    public static final int SPINDEXERID = 31;
   }
 
   public static class TowerConstants {

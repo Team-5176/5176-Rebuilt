@@ -32,7 +32,7 @@ public class Robot extends TimedRobot
   public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public static ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   public static TransportSubsystem transportSubsystem = new TransportSubsystem();
-  public static TowerClimbSubsystem towerClimbSubsystem = new TowerClimbSubsystem();
+  // public static TowerClimbSubsystem towerClimbSubsystem = new TowerClimbSubsystem();
   public static IO io = new IO();
 
 

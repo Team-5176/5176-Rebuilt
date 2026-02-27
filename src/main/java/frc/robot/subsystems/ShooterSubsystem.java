@@ -27,10 +27,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
       FeedForwardConfig shooterFeedForwardConfig = new FeedForwardConfig();
 
-      shooterFeedForwardConfig
-            .kS(Constants.ShooterConstants.kS) // Needed to overcome static friction
-            .kV(Constants.ShooterConstants.kV) // Velocity gain?
-            .kA(Constants.ShooterConstants.kA);// Acceleration gain?
+    //   shooterFeedForwardConfig
+    //         .kS(Constants.ShooterConstants.kS) // Needed to overcome static friction
+    //         .kV(Constants.ShooterConstants.kV) // Velocity gain?
+    //         .kA(Constants.ShooterConstants.kA);// Acceleration gain?
 
       shooterLeaderConfig.idleMode(IdleMode.kBrake);
       shooterLeaderConfig.voltageCompensation(Constants.ShooterConstants.SHOOTER_MOTORS_VOLTAGE);

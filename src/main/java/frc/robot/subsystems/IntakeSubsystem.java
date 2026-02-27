@@ -13,17 +13,24 @@ import com.revrobotics.spark.config.FeedForwardConfig;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase  {
 
     
-    private final SparkFlex intakeRoller = new SparkFlex(Constants.IntakeConstants.ROLLERID, MotorType.kBrushless);
-    private final SparkMax intakeArm = new SparkMax(Constants.IntakeConstants.ARMID, MotorType.kBrushless);
+    private final SparkFlex intakeRoller = new SparkFlex(Constants.IntakeConstants.ROLLERID1, MotorType.kBrushless);
+    private final SparkMax intakeArm = new SparkMax(Constants.IntakeConstants.ARMID,MotorType.kBrushless);
+    /*  private final SparkMax intakeArmLeader = new SparkMax(Constants.IntakeConstants.ROLLERID2,MotorType.kBrushless);
+    private final SparkMax intakeArmFollower = new SparkMax(Constants.IntakeConstants.ARMID, MotorType.kBrushless);
+ */
 
     public IntakeSubsystem(){ 
 
+        SparkFlexConfig intakeArmLeaderConfig = new SparkFlexConfig();
+        SparkFlexConfig intakeArmFollowerConfig = new SparkFlexConfig();
+        
         SparkFlexConfig intakeRollerConfig = new SparkFlexConfig();
         FeedForwardConfig intakeRollerFeedForwardConfig = new FeedForwardConfig();
 
@@ -34,10 +41,10 @@ public class IntakeSubsystem extends SubsystemBase  {
         intakeRollerConfig.smartCurrentLimit(Constants.IntakeConstants.INTAKE_ROLLER_MOTORS_CURRENT_LIMIT);
         intakeRollerConfig.voltageCompensation(Constants.IntakeConstants.INTAKE_ROLLER_MOTORS_VOLTAGE);
 
-        intakeRollerFeedForwardConfig
-                            .kS(Constants.IntakeConstants.kRollerS)
-                            .kV(Constants.IntakeConstants.kRollerV)
-                            .kA(Constants.IntakeConstants.kRollerA);
+        // intakeRollerFeedForwardConfig
+        //                     .kS(Constants.IntakeConstants.kRollerS)
+        //                     .kV(Constants.IntakeConstants.kRollerV)
+        //                     .kA(Constants.IntakeConstants.kRollerA);
 
         intakeRollerConfig.closedLoop
                 .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
@@ -53,10 +60,10 @@ public class IntakeSubsystem extends SubsystemBase  {
         intakeArmConfig.smartCurrentLimit(Constants.IntakeConstants.INTAKE_ARM_MOTORS_CURRENT_LIMIT);
         intakeArmConfig.voltageCompensation(Constants.IntakeConstants.INTAKE_ARM_MOTORS_CURRENT_LIMIT);
 
-        intakeArmFeedForwardConfig
-                            .kS(Constants.IntakeConstants.kArmS)
-                            .kV(Constants.IntakeConstants.kArmV)
-                            .kA(Constants.IntakeConstants.kArmA);
+        // intakeArmFeedForwardConfig
+        //                     .kS(Constants.IntakeConstants.kArmS)
+        //                     .kV(Constants.IntakeConstants.kArmV)
+        //                     .kA(Constants.IntakeConstants.kArmA);
 
         intakeArmConfig.closedLoop
                     .feedbackSensor(FeedbackSensor.kPrimaryEncoder)

@@ -29,10 +29,10 @@ public class TransportSubsystem extends SubsystemBase {
       transportConfig.voltageCompensation(Constants.TransportConstants.Transport_MOTORS_VOLTAGE);
       transportConfig.smartCurrentLimit(Constants.TransportConstants.Transport_MOTORS_CURRENT_LIMIT);
 
-      transportFeedForwardConfig
-                          .kS(Constants.TransportConstants.kTransportS)
-                          .kV(Constants.TransportConstants.kTransportV)
-                          .kA(Constants.TransportConstants.kTransportA);
+      // transportFeedForwardConfig
+      //                     .kS(Constants.TransportConstants.kTransportS)
+      //                     .kV(Constants.TransportConstants.kTransportV)
+      //                     .kA(Constants.TransportConstants.kTransportA);
 
       transportConfig.closedLoop
                 .feedbackSensor(FeedbackSensor.kPrimaryEncoder)

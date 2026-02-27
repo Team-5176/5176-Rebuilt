@@ -22,6 +22,9 @@ import swervelib.SwerveInputStream;
  * little robot logic should actually be handled in the {@link Robot} periodic methods (other than the scheduler calls).
  * Instead, the structure of the robot (including subsystems, commands, and trigger mappings) should be declared here.
  */
+
+
+
 public class RobotContainer
 {
   SwerveSubsystem drivebase = new SwerveSubsystem();
@@ -32,9 +35,12 @@ public class RobotContainer
   private final SendableChooser<Command> autoChooser;
   
   // The container for the robot. Contains subsystems, OI devices, and commands.
+  
+
+  
   public RobotContainer()
   {
-
+    AutoBuilder ab = new AutoBuilder();
     //Have the autoChooser pull in all PathPlanner autos as options
     autoChooser = AutoBuilder.buildAutoChooser();
 
