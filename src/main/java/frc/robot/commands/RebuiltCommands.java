@@ -28,7 +28,7 @@ public class RebuiltCommands {
     public static final Command deployIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(0.5) ,Robot.intakeSubsystem);
     public static final Command retractIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(0), Robot.intakeSubsystem);
 
-    public static final Command startTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(900), Robot.transportSubsystem);
+    public static final Command startTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(Constants.TransportConstants.TRANSPORT_VELOCITY_RPM), Robot.transportSubsystem);
     public static final Command stopTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(0), Robot.transportSubsystem);
     
     // public static final Command climberTopPose = new InstantCommand(()-> Robot.towerClimbSubsystem.setTowerClimbPosition(2), Robot.towerClimbSubsystem);
