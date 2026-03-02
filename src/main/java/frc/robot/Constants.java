@@ -48,22 +48,22 @@ public final class Constants
     public static final double SHOOTER_TARGET_VELOCITY_RPM = 200.0;
 
     // Shooter PID Constants
-    public static final double kP = 0.01;// Needs Tuning - Proportional Gain
+    public static final double kP = 0.0004;// Needs Tuning - Proportional Gain
     public static final double kI = 0.0;
     public static final double kD = 0.0;// Needs Tuning - Derivative Gain
     // public static final double kIz = 0.0; --- IGNORE ---
 
     // Feed Forward Constants
-    public static final double kS = 0.01; // Needs Tuning - Static Friction Gain. Needed to overcome initial static friction.
+    // public static final double kS = 0.20; // Needs Tuning - Static Friction Gain. Needed to overcome initial static friction.
     public static final double kV = 0.12; // Needs Tuning - Velocity Gain. Relates voltage to velocity.
-    public static final double kA = 0.0; // Needs Tuning - Acceleration Gain. Relates voltage to acceleration.
+    // // public static final double kA = 0.0; // Needs Tuning - Acceleration Gain. Relates voltage to acceleration.
 
     // Shooter Motor Current Limit and Voltage
     public static final int SHOOTER_MOTORS_CURRENT_LIMIT = 40; // Amps
     public static final double SHOOTER_MOTORS_VOLTAGE = 12.0; // Volts
 
-    public static final int LEADERSHOOTERID = 11; // Can ID constant for the lead shoter motor
-    public static final int FOLLOWERSHOOTERID = 12; // Can ID constant for the follower shoter motor
+    public static final int LEADERSHOOTERID = 12; // Can ID constant for the lead shoter motor
+    public static final int FOLLOWERSHOOTERID = 11; // Can ID constant for the follower shoter motor
     
     // CAN Timeout is milliseconds between motor controller communication with the rio. Frees up space in the command scheduler and on the CAN bus.
     public static final int CANTimeoutMs = 250; // milliseconds
@@ -106,15 +106,15 @@ public final class Constants
 
   public static class TransportConstants {
 
-    public static final double kTransportS = 0;
+    // public static final double kTransportS = 0.001;
     public static final double kTransportV = 0.12;
-    public static final double kTransportA = 0;
+    // public static final double kTransportA = 0.0001;
 
 
     
-    public static final double kTransportP = 0.00003;
+    public static final double kTransportP = 0.00008;
     public static final double kTransportI = 0;
-    public static final double kTransportD = 0;
+    public static final double kTransportD = 0.0008;
 
     public static final int Transport_MOTORS_CURRENT_LIMIT = 40; // Amps
     public static final double Transport_MOTORS_VOLTAGE = 12.0; // Volts
@@ -125,12 +125,13 @@ public final class Constants
 
   public static class SpindexerConstants {
 
-    public static final double kSpindexS = 0.001;
-    public static final double kSpindexV = 0.12;
-    public static final double kSpindexA = 0;
+
+    // public static final double kSpindexS = 0.01;
+    // public static final double kSpindexV = 0.12;
+    // public static final double kSpindexA = 0;
 
 
-    public static final double kSpindexP = 0.1 ;
+    public static final double kSpindexP = 0.001;
     public static final double kSpindexI = 0;
     public static final double kSpindexD = 0;
 

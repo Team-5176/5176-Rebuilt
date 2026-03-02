@@ -87,11 +87,6 @@ public class IntakeSubsystem extends SubsystemBase  {
         intakeRoller.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
     }
 
-    /** Open-loop percent output for the intake roller (range -1.0 to 1.0) */
-    public void spinIntakePercent(double percent) {
-        intakeRoller.set(percent);
-    }
-
     public void deployIntake(double deployPoint) {
 
         intakeArm.getClosedLoopController().setSetpoint(deployPoint, ControlType.kPosition);

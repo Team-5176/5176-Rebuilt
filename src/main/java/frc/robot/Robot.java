@@ -28,12 +28,15 @@ public class Robot extends TimedRobot
   private static Robot   instance;
   private Command m_autonomousCommand;
 
-  public static SpindexerSubsystem spindexerSubsystem = new SpindexerSubsystem();
-  public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  public static ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-  public static TransportSubsystem transportSubsystem = new TransportSubsystem();
-  // public static TowerClimbSubsystem towerClimbSubsystem = new TowerClimbSubsystem();
-  public static IO io = new IO();
+  // Subsystems declared here but instantiated in robotInit to avoid creating hardware
+  // before WPILib and vendor native libraries are ready. Static construction can
+  // cause failures like "Could not instantiate robot com.revrobotics.spark.SparkBase!"
+  public static SpindexerSubsystem spindexerSubsystem;
+  public static IntakeSubsystem intakeSubsystem;
+  public static ShooterSubsystem shooterSubsystem;
+  public static TransportSubsystem transportSubsystem;
+  // public static TowerClimbSubsystem towerClimbSubsystem;
+  public static IO io;
 
 
   @SuppressWarnings("unused")
@@ -59,6 +62,14 @@ public class Robot extends TimedRobot
   {
     // Instantiate our RobotContainer. This will put our autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+
+    // Instantiate subsystems and IO here (after RobotContainer and WPILib are initialized)
+    spindexerSubsystem = new SpindexerSubsystem();
+    intakeSubsystem = new IntakeSubsystem();
+    shooterSubsystem = new ShooterSubsystem();
+    transportSubsystem = new TransportSubsystem();
+    // towerClimbSubsystem = new TowerClimbSubsystem();
+    io = new IO();
 
     // Create a timer to disable motor brake a few seconds after disable.  This will let the robot stop
     // immediately when disabled, but then also let it be pushed more 

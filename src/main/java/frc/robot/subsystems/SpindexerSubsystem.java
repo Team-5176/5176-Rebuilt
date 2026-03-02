@@ -23,16 +23,16 @@ public class SpindexerSubsystem extends SubsystemBase {
     public SpindexerSubsystem() {
 
         SparkMaxConfig spindexerConfig  = new SparkMaxConfig();
-        FeedForwardConfig spindexerFeedForwardConfig = new FeedForwardConfig();
+        // FeedForwardConfig spindexerFeedForwardConfig = new FeedForwardConfig();
 
         spindexerConfig.idleMode(IdleMode.kBrake);
         spindexerConfig.smartCurrentLimit(Constants.SpindexerConstants.SPINDEX_MOTORS_CURRENT_LIMIT);
         spindexerConfig.voltageCompensation(Constants.SpindexerConstants.SPINDEX_MOTORS_VOLTAGE);
 
         // spindexerFeedForwardConfig
-        //                   .kS(Constants.SpindexerConstants.kSpindexS)
-        //                   .kV(Constants.SpindexerConstants.kSpindexV)
-        //                   .kA(Constants.SpindexerConstants.kSpindexA);
+                        //   .kS(Constants.SpindexerConstants.kSpindexS)
+                        //   .kV(Constants.SpindexerConstants.kSpindexV);
+                        //   .kA(Constants.SpindexerConstants.kSpindexA);
 
         spindexerConfig.closedLoop
                 .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
@@ -41,7 +41,7 @@ public class SpindexerSubsystem extends SubsystemBase {
                     Constants.SpindexerConstants.kSpindexI,
                     Constants.SpindexerConstants.kSpindexD);
         ClosedLoopConfig spindexerClosedLoopConfig = spindexerConfig.closedLoop;
-            //   spindexerClosedLoopConfig.apply(spindexerFeedForwardConfig);
+            //    spindexerClosedLoopConfig.apply(spindexerFeedForwardConfig);
               spindexerConfig.apply(spindexerClosedLoopConfig);
 
 
@@ -52,8 +52,4 @@ public class SpindexerSubsystem extends SubsystemBase {
         spindexer.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
     }
 
-    /** Open-loop percent output control for quick testing (range -1.0 to 1.0) */
-    public void runSpindexerPercent(double percent) {
-        spindexer.set(percent);
-    }
-}
+   }

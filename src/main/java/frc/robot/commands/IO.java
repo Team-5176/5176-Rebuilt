@@ -18,7 +18,8 @@ public class IO {
     public static XboxController driverXbox = new XboxController(0);
 
 
-    Trigger shootButton = new Trigger(() -> driverXbox.getAButton());//XboxController...RightTrigger
+    JoystickButton shootButton = new JoystickButton(driverXbox,  1);
+    JoystickButton shootOnlyButton = new JoystickButton(driverXbox, 2);
     Trigger toggleIntakeButton = new Trigger(() -> driverXbox.getLeftTriggerAxis() > 0.7);//XboxController...B
 
     // LED Button
@@ -27,10 +28,13 @@ public class IO {
     public IO() {
         // whiletrue buttons here
 
-        shootButton.onTrue(RebuiltCommands.toggleShoot);
+      shootButton.onTrue(RebuiltCommands.toggleShoot);
         // shootButton.onFalse(RebuiltCommands.toggleShoot);
 
         toggleIntakeButton.toggleOnTrue(RebuiltCommands.toggleIntake);
+
+        
+        shootOnlyButton.onTrue(RebuiltCommands.shootFuel);
     }
 
 

@@ -27,10 +27,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
       FeedForwardConfig shooterFeedForwardConfig = new FeedForwardConfig();
 
-    //   shooterFeedForwardConfig
-    //         .kS(Constants.ShooterConstants.kS) // Needed to overcome static friction
-    //         .kV(Constants.ShooterConstants.kV) // Velocity gain?
-    //         .kA(Constants.ShooterConstants.kA);// Acceleration gain?
+      shooterFeedForwardConfig
+            // .kS(Constants.ShooterConstants.kS) // Needed to overcome static friction
+            .kV(Constants.ShooterConstants.kV); // Velocity gain?
 
       shooterLeaderConfig.idleMode(IdleMode.kBrake);
       shooterLeaderConfig.voltageCompensation(Constants.ShooterConstants.SHOOTER_MOTORS_VOLTAGE);
@@ -61,11 +60,6 @@ public class ShooterSubsystem extends SubsystemBase {
     public void setShooterVelocity(double velocityRPM) {
         shooterLeader.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
     }
-
-  /** Open-loop percent output for the shooter leader (range -1.0 to 1.0). Useful for quick tests. */
-  public void setShooterPercent(double percent) {
-    shooterLeader.set(percent);
-  }
     
     public boolean isShooting() {
 
@@ -82,4 +76,9 @@ public class ShooterSubsystem extends SubsystemBase {
     public double getVelocityRPM() {
         return shooterLeader.getEncoder().getVelocity();
     }
+
+  /** Open-loop percent output for quick testing (range -1.0 to 1.0) */
+  public void setShooterPercent(double percent) {
+    shooterLeader.set(percent);
+  }
 }
