@@ -139,6 +139,8 @@ public final class Constants
     public static final double SPINDEX_MOTORS_VOLTAGE = 12.0; // Volts
 
     public static final int SPINDEXERID = 31;
+
+    public static final double SPINDEXER_TARGET_VELOCITY_RPM = 100;
   }
 
   public static class TowerConstants {

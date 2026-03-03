@@ -53,4 +53,15 @@ public class TransportSubsystem extends SubsystemBase {
 
       transport.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
     }
+
+    // added temporly to test transport
+     public double getVelocity()
+    {
+        return transport.getEncoder().getVelocity();
+    }
+
+    public boolean isTransporting()
+    {
+        return  Math.abs(transport.getEncoder().getVelocity()) > 2000;
+    }
 }

@@ -19,6 +19,7 @@ public class IO {
 
 
     JoystickButton shootButton = new JoystickButton(driverXbox,  1);
+    JoystickButton toggleTransporButton = new JoystickButton(driverXbox,  3);
     // JoystickButton shootOnlyButton = new JoystickButton(driverXbox, 2);
     Trigger toggleIntakeButton = new Trigger(() -> driverXbox.getLeftTriggerAxis() > 0.7);//XboxController...B
 
@@ -32,7 +33,7 @@ public class IO {
         // shootButton.onFalse(RebuiltCommands.toggleShoot);
 
         toggleIntakeButton.toggleOnTrue(RebuiltCommands.toggleIntake);
-
+        toggleTransporButton.toggleOnTrue(RebuiltCommands.toggleTransport);
         
         // shootOnlyButton.onTrue(RebuiltCommands.shootFuel);
     }

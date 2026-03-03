@@ -18,7 +18,7 @@ public class RebuiltCommands {
     public static final Command shootFuel = new InstantCommand(()-> Robot.shooterSubsystem.setShooterVelocity(Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM), Robot.shooterSubsystem);
     public static final Command stopShoot = new InstantCommand(()-> Robot.shooterSubsystem.setShooterVelocity(0), Robot.shooterSubsystem);
     
-    public static final Command runSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(200.0), Robot.spindexerSubsystem);
+    public static final Command runSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(Constants.SpindexerConstants.SPINDEXER_TARGET_VELOCITY_RPM), Robot.spindexerSubsystem);
     public static final Command stopSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(0.0), Robot.spindexerSubsystem);
 
     // Use an RPM value for the intake roller (closed-loop velocity). 0.5 looked like a percent and caused hunting.
@@ -39,8 +39,8 @@ public class RebuiltCommands {
 
 
     public static final ConditionalCommand toggleShoot = new ConditionalCommand(
-        stopShoot.andThen(stopSpindexer).andThen(stopTransport),
-        shootFuel.andThen(new WaitCommand(1)).andThen(runSpindexer).andThen(startTransport),
+        stopShoot.andThen(stopSpindexer),
+        shootFuel.andThen(new WaitCommand(1)).andThen(runSpindexer),
         Robot.shooterSubsystem::isShooting
     );
 
@@ -48,6 +48,13 @@ public class RebuiltCommands {
         stopIntake,
         startIntake,
         Robot.intakeSubsystem::isIntaking
+    );
+
+    // just temporary command
+    public static final ConditionalCommand toggleTransport = new ConditionalCommand(
+        stopTransport,
+        startTransport,
+        Robot.transportSubsystem::isTransporting
     );
 
     public static final SequentialCommandGroup rumble = new SequentialCommandGroup(
