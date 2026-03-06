@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.IntakeSubsystem;
+//import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.SpindexerSubsystem;
+//import frc.robot.subsystems.SpindexerSubsystem;
 import frc.robot.subsystems.TowerClimbSubsystem;
 import frc.robot.subsystems.TransportSubsystem;
 import frc.robot.subsystems.Vision;
@@ -31,11 +31,11 @@ public class Robot extends TimedRobot
   // Subsystems declared here but instantiated in robotInit to avoid creating hardware
   // before WPILib and vendor native libraries are ready. Static construction can
   // cause failures like "Could not instantiate robot com.revrobotics.spark.SparkBase!"
-  public static SpindexerSubsystem spindexerSubsystem;
-  public static IntakeSubsystem intakeSubsystem;
+  //public static SpindexerSubsystem spindexerSubsystem;
+  //public static IntakeSubsystem intakeSubsystem;
   public static ShooterSubsystem shooterSubsystem;
   public static TransportSubsystem transportSubsystem;
-  // public static TowerClimbSubsystem towerClimbSubsystem;
+  public static TowerClimbSubsystem towerClimbSubsystem;
   public static IO io;
 
 
@@ -64,8 +64,8 @@ public class Robot extends TimedRobot
     m_robotContainer = new RobotContainer();
 
     // Instantiate subsystems and IO here (after RobotContainer and WPILib are initialized)
-    spindexerSubsystem = new SpindexerSubsystem();
-    intakeSubsystem = new IntakeSubsystem();
+    //spindexerSubsystem = new SpindexerSubsystem();
+    //intakeSubsystem = new IntakeSubsystem();
     shooterSubsystem = new ShooterSubsystem();
     transportSubsystem = new TransportSubsystem();
     // towerClimbSubsystem = new TowerClimbSubsystem();

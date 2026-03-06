@@ -1,5 +1,5 @@
 package frc.robot.subsystems;
-
+/* 
 import com.revrobotics.spark.FeedbackSensor;
 import com.revrobotics.spark.SparkFlex;
 import com.revrobotics.spark.SparkMax;
@@ -24,7 +24,7 @@ public class IntakeSubsystem extends SubsystemBase  {
     private final SparkMax intakeArm = new SparkMax(Constants.IntakeConstants.ARMID,MotorType.kBrushless);
     /*  private final SparkMax intakeArmLeader = new SparkMax(Constants.IntakeConstants.ROLLERID2,MotorType.kBrushless);
     private final SparkMax intakeArmFollower = new SparkMax(Constants.IntakeConstants.ARMID, MotorType.kBrushless);
- */
+ 
 
     public IntakeSubsystem(){ 
 
@@ -99,3 +99,4 @@ public class IntakeSubsystem extends SubsystemBase  {
         return  Math.abs(intakeRoller.getEncoder().getVelocity()) > 2000;
     }
 }
+*/

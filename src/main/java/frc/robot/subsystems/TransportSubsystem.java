@@ -16,7 +16,7 @@ import frc.robot.Constants;
 
 public class TransportSubsystem extends SubsystemBase {
     
-    SparkFlex transport = new SparkFlex(Constants.TransportConstants.TRANSPORTID, MotorType.kBrushless);
+    //SparkFlex transport = new SparkFlex(Constants.TransportConstants.TRANSPORTID, MotorType.kBrushless);
 
 
     public TransportSubsystem()
@@ -44,24 +44,24 @@ public class TransportSubsystem extends SubsystemBase {
               transportConfig.apply(transportClosedLoopConfig);
 
 
-          transport.configure(transportConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        //  transport.configure(transportConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     }
 
     /** This is a method that makes the roller spin */
     public void setTransport(double velocityRPM) {
 
-      transport.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
+    //  transport.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
     }
 
     // added temporly to test transport
-     public double getVelocity()
+    // public double getVelocity()
     {
-        return transport.getEncoder().getVelocity();
+     //   return transport.getEncoder().getVelocity();
     }
 
-    public boolean isTransporting()
+   // public boolean isTransporting()
     {
-        return  Math.abs(transport.getEncoder().getVelocity()) > 2000;
+    //    return  Math.abs(transport.getEncoder().getVelocity()) > 2000;
     }
 }

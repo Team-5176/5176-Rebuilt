@@ -16,8 +16,8 @@ import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
     
-    private final SparkFlex shooterLeader = new SparkFlex(Constants.ShooterConstants.LEADERSHOOTERID, MotorType.kBrushless);
-    private final SparkFlex shooterFollower = new SparkFlex(Constants.ShooterConstants.FOLLOWERSHOOTERID, MotorType.kBrushless);
+   // private final SparkFlex shooterLeader = new SparkFlex(Constants.ShooterConstants.LEADERSHOOTERID, MotorType.kBrushless);
+   // private final SparkFlex shooterFollower = new SparkFlex(Constants.ShooterConstants.FOLLOWERSHOOTERID, MotorType.kBrushless);
 
 
     public ShooterSubsystem()
@@ -49,36 +49,36 @@ public class ShooterSubsystem extends SubsystemBase {
     // These lines NEED to be after defining config parameters for the lead motor
     shooterFollowerConfig.apply(shooterLeaderConfig);
     // Make the follower follow the leader motor ID (use constant) instead of an inline literal
-    shooterFollowerConfig.follow(Constants.ShooterConstants.LEADERSHOOTERID, true);
+    //shooterFollowerConfig.follow(Constants.ShooterConstants.LEADERSHOOTERID, true);
 
-      shooterLeader.configure(shooterLeaderConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-      shooterFollower.configure(shooterFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    //  shooterLeader.configure(shooterLeaderConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    //  shooterFollower.configure(shooterFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     }
 
     /* This is a method that makes the roller spin at a target velocity */
     public void setShooterVelocity(double velocityRPM) {
-        shooterLeader.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
+    //    shooterLeader.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
     }
     
-    public boolean isShooting() {
+    //public boolean isShooting() {
 
-        return Math.abs(shooterLeader.getEncoder().getVelocity()) > 2000; // Check if velocity > 100 RPM
-    }
+    //    return Math.abs(shooterLeader.getEncoder().getVelocity()) > 2000; // Check if velocity > 100 RPM
+    //}
     
     /** Check if shooter is at target speed (within tolerance) */
-    public boolean atTargetSpeed() {
-        double currentVelocity = shooterLeader.getEncoder().getVelocity();
-        return Math.abs(currentVelocity - Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM) < 100; // Within 100 RPM
-    }
+    //public boolean atTargetSpeed() {
+    //    double currentVelocity = shooterLeader.getEncoder().getVelocity();
+    //    return Math.abs(currentVelocity - Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM) < 100; // Within 100 RPM
+    //}
     
     /** Get current velocity in RPM */
-    public double getVelocityRPM() {
-        return shooterLeader.getEncoder().getVelocity();
-    }
+    //public double getVelocityRPM() {
+    //    return shooterLeader.getEncoder().getVelocity();
+    //}
 
   /** Open-loop percent output for quick testing (range -1.0 to 1.0) */
   public void setShooterPercent(double percent) {
-    shooterLeader.set(percent);
+  //  shooterLeader.set(percent);
   }
 }

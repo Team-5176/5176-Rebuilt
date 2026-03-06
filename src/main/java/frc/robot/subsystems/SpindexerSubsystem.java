@@ -1,5 +1,5 @@
 package frc.robot.subsystems;
-
+/* 
 import com.revrobotics.spark.SparkMax;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.revrobotics.PersistMode;
@@ -69,3 +69,4 @@ public class SpindexerSubsystem extends SubsystemBase {
     }
 
    }
+*/

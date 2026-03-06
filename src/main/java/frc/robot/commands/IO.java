@@ -22,16 +22,16 @@ public class IO {
     // JoystickButton toggleSpindexerButton = new JoystickButton(driverXbox,  3);
     // JoystickButton shootOnlyButton = new JoystickButton(driverXbox, 2);
     // Trigger toggleIntakeButton = new Trigger(() -> driverXbox.getLeftTriggerAxis() > 0.7);//XboxController...B
-
+    JoystickButton climbButton = new JoystickButton(driverXbox, 4);
     // LED Button
     // JoystickButton ledoff = new JoystickButton(operatorXbox, 4)    .whenPressed(m_turnOnLEDsCommand);
     
     public IO() {
         // whiletrue buttons here
 
-      shootButton.onTrue(RebuiltCommands.toggleShoot);
+      //shootButton.onTrue(RebuiltCommands.toggleShoot);
         // shootButton.onFalse(RebuiltCommands.toggleShoot);
-
+      climbButton.onTrue(RebuiltCommands.climberBottomPose);
         // toggleIntakeButton.toggleOnTrue(RebuiltCommands.toggleIntake);
         // toggleTransporButton.toggleOnTrue(RebuiltCommands.toggleTransport);
         // toggleSpindexerButton.toggleOnTrue(RebuiltCommands.toggleSpindex);

@@ -17,32 +17,32 @@ public class RebuiltCommands {
     public static final Command shootFuel = new InstantCommand(()-> Robot.shooterSubsystem.setShooterVelocity(Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM), Robot.shooterSubsystem);
     public static final Command stopShoot = new InstantCommand(()-> Robot.shooterSubsystem.setShooterVelocity(0), Robot.shooterSubsystem);
     
-    public static final Command startSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(Constants.SpindexerConstants.SPINDEXER_TARGET_VELOCITY_RPM), Robot.spindexerSubsystem);
-    public static final Command stopSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(0.0), Robot.spindexerSubsystem);
+   // public static final Command startSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(Constants.SpindexerConstants.SPINDEXER_TARGET_VELOCITY_RPM), Robot.spindexerSubsystem);
+   //public static final Command stopSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(0.0), Robot.spindexerSubsystem);
 
     // Use an RPM value for the intake roller (closed-loop velocity). 0.5 looked like a percent and caused hunting.
-    public static final Command startIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(200.0), Robot.intakeSubsystem);
-    public static final Command stopIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(0.0), Robot.intakeSubsystem);
+   // public static final Command startIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(200.0), Robot.intakeSubsystem);
+    //public static final Command stopIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(0.0), Robot.intakeSubsystem);
 
-    public static final Command deployIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(0.5) ,Robot.intakeSubsystem);
-    public static final Command retractIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(0), Robot.intakeSubsystem);
+   // public static final Command deployIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(0.5) ,Robot.intakeSubsystem);
+   // public static final Command retractIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(0), Robot.intakeSubsystem);
 
     public static final Command startTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(Constants.TransportConstants.TRANSPORT_VELOCITY_RPM), Robot.transportSubsystem);
     public static final Command stopTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(0), Robot.transportSubsystem);
     
     // public static final Command climberTopPose = new InstantCommand(()-> Robot.towerClimbSubsystem.setTowerClimbPosition(2), Robot.towerClimbSubsystem);
-    // public static final Command climberBottomPose = new InstantCommand(()-> Robot.towerClimbSubsystem.setTowerClimbPosition(0), Robot.towerClimbSubsystem);
+    public static final Command climberBottomPose = new InstantCommand(()-> Robot.towerClimbSubsystem.setTowerClimbPosition(0), Robot.towerClimbSubsystem);
 
     public static final Command startRumble = new InstantCommand(()->IO.driverXbox.setRumble(RumbleType.kBothRumble, 1.0));
     public static final Command stopRumble = new InstantCommand(()->IO.driverXbox.setRumble(RumbleType.kBothRumble, 0.0));
 
-
+/* 
     public static final ConditionalCommand toggleShoot = new ConditionalCommand(
         stopShoot.andThen(stopTransport).andThen(stopSpindexer),
         shootFuel.andThen(new WaitCommand(0.5)).andThen(startTransport).andThen(startSpindexer),
         Robot.shooterSubsystem::isShooting
     );
-
+*/
     // public static final ConditionalCommand toggleIntake = new ConditionalCommand(
     //     stopIntake,
     //     startIntake,
