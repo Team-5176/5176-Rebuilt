@@ -3,12 +3,11 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
+
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.RobotContainer;
-import frc.robot.commands.IO;
 
 // "() ->", or lambda function, allows to put in a method value where otherwise unable
 
@@ -23,6 +22,16 @@ public class RebuiltCommands {
     // Use an RPM value for the intake roller (closed-loop velocity). 0.5 looked like a percent and caused hunting.
     public static final Command startIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(200.0), Robot.intakeSubsystem);
     public static final Command stopIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(0.0), Robot.intakeSubsystem);
+
+    // Run the intake rollers while the button is held. StartEndCommand calls the
+    // start runnable when the command is initialized and the end runnable when
+    // the command is interrupted or finishes (which will happen on button
+    // release when used with a whileTrue binding).
+    public static final Command intakeWhileHeld = new StartEndCommand(
+        () -> Robot.intakeSubsystem.spinIntake(200.0),
+        () -> Robot.intakeSubsystem.spinIntake(0.0),
+        Robot.intakeSubsystem
+    );
 
     public static final Command deployIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(0.5) ,Robot.intakeSubsystem);
     public static final Command retractIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(0), Robot.intakeSubsystem);
@@ -43,7 +52,7 @@ public class RebuiltCommands {
         Robot.shooterSubsystem::isShooting
     );
 
-        
+
 
     // public static final ConditionalCommand toggleIntake = new ConditionalCommand(
     //     stopIntake,
