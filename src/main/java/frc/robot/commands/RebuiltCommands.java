@@ -43,6 +43,8 @@ public class RebuiltCommands {
         Robot.shooterSubsystem::isShooting
     );
 
+        
+
     // public static final ConditionalCommand toggleIntake = new ConditionalCommand(
     //     stopIntake,
     //     startIntake,
