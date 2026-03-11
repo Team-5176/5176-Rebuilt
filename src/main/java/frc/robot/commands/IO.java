@@ -4,8 +4,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-import edu.wpi.first.wpilibj2.command.StartEndCommand;
+//import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 
 // Button numbers on the controller:
 // https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.chiefdelphi.com%2Ft%2Fhow-to-program-an-xbox-controller-to-drive-a-robot%2F131164&psig=AOvVaw28II86to-llZYujh--NhGp&ust=1759627474419000&source=images&cd=vfe&opi=89978449&ved=0CBkQjhxqFwoTCIC8oKaxiZADFQAAAAAdAAAAABAE
@@ -22,7 +22,7 @@ public class IO {
 
   JoystickButton shootButton = new JoystickButton(driverXbox,  1);
   JoystickButton intakeButton = new JoystickButton(driverXbox, 2);
-  JoystickButton intakeAngleButton = new JoystickButton(driverXbox,3);
+  JoystickButton intakeAngleButton = new JoystickButton(driverXbox, 5);
  
     // JoystickButton toggleSpindexerButton = new JoystickButton(driverXbox,  3);
     // JoystickButton shootOnlyButton = new JoystickButton(driverXbox, 2);
@@ -40,7 +40,7 @@ public class IO {
       // press and the end lambda is guaranteed to run on release.
       intakeButton.whileTrue(RebuiltCommands.intakeWhileHeld); 
 
-      intakeAngleButton.onTrue(RebuiltCommands.deployIntake);
+      intakeAngleButton.onTrue(RebuiltCommands.angleIntake);
       
         // shootButton.onFalse(RebuiltCommands.toggleShoot);
 

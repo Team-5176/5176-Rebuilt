@@ -43,7 +43,6 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.util.Units;
 
-
 public class SwerveSubsystem extends SubsystemBase
 {
   File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(),"swerve");
@@ -62,6 +61,36 @@ public class SwerveSubsystem extends SubsystemBase
         throw new RuntimeException(e);
       }
     SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
+  }
+
+  // By default we drive field-oriented. This flag can be toggled at runtime.
+  private boolean fieldOriented = true;
+
+  /** Enable field-oriented driving. */
+  public void enableFieldOriented() { fieldOriented = true; }
+
+  /** Disable field-oriented driving (robot-oriented). */
+  public void disableFieldOriented() { fieldOriented = false; }
+
+  /** Toggle between field-oriented and robot-oriented driving. */
+  public void toggleFieldOriented() { fieldOriented = !fieldOriented; }
+
+  /** Returns whether field-oriented driving is currently enabled. */
+  public boolean isFieldOriented() { return fieldOriented; }
+
+  /**
+   * Drive using the configured mode. If field-oriented mode is enabled this will call
+   * driveFieldOriented(...), otherwise it will call the robot-oriented drive(...).
+   */
+  public Command driveWithMode(Supplier<ChassisSpeeds> velocity) {
+    return run(() -> {
+      ChassisSpeeds speeds = velocity.get();
+      if (fieldOriented) {
+        swerveDrive.driveFieldOriented(speeds);
+      } else {
+        swerveDrive.drive(speeds);
+      }
+    });
   }
 
   public SwerveDrive getSwerveDrive() {
@@ -86,9 +115,10 @@ public class SwerveSubsystem extends SubsystemBase
     });
   }
 
-   public void driveRobotOriented(ChassisSpeeds velocity) {
-    swerveDrive.driveFieldOrientedAndRobotOriented(null, velocity);
-  }
+  //  public void driveRobotOriented(ChassisSpeeds velocity) {
+  //   swerveDrive.driveFieldOrientedAndRobotOriented(null, velocity);
+  // }
+
   
   // This method checks the current alliance color from the DriverStation and returns true if it's the Red alliance, false otherwise. If the alliance information is not available, it defaults to false (Blue Alliance).
   public boolean isRedAlliance()
