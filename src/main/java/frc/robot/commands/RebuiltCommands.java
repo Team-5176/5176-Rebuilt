@@ -28,7 +28,7 @@ public class RebuiltCommands {
     // the command is interrupted or finishes (which will happen on button
     // release when used with a whileTrue binding).
     public static final Command intakeWhileHeld = new StartEndCommand(
-        () -> Robot.intakeSubsystem.spinIntake(200.0),
+        () -> Robot.intakeSubsystem.spinIntake(Constants.IntakeConstants.INTAKE_ROLLER_VELOCITY_RPM),
         () -> Robot.intakeSubsystem.spinIntake(0.0),
         Robot.intakeSubsystem
     );
@@ -48,10 +48,15 @@ public class RebuiltCommands {
 
     public static final ConditionalCommand toggleShoot = new ConditionalCommand(
         stopShoot.andThen(stopTransport).andThen(stopSpindexer),
-        shootFuel.andThen(new WaitCommand(1.0)).andThen(startTransport).andThen(startSpindexer),
+        shootFuel.andThen(new WaitCommand(3.0)).andThen(startTransport).andThen(startSpindexer),
         Robot.shooterSubsystem::isShooting
     );
 
+    public static final ConditionalCommand angleIntake = new ConditionalCommand(
+        retractIntake,
+        deployIntake,
+        Robot.intakeSubsystem::isDeployed
+    );
 
 
     // public static final ConditionalCommand toggleIntake = new ConditionalCommand(

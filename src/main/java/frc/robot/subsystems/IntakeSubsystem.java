@@ -19,7 +19,7 @@ import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase  {
 
-    
+    private boolean isDeployed;
     private final SparkFlex intakeRoller = new SparkFlex(Constants.IntakeConstants.ROLLERID1, MotorType.kBrushless);
     private final SparkMax intakeArm = new SparkMax(Constants.IntakeConstants.ARMID,MotorType.kBrushless);
     /*  private final SparkMax intakeArmLeader = new SparkMax(Constants.IntakeConstants.ROLLERID2,MotorType.kBrushless);
@@ -27,7 +27,7 @@ public class IntakeSubsystem extends SubsystemBase  {
  */
 
     public IntakeSubsystem(){ 
-
+        isDeployed = false;
         SparkFlexConfig intakeArmLeaderConfig = new SparkFlexConfig();
         SparkFlexConfig intakeArmFollowerConfig = new SparkFlexConfig();
         
@@ -37,7 +37,7 @@ public class IntakeSubsystem extends SubsystemBase  {
         SparkMaxConfig intakeArmConfig = new SparkMaxConfig();
         FeedForwardConfig intakeArmFeedForwardConfig = new FeedForwardConfig();
 
-        intakeRollerConfig.idleMode(IdleMode.kCoast);
+        intakeRollerConfig.idleMode(IdleMode.kBrake);
         intakeRollerConfig.smartCurrentLimit(Constants.IntakeConstants.INTAKE_ROLLER_MOTORS_CURRENT_LIMIT);
         intakeRollerConfig.voltageCompensation(Constants.IntakeConstants.INTAKE_ROLLER_MOTORS_VOLTAGE);
 
@@ -85,9 +85,16 @@ public class IntakeSubsystem extends SubsystemBase  {
     }
 
     public void deployIntake(double deployPoint) {
-
+        isDeployed = true;
         intakeArm.getClosedLoopController().setSetpoint(deployPoint, ControlType.kPosition);
     }
+
+    public void retractIntake(double deployPoint) {
+        isDeployed = false;
+        intakeArm.getClosedLoopController().setSetpoint(deployPoint, ControlType.kPosition);
+    }
+
+    
 
     public double getVelocity()
     {
@@ -96,6 +103,9 @@ public class IntakeSubsystem extends SubsystemBase  {
 
     public boolean isIntaking()
     {
-        return  Math.abs(intakeRoller.getEncoder().getVelocity()) > 2000;
+        return  Math.abs(intakeRoller.getEncoder().getVelocity()) > 200;
+    }
+    public boolean isDeployed(){
+        return isDeployed;
     }
 }

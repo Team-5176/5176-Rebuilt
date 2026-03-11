@@ -45,7 +45,7 @@ public class RobotContainer
     // autoChooser = AutoBuilder.buildAutoChooser();
 
     drivebase.setupPathPlanner();
-    configureDriveToPose();
+   // configureDriveToPose();
     drivebase.setDefaultCommand(driveFieldOrientedAngularVelocity);
     DriverStation.silenceJoystickConnectionWarning(true);
     drivebase.zeroGyroWithAlliance();
@@ -57,7 +57,7 @@ public class RobotContainer
                                                                     () -> driverXbox.getLeftX() * -1.0)
                                                                     .withControllerRotationAxis(() -> driverXbox.getRightX())
                                                                     .deadband(OperatorConstants.DEADBAND)
-                                                                    .scaleTranslation(0.5)
+                                                                    .scaleTranslation(0.8)
                                                                     .allianceRelativeControl(true);
                                                                     
   SwerveInputStream driveDirectAngle = driveAngularVelocity.copy()
@@ -68,31 +68,33 @@ public class RobotContainer
   Command driveFieldOrientedDirectAngle = drivebase.driveFieldOriented(driveDirectAngle);
   Command driveFieldOrientedAngularVelocity = drivebase.driveFieldOriented(driveAngularVelocity);
 
+  
+
  /*  public Command getAutonomousCommand()
   {
     // Pass in the selected auto from the SmartDashboard as our desired autnomous commmand 
     return autoChooser.getSelected();
   } */
 
-  private void configureDriveToPose() {
+//   private void configureDriveToPose() {
 
-    driverXbox.y().whileTrue(drivebase.driveToPose(drivebase.getClosestPoint()));
+//     driverXbox.y().whileTrue(drivebase.driveToPose(drivebase.getClosestPoint()));
 
-    if(!drivebase.isRedAlliance()) {
-        driverXbox.x().whileTrue(drivebase.driveToPose(Constants.driveToPoseConstants.BLUELEFTPOSE2D));
-        driverXbox.a().whileTrue(drivebase.driveToPose(
-          new Pose2d(Constants.driveToPoseConstants.BlueCenterTranslation, Constants.driveToPoseConstants.BlueCenterRotation)));
-        driverXbox.b().whileTrue(drivebase.driveToPose(
-          new Pose2d(Constants.driveToPoseConstants.BlueRightTranslation, Constants.driveToPoseConstants.BlueRightRotation)));
-      }else {
-        driverXbox.x().whileTrue(drivebase.driveToPose(
-          new Pose2d(Constants.driveToPoseConstants.RedLeftTranslation, Constants.driveToPoseConstants.RedLeftRotation)));
-        driverXbox.a().whileTrue(drivebase.driveToPose(
-          new Pose2d(Constants.driveToPoseConstants.BlueCenterTranslation, Constants.driveToPoseConstants.RedCenterRotation)));
-        driverXbox.b().whileTrue(drivebase.driveToPose(
-          new Pose2d(Constants.driveToPoseConstants.BlueRightTranslation, Constants.driveToPoseConstants.RedRightRotation)));
-      }
-    }
-};
-
+//     if(!drivebase.isRedAlliance()) {
+//         driverXbox.x().whileTrue(drivebase.driveToPose(Constants.driveToPoseConstants.BLUELEFTPOSE2D));
+//         driverXbox.a().whileTrue(drivebase.driveToPose(
+//           new Pose2d(Constants.driveToPoseConstants.BlueCenterTranslation, Constants.driveToPoseConstants.BlueCenterRotation)));
+//         driverXbox.b().whileTrue(drivebase.driveToPose(
+//           new Pose2d(Constants.driveToPoseConstants.BlueRightTranslation, Constants.driveToPoseConstants.BlueRightRotation)));
+//       }else {
+//         driverXbox.x().whileTrue(drivebase.driveToPose(
+//           new Pose2d(Constants.driveToPoseConstants.RedLeftTranslation, Constants.driveToPoseConstants.RedLeftRotation)));
+//         driverXbox.a().whileTrue(drivebase.driveToPose(
+//           new Pose2d(Constants.driveToPoseConstants.BlueCenterTranslation, Constants.driveToPoseConstants.RedCenterRotation)));
+//         driverXbox.b().whileTrue(drivebase.driveToPose(
+//           new Pose2d(Constants.driveToPoseConstants.BlueRightTranslation, Constants.driveToPoseConstants.RedRightRotation)));
+//       }
+//     }
+// };
+}
 

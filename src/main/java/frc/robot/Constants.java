@@ -45,10 +45,10 @@ public final class Constants
   public static class ShooterConstants // Keep in mind these values affect 2 motors working together
   {
     // Target Shooter Velocity in RPM - May be removed later if using a function to calculate distance then velocity of the ball
-    public static final double SHOOTER_TARGET_VELOCITY_RPM = 500.0;//3000
+    public static final double SHOOTER_TARGET_VELOCITY_RPM = 360.0;//3000
 
     // Shooter PID Constants
-    public static final double kP = 0.0004;// Needs Tuning - Proportional Gain
+    public static final double kP = 0.001;// 0.0004 is a GOOD value for shooting! Needs Tuning - Proportional Gain
     public static final double kI = 0.0;
     public static final double kD = 0.0;// Needs Tuning - Derivative Gain
     // public static final double kIz = 0.0; --- IGNORE ---
@@ -76,11 +76,11 @@ public final class Constants
     public static final double kRollerA = 0;
 
 
-    public static final double kRollerP = 0.01;
+    public static final double kRollerP = 0.001;
     public static final double kRollerI = 0;
     public static final double kRollerD = 0;
 
-
+    public static final double INTAKE_ROLLER_VELOCITY_RPM = 4000.0;
 
     public static final double kArmS = 0;
     public static final double kArmV = 0;
@@ -140,7 +140,7 @@ public final class Constants
 
     public static final int SPINDEXERID = 31;
 
-    public static final double SPINDEXER_TARGET_VELOCITY_RPM = 6000;
+    public static final double SPINDEXER_TARGET_VELOCITY_RPM = 5000;
   }
 
   public static class TowerConstants {
