@@ -1,7 +1,7 @@
 {
   "imu": {
     "type": "navx3",
-    "id": null,
+    "id": 50,
     "canbus": null
   },
   "invertedIMU": false,

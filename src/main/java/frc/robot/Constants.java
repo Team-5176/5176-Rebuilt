@@ -45,12 +45,12 @@ public final class Constants
   public static class ShooterConstants // Keep in mind these values affect 2 motors working together
   {
     // Target Shooter Velocity in RPM - May be removed later if using a function to calculate distance then velocity of the ball
-    public static final double SHOOTER_TARGET_VELOCITY_RPM = 2000.0;//3000
+    public static final double SHOOTER_TARGET_VELOCITY_RPM = 200.0;//3000
 
     // Shooter PID Constants
     public static final double kP = 0.0038;// 0.0004 is a GOOD value for shooting! Needs Tuning - Proportional Gain
     public static final double kI = 0.0;
-    public static final double kD = 0;// Needs Tuning - Derivative Gain
+    public static final double kD = 0.001;// Needs Tuning - Derivative Gain
     // public static final double kIz = 0.0; --- IGNORE ---
 
     // Feed Forward Constants
@@ -60,7 +60,7 @@ public final class Constants
 
     // Shooter Motor Current Limit and Voltage
     public static final int SHOOTER_MOTORS_CURRENT_LIMIT = 40; // Amps
-    public static final double SHOOTER_MOTORS_VOLTAGE = 12.0; // Volts
+    public static final double SHOOTER_MOTORS_VOLTAGE = 10.0; // Volts
 
     public static final int LEADERSHOOTERID = 12; // Can ID constant for the lead shoter motor
     public static final int FOLLOWERSHOOTERID = 11; // Can ID constant for the follower shoter motor
@@ -92,12 +92,11 @@ public final class Constants
     public static final double kArmD = 0;
 
     public static final int INTAKE_ROLLER_MOTORS_CURRENT_LIMIT = 40; // Amps
-    public static final double INTAKE_ROLLER_MOTORS_VOLTAGE = 12.0; // Volts
+    public static final double INTAKE_ROLLER_MOTORS_VOLTAGE = 10.0; // Volts
 
 
     public static final int INTAKE_ARM_MOTORS_CURRENT_LIMIT = 40; // Amps
-    public static final double INTAKE_ARM_MOTORS_VOLTAGE = 12.0; // Volts
-
+    public static final double INTAKE_ARM_MOTORS_VOLTAGE = 10.0; // Volts
     public static final int ARMID = 32;
     public static final int ROLLERID1 = 33;
 
@@ -110,14 +109,14 @@ public final class Constants
     public static final double kTransportV = 0.03;
     // public static final double kTransportA = 0.0001;
 
-    public static final double TRANSPORT_VELOCITY_RPM = 700.0; //actually this is 4000 rpm, probably PID?? I, Thomas PRESIDENT OF CLUB OF ROBOTICS ANNO DOMINI 2026 (andrew told me to add that), made this btw
+    public static final double TRANSPORT_VELOCITY_RPM = 400.0; //actually this is 4000 rpm, probably PID?? I, Thomas PRESIDENT OF CLUB OF ROBOTICS ANNO DOMINI 2026 (andrew told me to add that), made this btw
     
     public static final double kTransportP = 0.0002; //0.0002
     public static final double kTransportI = 0;
     public static final double kTransportD = 0.0008; //0.0008
 
     public static final int Transport_MOTORS_CURRENT_LIMIT = 40; // Amps
-    public static final double Transport_MOTORS_VOLTAGE = 12.0; // Volts
+    public static final double Transport_MOTORS_VOLTAGE = 10.0; // Volts
 
     public static final int TRANSPORTID = 13;
 
@@ -126,21 +125,20 @@ public final class Constants
   public static class SpindexerConstants {
 
 
-    // public static final double kSpindexS = 0.01;
-    // public static final double kSpindexV = 0.12;
-    // public static final double kSpindexA = 0;
+    public static final double kSpindexV = 0.53;
+    public static final double kSpindexA = 0.17;
 
 
-    public static final double kSpindexP = 0.00038;
+    public static final double kSpindexP = 0.0048;
     public static final double kSpindexI = 0;
     public static final double kSpindexD = 0;
 
     public static final int SPINDEX_MOTORS_CURRENT_LIMIT = 40; // Amps
-    public static final double SPINDEX_MOTORS_VOLTAGE = 12.0; // Volts
+    public static final double SPINDEX_MOTORS_VOLTAGE = 10.0; // Volts
 
     public static final int SPINDEXERID = 31;
 
-    public static final double SPINDEXER_TARGET_VELOCITY_RPM = 5000;
+    public static final double SPINDEXER_TARGET_VELOCITY_RPM = 2000;
   }
 
   public static class TowerConstants {
