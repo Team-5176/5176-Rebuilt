@@ -244,11 +244,18 @@ public class Vision extends SubsystemBase {
     //            VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1));
 
 
+    SWERVE_CAM("swerveCam",
+               new Rotation3d(0, Units.degreesToRadians(-25), 180),
+               new Translation3d(Units.inchesToMeters(-9.5),
+                                 Units.inchesToMeters(-11.25),
+                                 Units.inchesToMeters(2)),
+               VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1)),
+
     CENTER_CAM("center",
-               new Rotation3d(0, Units.degreesToRadians(35), 0),
-               new Translation3d(Units.inchesToMeters(-11.25),
-                                 Units.inchesToMeters(-6.75),
-                                 Units.inchesToMeters(5.25)),
+               new Rotation3d(0, Units.degreesToRadians(0), Units.degreesToRadians(0)),
+               new Translation3d(Units.inchesToMeters(5.25),
+                                 Units.inchesToMeters(3.75),
+                                 Units.inchesToMeters(28.25)),
                VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1));
     /**
      * Latency alert to use when high latency is detected.

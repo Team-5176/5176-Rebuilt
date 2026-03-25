@@ -21,7 +21,7 @@ import frc.robot.Constants;
 public class TowerClimbSubsystem extends SubsystemBase {
 
     private final TalonFX towerClimbLead = new TalonFX(Constants.TowerConstants.LEADERCLIMBID);
-    private final TalonFX towerClimbFollow = new TalonFX(Constants.TowerConstants.FOLLOWERCLIMBID);
+    // private final TalonFX towerClimbFollow = new TalonFX(Constants.TowerConstants.FOLLOWERCLIMBID);
 
     private final SparkMax towerClimbFlippers = new SparkMax(0,MotorType.kBrushless);
 
@@ -55,7 +55,7 @@ public class TowerClimbSubsystem extends SubsystemBase {
         towerClimbFlippers.configure(flippersConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
         towerClimbLead.getConfigurator().apply(new TalonFXConfiguration());
-        towerClimbFollow.getConfigurator().apply(new TalonFXConfiguration());
+        // towerClimbFollow.getConfigurator().apply(new TalonFXConfiguration());
 
         TalonFXConfiguration towerClimbConfig = new TalonFXConfiguration();
 
@@ -76,26 +76,26 @@ public class TowerClimbSubsystem extends SubsystemBase {
 
         for (int i = 0; i < 5; ++i) {
         statusOne = towerClimbLead.getConfigurator().apply(towerClimbConfig);
-        statusTwo = towerClimbFollow.getConfigurator().apply(towerClimbConfig);
+        // statusTwo = towerClimbFollow.getConfigurator().apply(towerClimbConfig);
         if (statusOne.isOK() && statusTwo.isOK()) break;
         }
         if (!statusOne.isOK()) {
             System.out.println("Could not apply configs to DeepClimb motor ONE, error code: " + statusOne.toString());
         }
-        if (!statusTwo.isOK()) {
-            System.out.println("Could not apply configs to DeepClimb motor TWO, error code: " + statusTwo.toString());
-        }
+        // if (!statusTwo.isOK()) {
+        //   System.out.println("Could not apply configs to DeepClimb motor TWO, error code: " + statusTwo.toString());
+        // }
 
         /* Make sure we start at 0 */
         towerClimbLead.setPosition(0);
-        towerClimbFollow.setPosition(0);
+        // towerClimbFollow.setPosition(0);
     }
 
     public void setTowerClimbPosition(double rotations) {
 
         double rawRotations = rotations*25; 
         towerClimbLead.setControl(towerClimbPositionVoltage.withPosition(rawRotations));
-        towerClimbFollow.setControl(towerClimbPositionVoltage.withPosition(rawRotations * -1.0));
+        // towerClimbFollow.setControl(towerClimbPositionVoltage.withPosition(rawRotations * -1.0));
     }
 
     public void setFlippersPosition(double rotations) {

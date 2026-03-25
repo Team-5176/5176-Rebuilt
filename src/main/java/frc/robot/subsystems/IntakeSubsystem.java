@@ -18,7 +18,7 @@ import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase  {
 
-    private boolean isDeployed;
+    private boolean isDeployed = false;
     private final SparkFlex intakeRoller = new SparkFlex(Constants.IntakeConstants.ROLLERID1, MotorType.kBrushless);
     private final SparkMax intakeArm = new SparkMax(Constants.IntakeConstants.ARMID,MotorType.kBrushless);
     /*  private final SparkMax intakeArmLeader = new SparkMax(Constants.IntakeConstants.ROLLERID2,MotorType.kBrushless);
@@ -26,7 +26,6 @@ public class IntakeSubsystem extends SubsystemBase  {
  */
 
     public IntakeSubsystem(){ 
-        isDeployed = false;
         
         SparkFlexConfig intakeRollerConfig = new SparkFlexConfig();
         FeedForwardConfig intakeRollerFeedForwardConfig = new FeedForwardConfig();

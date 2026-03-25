@@ -169,8 +169,8 @@ public final class Constants
     public static final double kCLIMB_V = 0;
     public static final double kCLIMB_A = 0;
 
-    public static final int LEADERCLIMBID = 0;
-    public static final int FOLLOWERCLIMBID = 0;
+    public static final int LEADERCLIMBID = 22;
+    // public static final int FOLLOWERCLIMBID = 0;
 
   }
 
