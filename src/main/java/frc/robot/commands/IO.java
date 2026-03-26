@@ -13,7 +13,7 @@ public class IO {
   public static XboxController driverXbox = new XboxController(0);
 
   JoystickButton shootButton = new JoystickButton(driverXbox,  1);
-  JoystickButton intakeButton = new JoystickButton(driverXbox, 8);
+  Trigger intakeButton = new Trigger(() -> driverXbox.getRightTriggerAxis() > 0.5);
   JoystickButton intakeDeployButton = new JoystickButton(driverXbox, 5);
   JoystickButton intakeRetractButton = new JoystickButton(driverXbox, 6);
   Trigger position1Button = new Trigger(() -> driverXbox.getPOV() == 0);
