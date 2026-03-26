@@ -45,6 +45,7 @@ public class RebuiltCommands {
     );
 
     // Run the intake rollers while the button is held.
+    // does this work for starting and stopping the intake?  
     public static final Command toggleIntake = new ConditionalCommand(
         stopIntake,
         startIntake,
@@ -54,11 +55,11 @@ public class RebuiltCommands {
     
     
 
-    // public static final ConditionalCommand angleIntake = new ConditionalCommand(
-    //     retractIntake,
-    //     deployIntake,
-    //     Robot.intakeSubsystem::isDeployed
-    // );
+    public static final ConditionalCommand angleIntake = new ConditionalCommand(
+        retractIntake,
+        deployIntake,
+        Robot.intakeSubsystem::isDeployed
+    );
 
     //  public static final ConditionalCommand toggleSpindex = new ConditionalCommand(
     //     stopSpindexer,

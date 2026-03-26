@@ -70,9 +70,9 @@ public class ShooterSubsystem extends SubsystemBase {
     // much higher than the configured target (500), so isShooting() would
     // incorrectly return false even after starting the shooter. Use a low
     // threshold (100 RPM) so the toggle logic can detect the motor is running.
-    return Math.abs(shooterLeader.getEncoder().getVelocity()) > 100; // Check if velocity > 100 RPM
+         return Math.abs(shooterLeader.getEncoder().getVelocity()) > 100; // Check if velocity > 100 RPM
     }
-    
+
     /** Check if shooter is at target speed (within tolerance) */
     public boolean atTargetSpeed() {
         double currentVelocity = shooterLeader.getEncoder().getVelocity();

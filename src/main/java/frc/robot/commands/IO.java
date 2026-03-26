@@ -28,7 +28,7 @@ public class IO {
   public IO() {
     shootButton.onTrue(RebuiltCommands.toggleShoot);
     // Run intake only while the intake button is held.
-    intakeButton.whileTrue(RebuiltCommands.toggleIntake);
+    intakeButton.onTrue(RebuiltCommands.toggleIntake);
     // position1Button.whileTrue(RebuiltCommands.topPos);
     intakeDeployButton.onTrue(RebuiltCommands.deployIntake);
     intakeRetractButton.onTrue(RebuiltCommands.retractIntake);
