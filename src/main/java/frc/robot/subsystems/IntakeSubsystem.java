@@ -98,8 +98,6 @@ public class IntakeSubsystem extends SubsystemBase  {
         intakeArm.getClosedLoopController().setSetpoint(deployPoint, ControlType.kPosition);
     }
 
-    
-
     public double getVelocity()
     {
         return intakeRoller.getEncoder().getVelocity();

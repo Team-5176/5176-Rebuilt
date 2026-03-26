@@ -21,7 +21,6 @@ public class IO {
   
   // JoystickButton toggleSpindexerButton = new JoystickButton(driverXbox,  3);
   // JoystickButton shootOnlyButton = new JoystickButton(driverXbox, 2);
-  // JoystickButton toggleIntakeButton = new JoystickButton(driverXbox,  5); // Use button 5 (left bumper) for intake toggle
 
   // LED Button
   // JoystickButton ledoff = new JoystickButton(operatorXbox, 4)    .whenPressed(m_turnOnLEDsCommand);
@@ -29,7 +28,7 @@ public class IO {
   public IO() {
     shootButton.onTrue(RebuiltCommands.toggleShoot);
     // Run intake only while the intake button is held.
-    intakeButton.whileTrue(RebuiltCommands.intakeWhileHeld);
+    intakeButton.whileTrue(RebuiltCommands.toggleIntake);
     // position1Button.whileTrue(RebuiltCommands.topPos);
     intakeDeployButton.onTrue(RebuiltCommands.deployIntake);
     intakeRetractButton.onTrue(RebuiltCommands.retractIntake);
