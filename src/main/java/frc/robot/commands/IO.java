@@ -14,8 +14,10 @@ public class IO {
 
   JoystickButton shootButton = new JoystickButton(driverXbox,  1);
   Trigger intakeButton = new Trigger(() -> driverXbox.getRightTriggerAxis() > 0.5);
-  JoystickButton intakeDeployButton = new JoystickButton(driverXbox, 5);
-  JoystickButton intakeRetractButton = new JoystickButton(driverXbox, 6);
+  // JoystickButton intakeDeployButton = new JoystickButton(driverXbox, 5);
+  // JoystickButton intakeRetractButton = new JoystickButton(driverXbox, 6);
+ JoystickButton intakeAngleButton = new JoystickButton(driverXbox, 6);
+
   Trigger position1Button = new Trigger(() -> driverXbox.getPOV() == 0);
   // Trigger position0Button = new Trigger(() -> driverXbox.getPOV() == 180);
   
@@ -28,12 +30,12 @@ public class IO {
   public IO() {
     shootButton.onTrue(RebuiltCommands.toggleShoot);
     // Run intake only while the intake button is held.
-    intakeButton.onTrue(RebuiltCommands.toggleIntake);
+    intakeButton.whileTrue(RebuiltCommands.toggleIntake);
     // position1Button.whileTrue(RebuiltCommands.topPos);
-    intakeDeployButton.onTrue(RebuiltCommands.deployIntake);
-    intakeRetractButton.onTrue(RebuiltCommands.retractIntake);
+    // intakeDeployButton.onTrue(RebuiltCommands.deployIntake);
+    // intakeRetractButton.onTrue(RebuiltCommands.retractIntake);
 
-    // intakeAngleButton.onTrue(RebuiltCommands.angleIntake);
+    intakeAngleButton.onTrue(RebuiltCommands.angleIntake);
       
       // shootButton.onFalse(RebuiltCommands.toggleShoot);
       // toggleIntakeButton.toggleOnTrue(RebuiltCommands.startIntake);
