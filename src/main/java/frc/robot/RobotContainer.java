@@ -83,18 +83,19 @@ public class RobotContainer
     // driverXbox.y().whileTrue(drivebase.driveToPose(drivebase.getClosestPoint()));
     if(drivebase.isRedAlliance()) {
       driverXbox.x().whileTrue(
-        drivebase.driveToPose(new Pose2d(new Translation2d(14, 2), Rotation2d.fromDegrees(130))));
+        // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 1000;
+        drivebase.driveToPose(new Pose2d(new Translation2d(14, 2), Rotation2d.fromDegrees(50))));
       driverXbox.y().whileTrue(
-        drivebase.driveToPose(new Pose2d(new Translation2d(14, 4), Rotation2d.fromDegrees(180))));
+        drivebase.driveToPose(new Pose2d(new Translation2d(14, 4), Rotation2d.fromDegrees(0))));
       driverXbox.b().whileTrue(
-        drivebase.driveToPose(new Pose2d(new Translation2d(14, 6), Rotation2d.fromDegrees(-130))));
+        drivebase.driveToPose(new Pose2d(new Translation2d(14, 6), Rotation2d.fromDegrees(-50))));
     }else{
       driverXbox.x().whileTrue(
-        drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 6), Rotation2d.fromDegrees(-50))));
+        drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 6), Rotation2d.fromDegrees(130))));
       driverXbox.y().whileTrue(
-          drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 4), Rotation2d.fromDegrees(0))));
+          drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 4), Rotation2d.fromDegrees(180))));
       driverXbox.b().whileTrue(
-            drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 2), Rotation2d.fromDegrees(50))));
+            drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 2), Rotation2d.fromDegrees(-130))));
     }
 
 
