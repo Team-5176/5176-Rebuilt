@@ -30,6 +30,13 @@ public class RebuiltCommands {
         ()-> Robot.towerClimbSubsystem.setTowerClimbPosition(Constants.TowerConstants.CLIMBPOS), Robot.towerClimbSubsystem);
     public static final Command topPos = new InstantCommand(
         ()-> Robot.towerClimbSubsystem.setTowerClimbPosition(Constants.TowerConstants.RESETPOS), Robot.towerClimbSubsystem);
+        
+    public static final Command towerDown = new InstantCommand(
+        () -> Robot.towerClimbSubsystem.setTowerClimbVelocity(0.1), Robot.towerClimbSubsystem
+    );
+    public static final Command towerStop = new InstantCommand(
+        () -> Robot.towerClimbSubsystem.setTowerClimbVelocity(0), Robot.towerClimbSubsystem
+    );
     // public static final Command bottomPos = new InstantCommand(
     //     ()-> Robot.towerClimbSubsystem.setTowerClimbPosition(0), Robot.towerClimbSubsystem);
 

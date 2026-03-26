@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 // import com.revrobotics.PersistMode;
@@ -23,9 +24,10 @@ public class TowerClimbSubsystem extends SubsystemBase {
     private final TalonFX towerClimbLead = new TalonFX(Constants.TowerConstants.LEADERCLIMBID);
     // private final TalonFX towerClimbFollow = new TalonFX(Constants.TowerConstants.FOLLOWERCLIMBID);
 
-    private final SparkMax towerClimbFlippers = new SparkMax(0,MotorType.kBrushless);
+    // private final SparkMax towerClimbFlippers = new SparkMax(0,MotorType.kBrushless);
 
     private final PositionVoltage towerClimbPositionVoltage = new PositionVoltage(0);
+    private final VelocityVoltage towerClimbVelocityVoltage = new VelocityVoltage(0);
 
     public TowerClimbSubsystem() {
 
@@ -58,17 +60,17 @@ public class TowerClimbSubsystem extends SubsystemBase {
 
         TalonFXConfiguration towerClimbConfig = new TalonFXConfiguration();
 
-        towerClimbConfig.Slot0.kS = Constants.TowerConstants.kCLIMB_S;
-        towerClimbConfig.Slot0.kV = Constants.TowerConstants.kCLIMB_S;
-        towerClimbConfig.Slot0.kA = Constants.TowerConstants.kCLIMB_S;
+        // towerClimbConfig.Slot0.kS = Constants.TowerConstants.kCLIMB_S;
+        // towerClimbConfig.Slot0.kV = Constants.TowerConstants.kCLIMB_V;
+        // towerClimbConfig.Slot0.kA = Constants.TowerConstants.kCLIMB_A;
 
         towerClimbConfig.Slot0.kP = Constants.TowerConstants.kCLIMB_P;
         towerClimbConfig.Slot0.kI = Constants.TowerConstants.kCLIMB_I;
         towerClimbConfig.Slot0.kD = Constants.TowerConstants.kCLIMB_D;
 
-        towerClimbConfig.Voltage.withPeakForwardVoltage(12)
-                                .withPeakReverseVoltage(12);
-        towerClimbConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+        towerClimbConfig.Voltage.withPeakForwardVoltage(1)
+                                .withPeakReverseVoltage(1);
+        towerClimbConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         StatusCode statusOne = StatusCode.StatusCodeNotInitialized;
         // StatusCode statusTwo = StatusCode.StatusCodeNotInitialized;
@@ -96,9 +98,20 @@ public class TowerClimbSubsystem extends SubsystemBase {
         // towerClimbFollow.setControl(towerClimbPositionVoltage.withPosition(rawRotations * -1.0));
     }
 
-    public void setFlippersPosition(double rotations) {
+    public void setTowerClimbVelocity(double velocity) {
 
-        towerClimbFlippers.getClosedLoopController().setSetpoint(rotations, ControlType.kPosition);
+        towerClimbLead.setControl(towerClimbVelocityVoltage.withVelocity(velocity));
+    }
+
+    // public void setFlippersPosition(double rotations) {
+
+    //     towerClimbFlippers.getClosedLoopController().setSetpoint(rotations, ControlType.kPosition);
+    // }
+
+    public double displayEncoder() {
+
+        // return towerClimbLead.getPosition().getValueAsDouble();
+        return 1;
     }
 
     
