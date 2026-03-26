@@ -1,6 +1,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
@@ -32,9 +33,15 @@ public class RebuiltCommands {
 
     public static final Command startRumble = new InstantCommand(()->IO.driverXbox.setRumble(RumbleType.kBothRumble, 1.0));
     public static final Command stopRumble = new InstantCommand(()->IO.driverXbox.setRumble(RumbleType.kBothRumble, 0.0));
+    public static Command getStartIntake() {
+        return Commands.runOnce(() -> Robot.intakeSubsystem.spinIntake(Constants.IntakeConstants.INTAKE_ROLLER_VELOCITY_RPM), Robot.intakeSubsystem);
+    }
 
-    public static final Command startIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(Constants.IntakeConstants.INTAKE_ROLLER_VELOCITY_RPM), Robot.intakeSubsystem);
-    public static final Command stopIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(0.0), Robot.intakeSubsystem);
+    public static Command getStopIntake() {
+        return Commands.runOnce(() -> Robot.intakeSubsystem.spinIntake(0.0), Robot.intakeSubsystem);
+    }
+    // public static final Command startIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(Constants.IntakeConstants.INTAKE_ROLLER_VELOCITY_RPM), Robot.intakeSubsystem);
+    // public static final Command stopIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(0.0), Robot.intakeSubsystem);
 
 
     // Cannot stop shooting on button press until WaitCommands finish
@@ -46,13 +53,19 @@ public class RebuiltCommands {
 
     // Run the intake rollers while the button is held.
     // does this work for starting and stopping the intake?  
-    public static final Command toggleIntake = new ConditionalCommand(
-        stopIntake,
-        startIntake,
+    // public static final Command toggleIntake = new ConditionalCommand(
+    //     stopIntake,
+    //     startIntake,
+    //     Robot.intakeSubsystem::isIntaking
+    // );
+
+    public static Command getToggleIntake() {
+    return new ConditionalCommand(
+        getStopIntake(),
+        getStartIntake(),
         Robot.intakeSubsystem::isIntaking
     );
-
-    
+}
     
 
     public static final ConditionalCommand angleIntake = new ConditionalCommand(
