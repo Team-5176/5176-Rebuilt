@@ -79,7 +79,7 @@ public final class Constants
     public static final double kRollerI = 0;
     public static final double kRollerD = 0;
 
-    public static final double INTAKE_ROLLER_VELOCITY_RPM = 700.0;
+    public static final double INTAKE_ROLLER_VELOCITY_RPM = 1000.0;
 
     public static final double kArmV = 0.91;
     public static final double kArmA = 0.042;
@@ -92,7 +92,7 @@ public final class Constants
     public static final double kArmRotations = -12;
     public static final double kArmRetractPos = 0; //was -0.2 
 
-    public static final int INTAKE_ROLLER_MOTORS_CURRENT_LIMIT = 40; // Amps
+    public static final int INTAKE_ROLLER_MOTORS_CURRENT_LIMIT = 60; // Amps
     public static final double INTAKE_ROLLER_MOTORS_VOLTAGE = 10.0; // Volts
 
 
