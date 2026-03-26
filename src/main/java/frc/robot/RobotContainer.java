@@ -9,9 +9,12 @@ import java.io.File;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 
+import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Filesystem;
@@ -82,15 +85,8 @@ public class RobotContainer
   } */
 
   private void configureDriveToPose() {
-
     // driverXbox.y().whileTrue(drivebase.driveToPose(drivebase.getClosestPoint()));
     if(drivebase.isRedAlliance()) {
-        // // Line 1: Define the combined command using alongWith
-        // Command shootLeft = drivebase.driveToPose(new Pose2d(new Translation2d(14, 2), Rotation2d.fromDegrees(50)))
-        // .alongWith(ShooterSubsystem.setShooterVelocity(1000));
-
-        // // Line 2: Bind it to a button using whileTrue
-        // driverXbox.button(1).whileTrue(shootLeft);
 
       driverXbox.x().whileTrue(
           drivebase.driveToPose(new Pose2d(new Translation2d(14, 2), Rotation2d.fromDegrees(-50)))
