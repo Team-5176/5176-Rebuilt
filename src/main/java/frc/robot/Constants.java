@@ -47,7 +47,7 @@ public final class Constants
   public static class ShooterConstants // Keep in mind these values affect 2 motors working together
   {
     // Target Shooter Velocity in RPM - May be removed later if using a function to calculate distance then velocity of the ball
-    public static double SHOOTER_TARGET_VELOCITY_RPM = 1750.0;//3000
+    public static double SHOOTER_TARGET_VELOCITY_RPM = 1700.0;//3000
 
     // shooter speeds: right(B): middle(Y): left(X):
 
@@ -139,7 +139,7 @@ public final class Constants
 
     public static final int SPINDEXERID = 31;
 
-    public static final double SPINDEXER_TARGET_VELOCITY_RPM = 3000;
+    public static final double SPINDEXER_TARGET_VELOCITY_RPM = 4000;
   }
 
   public static class TowerConstants {

@@ -93,21 +93,21 @@ public class RobotContainer
         // driverXbox.button(1).whileTrue(shootLeft);
 
       driverXbox.x().whileTrue(
-          drivebase.driveToPose(new Pose2d(new Translation2d(14, 2), Rotation2d.fromDegrees(-50)))
+          drivebase.driveToPose(new Pose2d(new Translation2d(10, 2), Rotation2d.fromDegrees(-50)))
           .alongWith(Commands.runOnce(() -> {
               // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 1000;
               SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
           }))
       );
       driverXbox.y().whileTrue(
-          drivebase.driveToPose(new Pose2d(new Translation2d(14, 4), Rotation2d.fromDegrees(0)))
+          drivebase.driveToPose(new Pose2d(new Translation2d(10, 4), Rotation2d.fromDegrees(0)))
           .alongWith(Commands.runOnce(() -> {
               // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 500;
               SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
           }))
       );
       driverXbox.b().whileTrue(
-          drivebase.driveToPose(new Pose2d(new Translation2d(14, 6), Rotation2d.fromDegrees(50)))
+          drivebase.driveToPose(new Pose2d(new Translation2d(10, 6), Rotation2d.fromDegrees(50)))
           .alongWith(Commands.runOnce(() -> {
               // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 700;
               SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
