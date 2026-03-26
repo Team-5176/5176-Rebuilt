@@ -25,7 +25,8 @@ public final class Constants
   public static final double ROBOT_MASS = (148 - 20.3) * 0.453592; // 32lbs * kg per pound
   public static final Matter CHASSIS    = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
   public static final double LOOP_TIME  = 0.13; //s, 20ms + 110ms sprk max velocity lag
-  public static final double MAX_SPEED  = Units.feetToMeters(14.5);// Maximum speed of the robot in meters per second, used to limit acceleration.
+  // public static final double MAX_SPEED  = Units.feetToMeters(14.5);// Maximum speed of the robot in meters per second, used to limit acceleration.
+  public static final double MAX_SPEED  = Units.feetToMeters(7);// Maximum speed of the robot in meters per second, used to limit acceleration.
 
   public static final class DrivebaseConstants
   {
@@ -78,7 +79,7 @@ public final class Constants
     public static final double kRollerI = 0;
     public static final double kRollerD = 0;
 
-    public static final double INTAKE_ROLLER_VELOCITY_RPM = 1200.0;
+    public static final double INTAKE_ROLLER_VELOCITY_RPM = 700.0;
 
     public static final double kArmV = 0.91;
     public static final double kArmA = 0.042;
@@ -88,8 +89,8 @@ public final class Constants
     public static final double kArmI = 0;
     public static final double kArmD = 0;
 
-    public static final double kArmRotations = -.05;
-    public static final double kArmRetractPos = 0.2;
+    public static final double kArmRotations = -12;
+    public static final double kArmRetractPos = -0.2;
 
     public static final int INTAKE_ROLLER_MOTORS_CURRENT_LIMIT = 40; // Amps
     public static final double INTAKE_ROLLER_MOTORS_VOLTAGE = 10.0; // Volts
@@ -129,7 +130,7 @@ public final class Constants
     public static final double kSpindexA = 0.17;
 
 
-    public static final double kSpindexP = 0.00100;
+    public static final double kSpindexP = 0.00190;
     public static final double kSpindexI = 0;
     public static final double kSpindexD = 0;
 
@@ -138,7 +139,7 @@ public final class Constants
 
     public static final int SPINDEXERID = 31;
 
-    public static final double SPINDEXER_TARGET_VELOCITY_RPM = 2000;
+    public static final double SPINDEXER_TARGET_VELOCITY_RPM = 3000;
   }
 
   public static class TowerConstants {
@@ -148,26 +149,27 @@ public final class Constants
     public static final Rotation2d TOWERROTATION = new Rotation2d(0);
 
     public static final double CLIMBCONVERSIONFACTOR = 5.2935836213; // DO NOT TOUCH. CALCULATED CONVERSION
-    public static final double CLIMBDISTANCE = 0 / CLIMBCONVERSIONFACTOR;//inches you want the bike chain to move * conversion factor
+    public static final double CLIMBDISTANCE = -(5 / CLIMBCONVERSIONFACTOR);//inches you want the bike chain to move * conversion factor
 
-    public static final int FLIPPERS_MOTOR_CURRENT_LIMIT = 40;
-    public static final double FLIPPERS_MOTOR_VOLTAGE = 12;
+    // public static final int FLIPPERS_MOTOR_CURRENT_LIMIT = 40;
+    // public static final double FLIPPERS_MOTOR_VOLTAGE = 12;
 
-    public static final double kFlippersP = 0;
-    public static final double kFlippersI = 0;
-    public static final double kFlippersD = 0;
+    // public static final double kFlippersP = 0;
+    // public static final double kFlippersI = 0;
+    // public static final double kFlippersD = 0;
 
-    public static final double kFlippersS = 0;
-    public static final double kFlippersV = 0;
-    public static final double kFlippersA = 0;
+    // public static final double kFlippersS = 0;
+    // public static final double kFlippersV = 0;
+    // public static final double kFlippersA = 0;
 
-    public static final double kCLIMB_P = 0.05;
+    public static final double kCLIMB_P = 0.0005;
     public static final double kCLIMB_I = 0;
     public static final double kCLIMB_D = 0;
 
     public static final double kCLIMB_S = 0;
     public static final double kCLIMB_V = 0;
     public static final double kCLIMB_A = 0;
+    public static final double kCLIMB_G = 0;
 
     public static final int LEADERCLIMBID = 22;
     // public static final int FOLLOWERCLIMBID = 0;
@@ -211,6 +213,8 @@ public final class Constants
     public static final double SHOOTERPOS1RPM = 500;
     public static final double SHOOTERPOS2RPM = 500;
     public static final double SHOOTERPOS3RPM = 500;
+    public static final double SHOOTERPOS4RPM = 500;
+    public static final double SHOOTERPOS5RPM = 500;
     
   }
 }

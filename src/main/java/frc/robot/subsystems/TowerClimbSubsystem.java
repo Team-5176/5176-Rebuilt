@@ -29,30 +29,29 @@ public class TowerClimbSubsystem extends SubsystemBase {
 
     public TowerClimbSubsystem() {
 
-        SparkMaxConfig flippersConfig  = new SparkMaxConfig();
+        // SparkMaxConfig flippersConfig  = new SparkMaxConfig();
         // FeedForwardConfig flippersFeedForwardConfig = new FeedForwardConfig();
 
-        flippersConfig.idleMode(IdleMode.kBrake);
-        flippersConfig.smartCurrentLimit(Constants.TowerConstants.FLIPPERS_MOTOR_CURRENT_LIMIT);
-        flippersConfig.voltageCompensation(Constants.TowerConstants.FLIPPERS_MOTOR_VOLTAGE);
+        // flippersConfig.idleMode(IdleMode.kBrake);
+        // flippersConfig.smartCurrentLimit(Constants.TowerConstants.FLIPPERS_MOTOR_CURRENT_LIMIT);
+        // flippersConfig.voltageCompensation(Constants.TowerConstants.FLIPPERS_MOTOR_VOLTAGE);
 
         // flippersFeedForwardConfig
         //                   .kS(Constants.TowerConstants.kFlippersS)
         //                   .kV(Constants.TowerConstants.kFlippersV)
         //                   .kA(Constants.TowerConstants.kFlippersA);
 
-        flippersConfig.closedLoop
-                .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-                .pid(
-                    Constants.TowerConstants.kFlippersP,
-                    Constants.TowerConstants.kFlippersI,
-                    Constants.TowerConstants.kFlippersD);
-        ClosedLoopConfig spindexerClosedLoopConfig = flippersConfig.closedLoop;
-            //   spindexerClosedLoopConfig.apply(flippersFeedForwardConfig);
-              flippersConfig.apply(spindexerClosedLoopConfig);
+        // flippersConfig.closedLoop
+        //         .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
+        //         .pid(
+        //             Constants.TowerConstants.kFlippersP,
+        //             Constants.TowerConstants.kFlippersI,
+        //             Constants.TowerConstants.kFlippersD);
+        // ClosedLoopConfig spindexerClosedLoopConfig = flippersConfig.closedLoop;
+        //       flippersConfig.apply(spindexerClosedLoopConfig);
 
 
-        towerClimbFlippers.configure(flippersConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        // towerClimbFlippers.configure(flippersConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
         towerClimbLead.getConfigurator().apply(new TalonFXConfiguration());
         // towerClimbFollow.getConfigurator().apply(new TalonFXConfiguration());
@@ -69,15 +68,15 @@ public class TowerClimbSubsystem extends SubsystemBase {
 
         towerClimbConfig.Voltage.withPeakForwardVoltage(12)
                                 .withPeakReverseVoltage(12);
-        towerClimbConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+        towerClimbConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
 
         StatusCode statusOne = StatusCode.StatusCodeNotInitialized;
-        StatusCode statusTwo = StatusCode.StatusCodeNotInitialized;
+        // StatusCode statusTwo = StatusCode.StatusCodeNotInitialized;
 
         for (int i = 0; i < 5; ++i) {
         statusOne = towerClimbLead.getConfigurator().apply(towerClimbConfig);
         // statusTwo = towerClimbFollow.getConfigurator().apply(towerClimbConfig);
-        if (statusOne.isOK() && statusTwo.isOK()) break;
+        if (statusOne.isOK()) break;
         }
         if (!statusOne.isOK()) {
             System.out.println("Could not apply configs to DeepClimb motor ONE, error code: " + statusOne.toString());

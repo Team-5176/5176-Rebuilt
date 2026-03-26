@@ -46,13 +46,13 @@ public class RebuiltCommands {
     );
 
     public static final Command topPos = new InstantCommand(
-        ()-> Robot.towerClimbSubsystem.setTowerClimbPosition(0.5), Robot.towerClimbSubsystem);
+        ()-> Robot.towerClimbSubsystem.setTowerClimbPosition(Constants.TowerConstants.CLIMBDISTANCE), Robot.towerClimbSubsystem);
 
-    public static final ConditionalCommand angleIntake = new ConditionalCommand(
-        retractIntake,
-        deployIntake,
-        Robot.intakeSubsystem::isDeployed
-    );
+    // public static final ConditionalCommand angleIntake = new ConditionalCommand(
+    //     retractIntake,
+    //     deployIntake,
+    //     Robot.intakeSubsystem::isDeployed
+    // );
 
 
     // public static final ConditionalCommand toggleIntake = new ConditionalCommand(

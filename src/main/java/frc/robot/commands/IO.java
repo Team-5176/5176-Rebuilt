@@ -17,7 +17,7 @@ public class IO {
   JoystickButton intakeDeployButton = new JoystickButton(driverXbox, 5);
   JoystickButton intakeRetractButton = new JoystickButton(driverXbox, 6);
   Trigger position1Button = new Trigger(() -> driverXbox.getPOV() == 0);
-  Trigger position0Button = new Trigger(() -> driverXbox.getPOV() == 180);
+  // Trigger position0Button = new Trigger(() -> driverXbox.getPOV() == 180);
   
   // JoystickButton toggleSpindexerButton = new JoystickButton(driverXbox,  3);
   // JoystickButton shootOnlyButton = new JoystickButton(driverXbox, 2);
@@ -30,7 +30,7 @@ public class IO {
     shootButton.onTrue(RebuiltCommands.toggleShoot);
     // Run intake only while the intake button is held.
     intakeButton.whileTrue(RebuiltCommands.intakeWhileHeld);
-    position1Button.whileTrue(RebuiltCommands.topPos);
+    // position1Button.whileTrue(RebuiltCommands.topPos);
     intakeDeployButton.onTrue(RebuiltCommands.deployIntake);
     intakeRetractButton.onTrue(RebuiltCommands.retractIntake);
 

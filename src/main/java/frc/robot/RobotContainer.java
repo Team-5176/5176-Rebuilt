@@ -5,10 +5,13 @@
 package frc.robot;
 
 
+import java.io.File;
+
 import com.pathplanner.lib.auto.AutoBuilder;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,32 +30,30 @@ import swervelib.SwerveInputStream;
 
 public class RobotContainer
 {
-  SwerveSubsystem drivebase = new SwerveSubsystem();
-
+  private final SwerveSubsystem       drivebase  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
+                                                                                "swerve"));
   private final CommandXboxController driverXbox = new CommandXboxController(0);
 
     // Establish a Sendable Chooser that will be able to be sent to the SmartDashboard, allowing selection of desired auto
   private final SendableChooser<Command> autoChooser;
-  
   // The container for the robot. Contains subsystems, OI devices, and commands.
   
 
   
   public RobotContainer()
   {
-    drivebase.setupPathPlanner();
     configureDriveToPose();
     drivebase.setDefaultCommand(driveFieldOrientedAngularVelocity);
     DriverStation.silenceJoystickConnectionWarning(true);
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
-    drivebase.zeroGyroWithAlliance();
+    // drivebase.zeroGyroWithAlliance();
   }
 
 
   SwerveInputStream driveAngularVelocity = SwerveInputStream.of(drivebase.getSwerveDrive(),
-                                                                    () -> driverXbox.getLeftY() * -1.0,
-                                                                    () -> driverXbox.getLeftX() * -1.0)
+                                                                    () -> driverXbox.getLeftY() * 1.0,
+                                                                    () -> driverXbox.getLeftX() * 1.0)
                                                                     .withControllerRotationAxis(() -> driverXbox.getRightX())
                                                                     .deadband(OperatorConstants.DEADBAND)
                                                                     .scaleTranslation(0.8)

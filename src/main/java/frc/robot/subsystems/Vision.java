@@ -213,7 +213,7 @@ public class Vision extends SubsystemBase {
   /**
    * Camera Enum to select each camera
    */
-  enum Cameras
+  public enum Cameras
   {
     /**
      * Left Camera
@@ -245,7 +245,7 @@ public class Vision extends SubsystemBase {
 
 
     SWERVE_CAM("swerveCam",
-               new Rotation3d(0, Units.degreesToRadians(-25), 180),
+               new Rotation3d(0, Units.degreesToRadians(-25), Units.degreesToRadians(180)),
                new Translation3d(Units.inchesToMeters(-9.5),
                                  Units.inchesToMeters(-11.25),
                                  Units.inchesToMeters(2)),
