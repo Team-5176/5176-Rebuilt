@@ -25,8 +25,7 @@ public final class Constants
   public static final double ROBOT_MASS = (148 - 20.3) * 0.453592; // 32lbs * kg per pound
   public static final Matter CHASSIS    = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
   public static final double LOOP_TIME  = 0.13; //s, 20ms + 110ms sprk max velocity lag
-  // public static final double MAX_SPEED  = Units.feetToMeters(14.5);// Maximum speed of the robot in meters per second, used to limit acceleration.
-  public static final double MAX_SPEED  = Units.feetToMeters(7);// Maximum speed of the robot in meters per second, used to limit acceleration.
+  public static final double MAX_SPEED  = Units.feetToMeters(14.5);// Maximum speed of the robot in meters per second, used to limit acceleration.
 
   public static final class DrivebaseConstants
   {
@@ -65,9 +64,6 @@ public final class Constants
 
     public static final int LEADERSHOOTERID = 12; // Can ID constant for the lead shoter motor
     public static final int FOLLOWERSHOOTERID = 11; // Can ID constant for the follower shoter motor
-    
-    // CAN Timeout is milliseconds between motor controller communication with the rio. Frees up space in the command scheduler and on the CAN bus.
-    public static final int CANTimeoutMs = 250; // milliseconds
   }
 
   public static class IntakeConstants {
