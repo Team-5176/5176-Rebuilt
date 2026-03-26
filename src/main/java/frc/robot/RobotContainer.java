@@ -85,61 +85,61 @@ public class RobotContainer
   } */
 
   private void configureDriveToPose() {
-    // driverXbox.y().whileTrue(drivebase.driveToPose(drivebase.getClosestPoint()));
+    // driverXbox.y().whileTrue(drivebase.driveToPosePID(drivebase.getClosestPoint()));
     if(drivebase.isRedAlliance()) {
 
       driverXbox.x().whileTrue(
-          drivebase.driveToPose(new Pose2d(new Translation2d(10, 2), Rotation2d.fromDegrees(-50)))
+          drivebase.driveToPosePID(new Pose2d(new Translation2d(10, 2), Rotation2d.fromDegrees(-50)))
           .alongWith(Commands.runOnce(() -> {
               // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 1000;
               SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
           }))
       );
       driverXbox.y().whileTrue(
-          drivebase.driveToPose(new Pose2d(new Translation2d(10, 4), Rotation2d.fromDegrees(0)))
+          drivebase.driveToPosePID(new Pose2d(new Translation2d(10, 4), Rotation2d.fromDegrees(0)))
           .alongWith(Commands.runOnce(() -> {
               // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 500;
               SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
           }))
       );
       driverXbox.b().whileTrue(
-          drivebase.driveToPose(new Pose2d(new Translation2d(10, 6), Rotation2d.fromDegrees(50)))
+          drivebase.driveToPosePID(new Pose2d(new Translation2d(10, 6), Rotation2d.fromDegrees(50)))
           .alongWith(Commands.runOnce(() -> {
               // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 700;
               SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
           }))
       );
       // driverXbox.x().whileTrue(
-      //   drivebase.driveToPose(new Pose2d(new Translation2d(14, 2), Rotation2d.fromDegrees(-50))));
+      //   drivebase.driveToPosePID(new Pose2d(new Translation2d(14, 2), Rotation2d.fromDegrees(-50))));
       // driverXbox.x().whileTrue(Commands.runOnce(()-> Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 1000));
       // driverXbox.y().whileTrue(
-      //   drivebase.driveToPose(new Pose2d(new Translation2d(14, 4), Rotation2d.fromDegrees(0))));
+      //   drivebase.driveToPosePID(new Pose2d(new Translation2d(14, 4), Rotation2d.fromDegrees(0))));
       // driverXbox.b().whileTrue(
-        // drivebase.driveToPose(new Pose2d(new Translation2d(14, 6), Rotation2d.fromDegrees(50))));
+        // drivebase.driveToPosePID(new Pose2d(new Translation2d(14, 6), Rotation2d.fromDegrees(50))));
     }else{
       // driverXbox.x().whileTrue(
-      //   drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 6), Rotation2d.fromDegrees(130))));
+      //   drivebase.driveToPosePID(new Pose2d(new Translation2d(2.6, 6), Rotation2d.fromDegrees(130))));
       // driverXbox.y().whileTrue(
-      //     drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 4), Rotation2d.fromDegrees(180))));
+      //     drivebase.driveToPosePID(new Pose2d(new Translation2d(2.6, 4), Rotation2d.fromDegrees(180))));
       // driverXbox.b().whileTrue(
-      //       drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 2), Rotation2d.fromDegrees(-130))));
+      //       drivebase.driveToPosePID(new Pose2d(new Translation2d(2.6, 2), Rotation2d.fromDegrees(-130))));
 
       driverXbox.x().whileTrue(
-          drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 6), Rotation2d.fromDegrees(130)))
+          drivebase.driveToPosePID(new Pose2d(new Translation2d(2.6, 6), Rotation2d.fromDegrees(130)))
           .alongWith(Commands.runOnce(() -> {
               // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 1000;
               SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
           }))
       );
       driverXbox.y().whileTrue(
-          drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 4), Rotation2d.fromDegrees(180)))
+          drivebase.driveToPosePID(new Pose2d(new Translation2d(2.6, 4), Rotation2d.fromDegrees(180)))
           .alongWith(Commands.runOnce(() -> {
               // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 500;
               SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
           }))
       );
       driverXbox.b().whileTrue(
-          drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 2), Rotation2d.fromDegrees(-130)))
+          drivebase.driveToPosePID(new Pose2d(new Translation2d(2.6, 2), Rotation2d.fromDegrees(-130)))
           .alongWith(Commands.runOnce(() -> {
               // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 700;
               SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
@@ -149,17 +149,17 @@ public class RobotContainer
 
 
 //     if(!drivebase.isRedAlliance()) {
-//         driverXbox.x().whileTrue(drivebase.driveToPose(Constants.driveToPoseConstants.BLUELEFTPOSE2D));
-//         driverXbox.a().whileTrue(drivebase.driveToPose(
+//         driverXbox.x().whileTrue(drivebase.driveToPosePID(Constants.driveToPoseConstants.BLUELEFTPOSE2D));
+//         driverXbox.a().whileTrue(drivebase.driveToPosePID(
 //           new Pose2d(Constants.driveToPoseConstants.BlueCenterTranslation, Constants.driveToPoseConstants.BlueCenterRotation)));
-//         driverXbox.b().whileTrue(drivebase.driveToPose(
+//         driverXbox.b().whileTrue(drivebase.driveToPosePID(
 //           new Pose2d(Constants.driveToPoseConstants.BlueRightTranslation, Constants.driveToPoseConstants.BlueRightRotation)));
 //       }else {
-//         driverXbox.x().whileTrue(drivebase.driveToPose(
+//         driverXbox.x().whileTrue(drivebase.driveToPosePID(
 //           new Pose2d(Constants.driveToPoseConstants.RedLeftTranslation, Constants.driveToPoseConstants.RedLeftRotation)));
-//         driverXbox.a().whileTrue(drivebase.driveToPose(
+//         driverXbox.a().whileTrue(drivebase.driveToPosePID(
 //           new Pose2d(Constants.driveToPoseConstants.BlueCenterTranslation, Constants.driveToPoseConstants.RedCenterRotation)));
-//         driverXbox.b().whileTrue(drivebase.driveToPose(
+//         driverXbox.b().whileTrue(drivebase.driveToPosePID(
 //           new Pose2d(Constants.driveToPoseConstants.BlueRightTranslation, Constants.driveToPoseConstants.RedRightRotation)));
       // }
 //     }
