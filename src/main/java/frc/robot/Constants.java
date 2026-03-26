@@ -75,11 +75,11 @@ public final class Constants
     public static final double kRollerV = 0.19;
     public static final double kRollerA = .512;
 
-    public static final double kRollerP = 0.00046;
+    public static final double kRollerP = 0.0008;
     public static final double kRollerI = 0;
     public static final double kRollerD = 0;
 
-    public static final double INTAKE_ROLLER_VELOCITY_RPM = 1000.0;
+    public static final double INTAKE_ROLLER_VELOCITY_RPM = 700.0;
 
     public static final double kArmV = 0.91;
     public static final double kArmA = 0.042;
@@ -148,7 +148,7 @@ public final class Constants
     public static final Translation2d TOWERTRANSLATION = new Translation2d(0,0);
     public static final Rotation2d TOWERROTATION = new Rotation2d(0);
 
-    public static final double CLIMBPOS = -1;
+    public static final double CLIMBPOS = -0.00;
     public static final double RESETPOS = 0;
 
     // public static final int FLIPPERS_MOTOR_CURRENT_LIMIT = 40;
@@ -234,4 +234,16 @@ public final class Constants
     public static final double SHOOTERPOS5RPM = 500;
     
   }
+  public static class DriveToPIDConstants {
+    // Translation (X/Y) PID - output is m/s per meter of error
+    public static final double TRANSLATION_KP = 1.0;
+    public static final double TRANSLATION_KD = 0.0;
+    // Rotation PID - output is rad/s per radian of error
+    public static final double ROTATION_KP    = 3.0;
+    public static final double ROTATION_KD    = 0.0;
+    // Tolerances
+    public static final double TRANSLATION_TOLERANCE_M   = 0.05; // 5 cm
+    public static final double ROTATION_TOLERANCE_RAD    = Units.degreesToRadians(2); // 2 degrees
+  }
+
 }

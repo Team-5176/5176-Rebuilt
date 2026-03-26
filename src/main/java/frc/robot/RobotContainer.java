@@ -7,6 +7,7 @@ package frc.robot;
 
 import java.io.File;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pathplanner.lib.auto.AutoBuilder;
 
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -26,6 +27,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TowerClimbSubsystem;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import swervelib.SwerveInputStream;
 
@@ -56,7 +58,10 @@ public class RobotContainer
     DriverStation.silenceJoystickConnectionWarning(true);
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
-    // drivebase.zeroGyroWithAlliance();
+    // if(Robot.towerClimbSubsystem != null) {
+    // SmartDashboard.putNumber("Kraken Encoder Value", Robot.towerClimbSubsystem.displayEncoder());
+    // }
+    drivebase.zeroGyroWithAlliance();
   }
 
 

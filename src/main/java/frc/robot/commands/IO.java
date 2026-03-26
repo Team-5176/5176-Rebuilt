@@ -19,6 +19,7 @@ public class IO {
  JoystickButton intakeAngleButton = new JoystickButton(driverXbox, 6);
 
   Trigger position1Button = new Trigger(() -> driverXbox.getPOV() == 0);
+  Trigger position2Button = new Trigger(()-> driverXbox.getPOV() == 180);
   // Trigger position0Button = new Trigger(() -> driverXbox.getPOV() == 180);
   
   // JoystickButton toggleSpindexerButton = new JoystickButton(driverXbox,  3);
@@ -32,7 +33,8 @@ public class IO {
     // Run intake only while the intake button is held.
     // intakeButton.whileTrue(RebuiltCommands.toggleIntake);
     intakeButton.onTrue(RebuiltCommands.getToggleIntake());
-    position1Button.onTrue(RebuiltCommands.bottomPos);
+    position1Button.onTrue(RebuiltCommands.towerStop);
+    position2Button.onTrue(RebuiltCommands.towerDown);
     // intakeDeployButton.onTrue(RebuiltCommands.deployIntake);
     // intakeRetractButton.onTrue(RebuiltCommands.retractIntake);
 
