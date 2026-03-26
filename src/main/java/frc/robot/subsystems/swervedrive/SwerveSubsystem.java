@@ -17,7 +17,11 @@ import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.DriveFeedforwards;
 import com.pathplanner.lib.util.swerve.SwerveSetpoint;
 import com.pathplanner.lib.util.swerve.SwerveSetpointGenerator;
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -280,6 +284,48 @@ public class SwerveSubsystem extends SubsystemBase
         constraints,
         edu.wpi.first.units.Units.MetersPerSecond.of(0) // Goal end velocity in meters/sec
                                      );
+  }
+
+  /**
+   * Drive to a pose using three independent PID controllers (X, Y, theta).
+   * Unlike pathfindToPose this guarantees the final rotation is reached.
+   *
+   * @param targetPose Target {@link Pose2d} to drive to.
+   * @return Command that drives to the pose with full rotation control.
+   */
+  public Command driveToPosePID(Pose2d targetPose) {
+    PIDController xController = new PIDController(
+        Constants.DriveToPIDConstants.TRANSLATION_KP, 0, Constants.DriveToPIDConstants.TRANSLATION_KD);
+    PIDController yController = new PIDController(
+        Constants.DriveToPIDConstants.TRANSLATION_KP, 0, Constants.DriveToPIDConstants.TRANSLATION_KD);
+    ProfiledPIDController thetaController = new ProfiledPIDController(
+        Constants.DriveToPIDConstants.ROTATION_KP, 0, Constants.DriveToPIDConstants.ROTATION_KD,
+        new TrapezoidProfile.Constraints(
+            swerveDrive.getMaximumChassisAngularVelocity(),
+            swerveDrive.getMaximumChassisAngularVelocity() * 2));
+    thetaController.enableContinuousInput(-Math.PI, Math.PI);
+    xController.setTolerance(Constants.DriveToPIDConstants.TRANSLATION_TOLERANCE_M);
+    yController.setTolerance(Constants.DriveToPIDConstants.TRANSLATION_TOLERANCE_M);
+    thetaController.setTolerance(Constants.DriveToPIDConstants.ROTATION_TOLERANCE_RAD);
+
+    return startRun(
+        () -> thetaController.reset(getPose().getRotation().getRadians()),
+        () -> {
+          Pose2d currentPose = getPose();
+          double xSpeed = MathUtil.clamp(
+              xController.calculate(currentPose.getX(), targetPose.getX()),
+              -swerveDrive.getMaximumChassisVelocity(), swerveDrive.getMaximumChassisVelocity());
+          double ySpeed = MathUtil.clamp(
+              yController.calculate(currentPose.getY(), targetPose.getY()),
+              -swerveDrive.getMaximumChassisVelocity(), swerveDrive.getMaximumChassisVelocity());
+          double thetaSpeed = MathUtil.clamp(
+              thetaController.calculate(
+                  currentPose.getRotation().getRadians(), targetPose.getRotation().getRadians()),
+              -swerveDrive.getMaximumChassisAngularVelocity(),
+              swerveDrive.getMaximumChassisAngularVelocity());
+          driveFieldOriented(new ChassisSpeeds(xSpeed, ySpeed, thetaSpeed));
+        }
+    ).finallyDo(() -> driveFieldOriented(new ChassisSpeeds(0, 0, 0)));
   }
 
   /**
