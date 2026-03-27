@@ -41,6 +41,7 @@ public class IntakeSubsystem extends SubsystemBase  {
 
         intakeRollerFeedForwardConfig
                             .kA(Constants.IntakeConstants.kRollerA)
+                            .kS(Constants.IntakeConstants.kRollerS)
                             .kV(Constants.IntakeConstants.kRollerV);
 
         intakeRollerConfig.closedLoop
