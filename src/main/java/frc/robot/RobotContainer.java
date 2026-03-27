@@ -76,13 +76,13 @@ public class RobotContainer
   {
     driverXbox.x().whileTrue(driveToAlliancePoseCommand(
         new Pose2d(new Translation2d(2.6, 6), Rotation2d.fromDegrees(130)),
-        new Pose2d(new Translation2d(14, 2), Rotation2d.fromDegrees(-50))));
+        new Pose2d(new Translation2d(14, 3), Rotation2d.fromDegrees(-50))));
     driverXbox.y().whileTrue(driveToAlliancePoseCommand(
         new Pose2d(new Translation2d(2.6, 4), Rotation2d.fromDegrees(180)),
-        new Pose2d(new Translation2d(14, 4), Rotation2d.fromDegrees(0))));
+        new Pose2d(new Translation2d(14, 4), Rotation2d.fromDegrees(180))));
     driverXbox.b().whileTrue(driveToAlliancePoseCommand(
         new Pose2d(new Translation2d(2.6, 2), Rotation2d.fromDegrees(-130)),
-        new Pose2d(new Translation2d(14, 6), Rotation2d.fromDegrees(50))));
+        new Pose2d(new Translation2d(14, 5), Rotation2d.fromDegrees(50))));
   }
 
   private Command driveToAlliancePoseCommand(Pose2d bluePose, Pose2d redPose)

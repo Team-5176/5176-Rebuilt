@@ -317,19 +317,19 @@ public class SwerveSubsystem extends SubsystemBase
           Pose2d currentPose = getPose();
           double xSpeed = MathUtil.clamp(
               xController.calculate(currentPose.getX(), targetPose.getX()),
-              -swerveDrive.getMaximumChassisVelocity(), swerveDrive.getMaximumChassisVelocity());
+              swerveDrive.getMaximumChassisVelocity(), swerveDrive.getMaximumChassisVelocity());
           double ySpeed = MathUtil.clamp(
               yController.calculate(currentPose.getY(), targetPose.getY()),
-              -swerveDrive.getMaximumChassisVelocity(), swerveDrive.getMaximumChassisVelocity());
+              swerveDrive.getMaximumChassisVelocity(), swerveDrive.getMaximumChassisVelocity());
           double thetaSpeed = MathUtil.clamp(
               thetaController.calculate(
                   currentPose.getRotation().getRadians(), targetPose.getRotation().getRadians()),
               -swerveDrive.getMaximumChassisAngularVelocity(),
               swerveDrive.getMaximumChassisAngularVelocity());
-          driveFieldOriented(new ChassisSpeeds(xSpeed, ySpeed, thetaSpeed));
+          swerveDrive.drive(new ChassisSpeeds(xSpeed, ySpeed, thetaSpeed));
         }
     ).until(() -> xController.atSetpoint() && yController.atSetpoint() && thetaController.atGoal())
-     .finallyDo(() -> driveFieldOriented(new ChassisSpeeds(0, 0, 0)));
+     .finallyDo(() -> swerveDrive.drive(new ChassisSpeeds(0, 0, 0)));
   }
 
   /**

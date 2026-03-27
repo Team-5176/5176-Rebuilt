@@ -179,14 +179,14 @@ public final class Constants
 
   public static class DriveToPIDConstants {
     // Translation (X/Y) PID - output is m/s per meter of error
-    public static final double TRANSLATION_KP = 2.0;
+    public static final double TRANSLATION_KP = 1.0;
     public static final double TRANSLATION_KD = 0.0;
     // Rotation PID - output is rad/s per radian of error
-    public static final double ROTATION_KP    = 3.0;
+    public static final double ROTATION_KP    = 0.2;
     public static final double ROTATION_KD    = 0.0;
     // Tolerances
-    public static final double TRANSLATION_TOLERANCE_M   = 0.05; // 5 cm
-    public static final double ROTATION_TOLERANCE_RAD    = Units.degreesToRadians(2); // 2 degrees
+    public static final double TRANSLATION_TOLERANCE_M   = 0.5; // 5 cm
+    public static final double ROTATION_TOLERANCE_RAD    = Units.degreesToRadians(20); // 2 degrees
   }
 
   public static class driveToPoseConstants {
