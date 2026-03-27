@@ -27,7 +27,7 @@ public final class Constants
   public static final double ROBOT_MASS = (148 - 20.3) * 0.453592; // 32lbs * kg per pound
   public static final Matter CHASSIS    = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
   public static final double LOOP_TIME  = 0.13; //s, 20ms + 110ms sprk max velocity lag
-  public static final double MAX_SPEED  = Units.feetToMeters(14.5);// Maximum speed of the robot in meters per second, used to limit acceleration.
+  public static final double MAX_SPEED  = Units.feetToMeters(17.5);// Maximum speed of the robot in meters per second, used to limit acceleration.
 
   public static final class DrivebaseConstants
   {
@@ -149,7 +149,7 @@ public final class Constants
     public static final Translation2d TOWERTRANSLATION = new Translation2d(0,0);
     public static final Rotation2d TOWERROTATION = new Rotation2d(0);
 
-    public static final double CLIMBPOS = 73.0;
+    public static final double CLIMBPOS = 36.0;
     public static final double RESETPOS = 0;
 
     // public static final int FLIPPERS_MOTOR_CURRENT_LIMIT = 40;
