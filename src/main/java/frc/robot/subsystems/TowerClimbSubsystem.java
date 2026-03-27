@@ -71,7 +71,7 @@ public class TowerClimbSubsystem extends SubsystemBase {
 
         towerClimbConfig.Voltage.withPeakForwardVoltage(6)
                                 .withPeakReverseVoltage(-6);
-        towerClimbConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+        towerClimbConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         StatusCode statusOne = StatusCode.StatusCodeNotInitialized;
         // StatusCode statusTwo = StatusCode.StatusCodeNotInitialized;

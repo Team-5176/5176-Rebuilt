@@ -86,7 +86,7 @@ public final class Constants
     public static final double kArmA = 0.042;
     public static final double kArmG = 0.60;
 
-    public static final double kArmP = 0.05; //was 0.05 - had to up this value in an attempt to increase retracting speed.
+    public static final double kArmP = 0.65; //was 0.05 - had to up this value in an attempt to increase retracting speed.
     public static final double kArmI = 0;
     public static final double kArmD = 0;
 
