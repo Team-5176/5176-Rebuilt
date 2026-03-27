@@ -58,9 +58,7 @@ public class RobotContainer
     DriverStation.silenceJoystickConnectionWarning(true);
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
-    // if(Robot.towerClimbSubsystem != null) {
-    // SmartDashboard.putNumber("Kraken Encoder Value", Robot.towerClimbSubsystem.displayEncoder());
-    // }
+    
     drivebase.zeroGyroWithAlliance();
   }
 

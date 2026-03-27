@@ -16,6 +16,7 @@ import com.revrobotics.spark.SparkMax;
 // import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 // import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -69,8 +70,8 @@ public class TowerClimbSubsystem extends SubsystemBase {
         towerClimbConfig.Slot0.kD = Constants.TowerConstants.kCLIMB_D;
 
         towerClimbConfig.Voltage.withPeakForwardVoltage(6)
-                                .withPeakReverseVoltage(6);
-        towerClimbConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+                                .withPeakReverseVoltage(-6);
+        towerClimbConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
 
         StatusCode statusOne = StatusCode.StatusCodeNotInitialized;
         // StatusCode statusTwo = StatusCode.StatusCodeNotInitialized;
@@ -113,4 +114,9 @@ public class TowerClimbSubsystem extends SubsystemBase {
         return towerClimbLead.getPosition().getValueAsDouble();
     }
 
+    @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Kraken Encoder Value", displayEncoder());
+    }
 }
