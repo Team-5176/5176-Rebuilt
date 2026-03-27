@@ -162,14 +162,18 @@ public final class Constants
     // public static final double kFlippersV = 0;
     // public static final double kFlippersA = 0;
 
-    public static final double kCLIMB_P = 0.0005;
+    public static final double kCLIMB_P = 0.5;  // V/rot error — tune on robot
     public static final double kCLIMB_I = 0;
-    public static final double kCLIMB_D = 0;
+    public static final double kCLIMB_D = 0.5;  // V/(rot/s) — tune on robot
 
     public static final double kCLIMB_S = 0;
-    public static final double kCLIMB_V = 0;
+    public static final double kCLIMB_V = 0.12; // V/(rot/s) feedforward — tune on robot
     public static final double kCLIMB_A = 0;
     public static final double kCLIMB_G = 0;
+
+    // MotionMagic profile — tune on robot
+    public static final double MM_CRUISE_VELOCITY = 20.0; // rot/s
+    public static final double MM_ACCELERATION    = 40.0; // rot/s²
 
     public static final int LEADERCLIMBID = 22;
     // public static final int FOLLOWERCLIMBID = 0;

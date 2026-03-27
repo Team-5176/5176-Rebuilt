@@ -18,8 +18,8 @@ public class IO {
   // JoystickButton intakeRetractButton = new JoystickButton(driverXbox, 6);
  JoystickButton intakeAngleButton = new JoystickButton(driverXbox, 6);
 
-  Trigger position1Button = new Trigger(() -> driverXbox.getPOV() == 0);
-  // Trigger position0Button = new Trigger(() -> driverXbox.getPOV() == 180);
+  Trigger climbUpButton   = new Trigger(() -> driverXbox.getPOV() == 0);   // DPAD UP   → extend to climb position
+  Trigger climbDownButton = new Trigger(() -> driverXbox.getPOV() == 180); // DPAD DOWN → retract to reset position
   
   // JoystickButton toggleSpindexerButton = new JoystickButton(driverXbox,  3);
   // JoystickButton shootOnlyButton = new JoystickButton(driverXbox, 2);
@@ -32,7 +32,8 @@ public class IO {
     // Run intake only while the intake button is held.
     // intakeButton.whileTrue(RebuiltCommands.toggleIntake);
     intakeButton.onTrue(RebuiltCommands.getToggleIntake());
-    position1Button.onTrue(RebuiltCommands.bottomPos);
+    climbUpButton.onTrue(RebuiltCommands.bottomPos);   // DPAD UP   → CLIMBPOS (73 rot)
+    climbDownButton.onTrue(RebuiltCommands.topPos);    // DPAD DOWN → RESETPOS (0 rot)
     // intakeDeployButton.onTrue(RebuiltCommands.deployIntake);
     // intakeRetractButton.onTrue(RebuiltCommands.retractIntake);
 
