@@ -80,7 +80,7 @@ public final class Constants
     public static final double kRollerI = 0;
     public static final double kRollerD = 0;
 
-    public static final double INTAKE_ROLLER_VELOCITY_RPM = 1000.0;
+    public static final double INTAKE_ROLLER_VELOCITY_RPM = 800.0;
 
     public static final double kArmV = 0.91;
     public static final double kArmA = 0.042;
