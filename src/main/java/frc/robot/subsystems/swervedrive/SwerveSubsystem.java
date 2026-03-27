@@ -324,9 +324,9 @@ public class SwerveSubsystem extends SubsystemBase
                   currentPose.getRotation().getRadians(), targetPose.getRotation().getRadians()),
               -swerveDrive.getMaximumChassisAngularVelocity(),
               swerveDrive.getMaximumChassisAngularVelocity());
-          driveFieldOriented(new ChassisSpeeds(xSpeed, ySpeed, thetaSpeed));
+          swerveDrive.drive(new ChassisSpeeds(xSpeed, ySpeed, thetaSpeed));
         }
-    ).finallyDo(() -> driveFieldOriented(new ChassisSpeeds(0, 0, 0)));
+    ).finallyDo(() -> swerveDrive.drive(new ChassisSpeeds(0, 0, 0)));
   }
 
   /**

@@ -149,7 +149,7 @@ public final class Constants
     public static final Translation2d TOWERTRANSLATION = new Translation2d(0,0);
     public static final Rotation2d TOWERROTATION = new Rotation2d(0);
 
-    public static final double CLIMBPOS = 73.0;
+    public static final double CLIMBPOS = 36.0;
     public static final double RESETPOS = 0;
 
     // public static final int FLIPPERS_MOTOR_CURRENT_LIMIT = 40;
