@@ -13,7 +13,6 @@ import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.pathplanner.lib.path.PathConstraints;
-import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.DriveFeedforwards;
 import com.pathplanner.lib.util.swerve.SwerveSetpoint;
 import com.pathplanner.lib.util.swerve.SwerveSetpointGenerator;
@@ -58,9 +57,6 @@ import swervelib.parser.SwerveDriveConfiguration;
 import swervelib.parser.SwerveParser;
 import swervelib.telemetry.SwerveDriveTelemetry;
 import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
-
-
-
 public class SwerveSubsystem extends SubsystemBase
 {
   /**
@@ -83,8 +79,8 @@ public class SwerveSubsystem extends SubsystemBase
    *
    * @param directory Directory of swerve drive config files.
    */
-   public SwerveSubsystem(File directory)
-  { 
+  public SwerveSubsystem(File directory)
+  {
     boolean blueAlliance = DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Blue;
     Pose2d startingPose = blueAlliance ? new Pose2d(new Translation2d(Meter.of(3),
                                                                       Meter.of(4)),
@@ -294,7 +290,8 @@ public class SwerveSubsystem extends SubsystemBase
    * @param targetPose Target {@link Pose2d} to drive to.
    * @return Command that drives to the pose with full rotation control.
    */
-  public Command driveToPosePID(Pose2d targetPose) {
+  public Command driveToPosePID(Pose2d targetPose)
+  {
     PIDController xController = new PIDController(
         Constants.DriveToPIDConstants.TRANSLATION_KP, 0, Constants.DriveToPIDConstants.TRANSLATION_KD);
     PIDController yController = new PIDController(
@@ -310,7 +307,12 @@ public class SwerveSubsystem extends SubsystemBase
     thetaController.setTolerance(Constants.DriveToPIDConstants.ROTATION_TOLERANCE_RAD);
 
     return startRun(
-        () -> thetaController.reset(getPose().getRotation().getRadians()),
+        () -> {
+          Pose2d currentPose = getPose();
+          xController.reset();
+          yController.reset();
+          thetaController.reset(currentPose.getRotation().getRadians());
+        },
         () -> {
           Pose2d currentPose = getPose();
           double xSpeed = MathUtil.clamp(
@@ -326,7 +328,8 @@ public class SwerveSubsystem extends SubsystemBase
               swerveDrive.getMaximumChassisAngularVelocity());
           driveFieldOriented(new ChassisSpeeds(xSpeed, ySpeed, thetaSpeed));
         }
-    ).finallyDo(() -> driveFieldOriented(new ChassisSpeeds(0, 0, 0)));
+    ).until(() -> xController.atSetpoint() && yController.atSetpoint() && thetaController.atGoal())
+     .finallyDo(() -> driveFieldOriented(new ChassisSpeeds(0, 0, 0)));
   }
 
   /**
@@ -624,24 +627,6 @@ public class SwerveSubsystem extends SubsystemBase
   }
 
   /**
-   * This will zero (calibrate) the robot to assume the current position is facing forward
-   * <p>
-   * If red alliance rotate the robot 180 after the drviebase zero command
-   */
-  public void zeroGyroWithAlliance()
-  {
-    if (isRedAlliance())
-    {
-      zeroGyro();
-      //Set the pose 180 degrees
-      resetOdometry(new Pose2d(getPose().getTranslation(), Rotation2d.fromDegrees(180)));
-    } else
-    {
-      zeroGyro();
-    }
-  }
-
-  /**
    * Sets the drive motors to brake/coast mode.
    *
    * @param brake True to set motors to brake mode, false for coast.
@@ -778,11 +763,10 @@ public class SwerveSubsystem extends SubsystemBase
   {
     return swerveDrive;
   }
-
-
-    public Pose2d getClosestPoint() {
-      Translation2d currentPose = swerveDrive.getPose().getTranslation();
-      Pose2d bestPose = new Pose2d();
+  public Pose2d getClosestPoint()
+  {
+    Translation2d currentPose = swerveDrive.getPose().getTranslation();
+    Pose2d bestPose = new Pose2d();
 
       if(isRedAlliance()){
         double redDistanceFromLeft;
@@ -857,7 +841,7 @@ public class SwerveSubsystem extends SubsystemBase
         }
       }
 
-      return bestPose;
-    }
+    return bestPose;
+  }
     
 }

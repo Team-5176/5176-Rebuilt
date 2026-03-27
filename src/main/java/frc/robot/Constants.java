@@ -47,7 +47,8 @@ public final class Constants
   public static class ShooterConstants // Keep in mind these values affect 2 motors working together
   {
     // Target Shooter Velocity in RPM - May be removed later if using a function to calculate distance then velocity of the ball
-    public static double SHOOTER_TARGET_VELOCITY_RPM = 1800.0;//3000
+    public static final double DEFAULT_TARGET_VELOCITY_RPM = 1800.0;
+    public static double SHOOTER_TARGET_VELOCITY_RPM = DEFAULT_TARGET_VELOCITY_RPM;//3000
 
     // shooter speeds: right(B): middle(Y): left(X):
 
@@ -189,6 +190,8 @@ public final class Constants
   }
 
   public static class driveToPoseConstants {
+    public static final double SHOOTER_POSE_ACTIVATION_RADIUS_M = 0.75;
+
     public static final Translation2d BlueLeftTranslation = new Translation2d(Meter.of(3),Meter.of(6));
     public static final Translation2d BlueCenterTranslation = new Translation2d(Meter.of(3),Meter.of(4));
     public static final Translation2d BlueRightTranslation = new Translation2d(Meter.of(3),Meter.of(2));
@@ -226,12 +229,8 @@ public final class Constants
     public static final Pose2d REDBACKRIGHTPOSE2D = new Pose2d(RedBackRightTranslation, RedBackRightRotation);
     public static final Pose2d REDBACKLEFTPOSE2D = new Pose2d(RedBackLeftTranslation, RedBackLeftRotation);
 
-
-    public static final double SHOOTERPOS1RPM = 500;
-    public static final double SHOOTERPOS2RPM = 500;
-    public static final double SHOOTERPOS3RPM = 500;
-    public static final double SHOOTERPOS4RPM = 500;
-    public static final double SHOOTERPOS5RPM = 500;
-    
+    public static final double SHOOTER_LEFT_RPM = 500;
+    public static final double SHOOTER_CENTER_RPM = 500;
+    public static final double SHOOTER_RIGHT_RPM = 500;
   }
 }
