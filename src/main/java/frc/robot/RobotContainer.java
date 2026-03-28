@@ -63,6 +63,9 @@ public class RobotContainer
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
     drivebase.zeroGyroWithAlliance();
+    NamedCommands.registerCommand("First Shoot Start", RebuiltCommands.toggleShoot);
+    NamedCommands.registerCommand("First Shoot Stop", RebuiltCommands.toggleShoot);
+    NamedCommands.registerCommand("Intake Out", RebuiltCommands.angleIntake);
   }
 
 
