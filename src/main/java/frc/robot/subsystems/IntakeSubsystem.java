@@ -106,7 +106,7 @@ public class IntakeSubsystem extends SubsystemBase  {
 
     public boolean isIntaking()
     {
-        return  Math.abs(intakeRoller.getEncoder().getVelocity()) > 200;
+        return  Math.abs(intakeRoller.getEncoder().getVelocity()) > 200 || Math.abs(intakeRoller.getEncoder().getVelocity()) < -200;
     }
 
     public boolean isDeployed(){
