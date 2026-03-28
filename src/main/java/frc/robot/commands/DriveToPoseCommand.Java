@@ -1,223 +1,191 @@
-// Copyright (c) 2023 FRC 6328
-// http://github.com/Mechanical-Advantage
-//
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file at
-// the root directory of this project.
-
-// originally from https://github.com/Mechanical-Advantage/RobotCode2023
-
 package frc.robot.commands;
-
-import static frc.robot.Constants.*;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform2d;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.lib.team3061.RobotConfig;
-import frc.lib.team3061.drivetrain.Drivetrain;
-import frc.lib.team3061.leds.LEDs;
-import frc.lib.team6328.util.LoggedTunableNumber;
-import frc.robot.Field2d;
-import java.util.function.Consumer;
+import frc.robot.Constants;
+import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.util.function.Supplier;
-import org.littletonrobotics.junction.Logger;
 
 /**
- * This command, when executed, instructs the drivetrain subsystem to drive to the specified pose in
- * a straight line. The execute method invokes the drivetrain subsystem's drive method. For
- * following a predetermined path, refer to the FollowPath Command class. For generating a path on
- * the fly and following that path, refer to the MoveToPose Command class.
- *
- * <p>This is a more generic command that drives to any given pose, and can be customized for other
- * specific goals.
- *
- * <p>Requires: the Drivetrain subsystem
- *
- * <p>Finished When: the robot is at the specified pose (within the specified tolerances)
- *
- * <p>At End: stops the drivetrain
+ * Drives a YAGSL swerve to a field-relative target pose using PID on X, Y, and heading.
  */
-public class DriveToPose extends Command {
-  private final Drivetrain drivetrain;
+public class DriveToPoseCommand extends Command
+{
+  private static final String TRANSLATION_KP_KEY = "DriveToPose/Translation kP";
+  private static final String TRANSLATION_KD_KEY = "DriveToPose/Translation kD";
+  private static final String ROTATION_KP_KEY    = "DriveToPose/Rotation kP";
+  private static final String ROTATION_KD_KEY    = "DriveToPose/Rotation kD";
+  private static final String XY_TOLERANCE_KEY   = "DriveToPose/XY Tolerance M";
+  private static final String THETA_TOLERANCE_KEY = "DriveToPose/Theta Tolerance Deg";
+  private static final String TIMEOUT_KEY        = "DriveToPose/Timeout Sec";
+
+  private final SwerveSubsystem drivetrain;
   private final Supplier<Pose2d> poseSupplier;
-  private final Consumer<Boolean> onTarget;
-  private Pose2d targetPose;
-  private Transform2d targetTolerance;
+  private final Timer            timer = new Timer();
 
-  private double timeout;
+  private final Transform2d targetTolerance;
+  private final double      defaultTimeoutSeconds;
 
-  private Timer timer;
+  private final PIDController xController = new PIDController(
+      Constants.DriveToPIDConstants.TRANSLATION_KP,
+      0,
+      Constants.DriveToPIDConstants.TRANSLATION_KD);
+  private final PIDController yController = new PIDController(
+      Constants.DriveToPIDConstants.TRANSLATION_KP,
+      0,
+      Constants.DriveToPIDConstants.TRANSLATION_KD);
+  private final PIDController thetaController = new PIDController(
+      Constants.DriveToPIDConstants.ROTATION_KP,
+      0,
+      Constants.DriveToPIDConstants.ROTATION_KD);
 
-  private static final LoggedTunableNumber driveKp =
-      new LoggedTunableNumber(
-          "DriveToPose/DriveKp", RobotConfig.getInstance().getDriveToPoseDriveKP());
-  private static final LoggedTunableNumber driveKd =
-      new LoggedTunableNumber(
-          "DriveToPose/DriveKd", RobotConfig.getInstance().getDriveToPoseDriveKD());
-  private static final LoggedTunableNumber driveKi =
-      new LoggedTunableNumber("DriveToPose/DriveKi", 0);
-  private static final LoggedTunableNumber thetaKp =
-      new LoggedTunableNumber(
-          "DriveToPose/ThetaKp", RobotConfig.getInstance().getDriveToPoseThetaKP());
-  private static final LoggedTunableNumber thetaKd =
-      new LoggedTunableNumber(
-          "DriveToPose/ThetaKd", RobotConfig.getInstance().getDriveToPoseThetaKD());
-  private static final LoggedTunableNumber thetaKi =
-      new LoggedTunableNumber(
-          "DriveToPose/ThetaKi", RobotConfig.getInstance().getDriveToPoseThetaKI());
+  private Pose2d targetPose = new Pose2d();
 
-  private final PIDController xController =
-      new PIDController(driveKp.get(), driveKi.get(), driveKd.get(), LOOP_PERIOD_SECS);
-  private final PIDController yController =
-      new PIDController(driveKp.get(), driveKi.get(), driveKd.get(), LOOP_PERIOD_SECS);
-  private final PIDController thetaController =
-      new PIDController(thetaKp.get(), thetaKi.get(), thetaKd.get(), LOOP_PERIOD_SECS);
+  public DriveToPoseCommand(SwerveSubsystem drivetrain, Supplier<Pose2d> poseSupplier)
+  {
+    this(
+        drivetrain,
+        poseSupplier,
+        new Transform2d(
+            Constants.DriveToPIDConstants.TRANSLATION_TOLERANCE_M,
+            Constants.DriveToPIDConstants.TRANSLATION_TOLERANCE_M,
+            Rotation2d.fromRadians(Constants.DriveToPIDConstants.ROTATION_TOLERANCE_RAD)),
+        3.0);
+  }
 
-  /**
-   * Constructs a new DriveToPose command that drives the robot in a straight line to the specified
-   * pose. A pose supplier is specified instead of a pose since the target pose may not be known
-   * when this command is created.
-   *
-   * @param drivetrain the drivetrain subsystem required by this command
-   * @param poseSupplier a supplier that returns the pose to drive to
-   */
-  public DriveToPose(
-      Drivetrain drivetrain,
+  public DriveToPoseCommand(
+      SwerveSubsystem drivetrain,
       Supplier<Pose2d> poseSupplier,
-      Consumer<Boolean> onTargetConsumer,
       Transform2d tolerance,
-      double timeout) {
+      double timeoutSeconds)
+  {
     this.drivetrain = drivetrain;
     this.poseSupplier = poseSupplier;
-    this.onTarget = onTargetConsumer;
     this.targetTolerance = tolerance;
-    this.timer = new Timer();
-    this.timeout = timeout;
+    this.defaultTimeoutSeconds = timeoutSeconds;
+
     addRequirements(drivetrain);
     thetaController.enableContinuousInput(-Math.PI, Math.PI);
+    publishDefaultTunables();
+    refreshTunables();
   }
 
-  /**
-   * This method is invoked once when this command is scheduled. It resets all the PID controllers
-   * and initializes the current and target poses. It is critical that this initialization occurs in
-   * this method and not the constructor as this object is constructed well before the command is
-   * scheduled and the robot's pose will definitely have changed and the target pose may not be
-   * known until this command is scheduled.
-   */
   @Override
-  public void initialize() {
-    // Reset all controllers
-    this.targetPose = poseSupplier.get();
+  public void initialize()
+  {
+    targetPose = poseSupplier.get();
 
-    drivetrain.enableAccelerationLimiting();
+    refreshTunables();
+    xController.reset();
+    yController.reset();
+    thetaController.reset();
+    timer.restart();
 
-    Logger.recordOutput("DriveToPose/targetPose", targetPose);
-    Logger.recordOutput("DriveToPose/isFinished", false);
-    Logger.recordOutput("DriveToPose/withinTolerance", false);
-
-    this.timer.restart();
+    SmartDashboard.putString("DriveToPose/Target Pose",
+        String.format("(%.2f, %.2f, %.1f deg)",
+            targetPose.getX(),
+            targetPose.getY(),
+            targetPose.getRotation().getDegrees()));
   }
 
-  /**
-   * This method is invoked periodically while this command is scheduled. It calculates the
-   * velocities based on the current and target poses and invokes the drivetrain subsystem's drive
-   * method.
-   */
   @Override
-  public void execute() {
-
-    LEDs.getInstance().requestState(LEDs.States.AUTO_DRIVING_TO_SCORE);
-
-    // Update from tunable numbers
-    LoggedTunableNumber.ifChanged(
-        hashCode(),
-        pid -> {
-          xController.setPID(pid[0], pid[1], pid[2]);
-          yController.setPID(pid[0], pid[1], pid[2]);
-        },
-        driveKp,
-        driveKi,
-        driveKd);
-    LoggedTunableNumber.ifChanged(
-        hashCode(),
-        pid -> thetaController.setPID(pid[0], pid[1], pid[2]),
-        thetaKp,
-        thetaKi,
-        thetaKd);
-
+  public void execute()
+  {
+    refreshTunables();
     Pose2d currentPose = drivetrain.getPose();
 
-    // use last values of filter
-    double xVelocity = xController.calculate(currentPose.getX(), this.targetPose.getX());
-    double yVelocity = yController.calculate(currentPose.getY(), this.targetPose.getY());
-    double thetaVelocity =
+    double xVelocity = clamp(
+        xController.calculate(currentPose.getX(), targetPose.getX()),
+        drivetrain.getSwerveDrive().getMaximumChassisVelocity());
+    double yVelocity = clamp(
+        yController.calculate(currentPose.getY(), targetPose.getY()),
+        drivetrain.getSwerveDrive().getMaximumChassisVelocity());
+    double thetaVelocity = clamp(
         thetaController.calculate(
-            currentPose.getRotation().getRadians(), this.targetPose.getRotation().getRadians());
+            currentPose.getRotation().getRadians(),
+            targetPose.getRotation().getRadians()),
+        drivetrain.getSwerveDrive().getMaximumChassisAngularVelocity());
 
-    Logger.recordOutput("DriveToPose/x velocity (field relative)", xVelocity);
-    Logger.recordOutput("DriveToPose/y velocity (field relative)", yVelocity);
+    drivetrain.driveFieldOriented(new ChassisSpeeds(xVelocity, yVelocity, thetaVelocity));
 
-    int allianceMultiplier = Field2d.getInstance().getAlliance() == Alliance.Blue ? 1 : -1;
-
-    drivetrain.drive(
-        allianceMultiplier * xVelocity, allianceMultiplier * yVelocity, thetaVelocity, true, true);
+    SmartDashboard.putNumber("DriveToPose/X Error M", targetPose.getX() - currentPose.getX());
+    SmartDashboard.putNumber("DriveToPose/Y Error M", targetPose.getY() - currentPose.getY());
+    SmartDashboard.putNumber(
+        "DriveToPose/Theta Error Deg",
+        targetPose.getRotation().minus(currentPose.getRotation()).getDegrees());
   }
 
-  /**
-   * This method returns true if the command has finished. It is invoked periodically while this
-   * command is scheduled (after execute is invoked). This command is considered finished if the
-   * move-to-pose feature is disabled on the drivetrain subsystem or if the timeout has elapsed or
-   * if all the PID controllers are at their goal.
-   *
-   * @return true if the command has finished
-   */
   @Override
-  public boolean isFinished() {
-    Transform2d difference =
-        new Transform2d(
-            drivetrain.getPose().getX() - targetPose.getX(),
-            drivetrain.getPose().getY() - targetPose.getY(),
-            Rotation2d.fromRadians(
-                drivetrain.getPose().getRotation().getRadians()
-                    - targetPose.getRotation().getRadians()));
+  public boolean isFinished()
+  {
+    Transform2d error = new Transform2d(drivetrain.getPose(), targetPose);
+    return (Math.abs(error.getX()) <= targetTolerance.getX()
+            && Math.abs(error.getY()) <= targetTolerance.getY()
+            && Math.abs(error.getRotation().getRadians()) <= targetTolerance.getRotation().getRadians())
+           || timer.hasElapsed(getTimeoutSeconds());
+  }
 
-    Logger.recordOutput("DriveToPose/difference", difference);
+  @Override
+  public void end(boolean interrupted)
+  {
+    drivetrain.drive(new ChassisSpeeds());
+  }
 
-    Transform2d robotRelativeDifference = new Transform2d(targetPose, drivetrain.getPose());
-    Logger.recordOutput("DriveToPose/difference (robot relative)", robotRelativeDifference);
+  private static double clamp(double value, double maxMagnitude)
+  {
+    return Math.max(-maxMagnitude, Math.min(maxMagnitude, value));
+  }
 
-    boolean atGoal =
-        Math.abs(robotRelativeDifference.getX()) < targetTolerance.getX()
-            && Math.abs(robotRelativeDifference.getY()) < targetTolerance.getY()
-            && Math.abs(robotRelativeDifference.getRotation().getRadians())
-                < targetTolerance.getRotation().getRadians();
+  private void publishDefaultTunables()
+  {
+    putNumberIfMissing(TRANSLATION_KP_KEY, Constants.DriveToPIDConstants.TRANSLATION_KP);
+    putNumberIfMissing(TRANSLATION_KD_KEY, Constants.DriveToPIDConstants.TRANSLATION_KD);
+    putNumberIfMissing(ROTATION_KP_KEY, Constants.DriveToPIDConstants.ROTATION_KP);
+    putNumberIfMissing(ROTATION_KD_KEY, Constants.DriveToPIDConstants.ROTATION_KD);
+    putNumberIfMissing(XY_TOLERANCE_KEY, targetTolerance.getX());
+    putNumberIfMissing(THETA_TOLERANCE_KEY, targetTolerance.getRotation().getDegrees());
+    putNumberIfMissing(TIMEOUT_KEY, defaultTimeoutSeconds);
+  }
 
-    if (atGoal) {
-      onTarget.accept(true);
-      Logger.recordOutput("DriveToPose/withinTolerance", true);
-    } else if (!drivetrain.isMoveToPoseEnabled() || this.timer.hasElapsed(timeout)) {
-      onTarget.accept(false);
+  private void refreshTunables()
+  {
+    xController.setPID(
+        SmartDashboard.getNumber(TRANSLATION_KP_KEY, Constants.DriveToPIDConstants.TRANSLATION_KP),
+        0,
+        SmartDashboard.getNumber(TRANSLATION_KD_KEY, Constants.DriveToPIDConstants.TRANSLATION_KD));
+    yController.setPID(
+        SmartDashboard.getNumber(TRANSLATION_KP_KEY, Constants.DriveToPIDConstants.TRANSLATION_KP),
+        0,
+        SmartDashboard.getNumber(TRANSLATION_KD_KEY, Constants.DriveToPIDConstants.TRANSLATION_KD));
+    thetaController.setPID(
+        SmartDashboard.getNumber(ROTATION_KP_KEY, Constants.DriveToPIDConstants.ROTATION_KP),
+        0,
+        SmartDashboard.getNumber(ROTATION_KD_KEY, Constants.DriveToPIDConstants.ROTATION_KD));
+
+    double xyTolerance = SmartDashboard.getNumber(XY_TOLERANCE_KEY, targetTolerance.getX());
+    double thetaToleranceRadians = Math.toRadians(
+        SmartDashboard.getNumber(THETA_TOLERANCE_KEY, targetTolerance.getRotation().getDegrees()));
+    xController.setTolerance(xyTolerance);
+    yController.setTolerance(xyTolerance);
+    thetaController.setTolerance(thetaToleranceRadians);
+  }
+
+  private double getTimeoutSeconds()
+  {
+    return SmartDashboard.getNumber(TIMEOUT_KEY, defaultTimeoutSeconds);
+  }
+
+  private static void putNumberIfMissing(String key, double value)
+  {
+    if (!SmartDashboard.containsKey(key))
+    {
+      SmartDashboard.putNumber(key, value);
     }
-
-    // check each of the controllers is at their goal or if the timeout has elapsed
-    return !drivetrain.isMoveToPoseEnabled() || this.timer.hasElapsed(timeout) || atGoal;
-  }
-
-  /**
-   * This method will be invoked when this command finishes or is interrupted. It stops the motion
-   * of the drivetrain.
-   *
-   * @param interrupted true if the command was interrupted by another command being scheduled
-   */
-  @Override
-  public void end(boolean interrupted) {
-    drivetrain.disableAccelerationLimiting();
-    drivetrain.stop();
-    Logger.recordOutput("DriveToPose/isFinished", true);
   }
 }
