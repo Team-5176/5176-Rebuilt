@@ -53,7 +53,7 @@ public class RebuiltCommands {
 
     public static Command getReverseIntake() {
         return Commands.runOnce(
-            () -> Robot.intakeSubsystem.spinIntake(Constants.IntakeConstants.INTAKE_ROLLER_VELOCITY_RPM), Robot.intakeSubsystem);
+            () -> Robot.intakeSubsystem.spinIntake(-Constants.IntakeConstants.INTAKE_ROLLER_VELOCITY_RPM), Robot.intakeSubsystem);
     }
     // public static final Command startIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(Constants.IntakeConstants.INTAKE_ROLLER_VELOCITY_RPM), Robot.intakeSubsystem);
     // public static final Command stopIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(0.0), Robot.intakeSubsystem);
