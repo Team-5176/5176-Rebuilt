@@ -326,7 +326,8 @@ public class SwerveSubsystem extends SubsystemBase
               swerveDrive.getMaximumChassisAngularVelocity());
           swerveDrive.drive(new ChassisSpeeds(xSpeed, ySpeed, thetaSpeed));
         }
-    ).finallyDo(() -> swerveDrive.drive(new ChassisSpeeds(0, 0, 0)));
+    ).until(() -> xController.atSetpoint() && yController.atSetpoint() && thetaController.atGoal())
+     .finallyDo(() -> swerveDrive.drive(new ChassisSpeeds(0, 0, 0)));
   }
 
   /**

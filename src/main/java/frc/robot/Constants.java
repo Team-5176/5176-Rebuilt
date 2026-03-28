@@ -46,8 +46,10 @@ public final class Constants
 
   public static class ShooterConstants // Keep in mind these values affect 2 motors working together
   {
+    public static final double DEFAULT_SHOOTER_TARGET_VELOCITY_RPM = 1800.0;
+
     // Target Shooter Velocity in RPM - May be removed later if using a function to calculate distance then velocity of the ball
-    public static double SHOOTER_TARGET_VELOCITY_RPM = 1800.0;//3000
+    public static double SHOOTER_TARGET_VELOCITY_RPM = DEFAULT_SHOOTER_TARGET_VELOCITY_RPM;//3000
 
     // shooter speeds: right(B): middle(Y): left(X):
 
