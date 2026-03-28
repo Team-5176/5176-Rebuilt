@@ -61,7 +61,7 @@ public class RobotContainer
     DriverStation.silenceJoystickConnectionWarning(true);
     NamedCommands.registerCommand("First Shoot Start", RebuiltCommands.getToggleShoot());
     NamedCommands.registerCommand("First Shoot Stop", RebuiltCommands.getToggleShoot());
-    NamedCommands.registerCommand("Intake Out", RebuiltCommands.angleIntake);
+    NamedCommands.registerCommand("Intake Out", RebuiltCommands.getAngleIntake());
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
     drivebase.zeroGyroWithAlliance();

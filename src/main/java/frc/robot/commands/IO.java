@@ -40,7 +40,7 @@ public class IO {
     // intakeDeployButton.onTrue(RebuiltCommands.deployIntake);
     // intakeRetractButton.onTrue(RebuiltCommands.retractIntake);
 
-    intakeAngleButton.onTrue(RebuiltCommands.angleIntake);
+    intakeAngleButton.onTrue(RebuiltCommands.getAngleIntake());
       
       // shootButton.onFalse(RebuiltCommands.getToggleShoot());
       // toggleIntakeButton.toggleOnTrue(RebuiltCommands.startIntake);

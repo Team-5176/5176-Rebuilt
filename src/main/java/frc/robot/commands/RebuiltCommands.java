@@ -14,17 +14,52 @@ import frc.robot.Robot;
 
 public class RebuiltCommands {
 
-    public static final Command shootFuel = new InstantCommand(()-> Robot.shooterSubsystem.setShooterVelocity(Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM), Robot.shooterSubsystem);
-    public static final Command stopShoot = new InstantCommand(()-> Robot.shooterSubsystem.setShooterVelocity(0), Robot.shooterSubsystem);
+    private static Command getShootFuel() {
+        return new InstantCommand(
+            () -> Robot.shooterSubsystem.setShooterVelocity(Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM),
+            Robot.shooterSubsystem
+        );
+    }
+
+    private static Command getStopShoot() {
+        return new InstantCommand(() -> Robot.shooterSubsystem.setShooterVelocity(0), Robot.shooterSubsystem);
+    }
     
-    public static final Command startTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(Constants.TransportConstants.TRANSPORT_VELOCITY_RPM), Robot.transportSubsystem);
-    public static final Command stopTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(0), Robot.transportSubsystem);
+    private static Command getStartTransport() {
+        return new InstantCommand(
+            () -> Robot.transportSubsystem.setTransport(Constants.TransportConstants.TRANSPORT_VELOCITY_RPM),
+            Robot.transportSubsystem
+        );
+    }
 
-    public static final Command startSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(Constants.SpindexerConstants.SPINDEXER_TARGET_VELOCITY_RPM), Robot.spindexerSubsystem);
-    public static final Command stopSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(0.0), Robot.spindexerSubsystem);
+    private static Command getStopTransport() {
+        return new InstantCommand(() -> Robot.transportSubsystem.setTransport(0), Robot.transportSubsystem);
+    }
 
-    public static final Command deployIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(Constants.IntakeConstants.kArmRotations) ,Robot.intakeSubsystem);
-    public static final Command retractIntake = new InstantCommand(()-> Robot.intakeSubsystem.retractIntake(Constants.IntakeConstants.kArmRetractPos), Robot.intakeSubsystem);
+    private static Command getStartSpindexer() {
+        return new InstantCommand(
+            () -> Robot.spindexerSubsystem.runSpindexer(Constants.SpindexerConstants.SPINDEXER_TARGET_VELOCITY_RPM),
+            Robot.spindexerSubsystem
+        );
+    }
+
+    private static Command getStopSpindexer() {
+        return new InstantCommand(() -> Robot.spindexerSubsystem.runSpindexer(0.0), Robot.spindexerSubsystem);
+    }
+
+    private static Command getDeployIntake() {
+        return new InstantCommand(
+            () -> Robot.intakeSubsystem.deployIntake(Constants.IntakeConstants.kArmRotations),
+            Robot.intakeSubsystem
+        );
+    }
+
+    private static Command getRetractIntake() {
+        return new InstantCommand(
+            () -> Robot.intakeSubsystem.retractIntake(Constants.IntakeConstants.kArmRetractPos),
+            Robot.intakeSubsystem
+        );
+    }
     
     public static final Command bottomPos = new InstantCommand(
         ()-> Robot.towerClimbSubsystem.setTowerClimbPosition(Constants.TowerConstants.CLIMBPOS), Robot.towerClimbSubsystem);
@@ -62,8 +97,8 @@ public class RebuiltCommands {
     // Cannot stop shooting on button press until WaitCommands finish
     public static Command getToggleShoot() {
         return new ConditionalCommand(
-            stopShoot.andThen(stopTransport).andThen(stopSpindexer),
-            shootFuel.andThen(new WaitCommand(2.0)).andThen(startTransport).andThen(new WaitCommand(1.0)).andThen(startSpindexer),
+            getStopShoot().andThen(getStopTransport()).andThen(getStopSpindexer()),
+            getShootFuel().andThen(new WaitCommand(2.0)).andThen(getStartTransport()).andThen(new WaitCommand(1.0)).andThen(getStartSpindexer()),
             Robot.shooterSubsystem::isShooting
         );
     }
@@ -92,11 +127,13 @@ public class RebuiltCommands {
     }
     
 
-    public static final ConditionalCommand angleIntake = new ConditionalCommand(
-        retractIntake,
-        deployIntake,
-        Robot.intakeSubsystem::isDeployed
-    );
+    public static Command getAngleIntake() {
+        return new ConditionalCommand(
+            getRetractIntake(),
+            getDeployIntake(),
+            Robot.intakeSubsystem::isDeployed
+        );
+    }
 
     //  public static final ConditionalCommand toggleSpindex = new ConditionalCommand(
     //     stopSpindexer,
