@@ -9,6 +9,7 @@ import java.io.File;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -26,6 +27,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.RebuiltCommands;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerClimbSubsystem;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
@@ -58,7 +60,9 @@ public class RobotContainer
     DriverStation.silenceJoystickConnectionWarning(true);
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
-    
+    NamedCommands.registerCommand("First Shoot Start", RebuiltCommands.toggleShoot);
+    NamedCommands.registerCommand("First Shoot Stop", RebuiltCommands.toggleShoot);
+    NamedCommands.registerCommand("Intake Out", RebuiltCommands.angleIntake);
     drivebase.zeroGyroWithAlliance();
   }
 
