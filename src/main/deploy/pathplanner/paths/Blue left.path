@@ -34,9 +34,25 @@
   "eventMarkers": [
     {
       "name": "First Shoot Start",
-      "waypointRelativePos": 0,
+      "waypointRelativePos": 0.6779156327543355,
       "endWaypointRelativePos": null,
-      "command": null
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "First Shoot Start"
+        }
+      }
+    },
+    {
+      "name": "Intake Out",
+      "waypointRelativePos": 1.0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Intake Out"
+        }
+      }
     }
   ],
   "globalConstraints": {
