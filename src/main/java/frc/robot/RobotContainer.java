@@ -60,12 +60,12 @@ public class RobotContainer
     configureDriveToPose();
     drivebase.setDefaultCommand(driveFieldOrientedAngularVelocity);
     DriverStation.silenceJoystickConnectionWarning(true);
-    autoChooser = AutoBuilder.buildAutoChooser();
-    SmartDashboard.putData("Auto Chooser", autoChooser);
-    drivebase.zeroGyroWithAlliance();
     NamedCommands.registerCommand("First Shoot Start", RebuiltCommands.toggleShoot);
     NamedCommands.registerCommand("First Shoot Stop", RebuiltCommands.toggleShoot);
     NamedCommands.registerCommand("Intake Out", RebuiltCommands.angleIntake);
+    autoChooser = AutoBuilder.buildAutoChooser();
+    SmartDashboard.putData("Auto Chooser", autoChooser);
+    drivebase.zeroGyroWithAlliance();
   }
 
 
@@ -87,11 +87,11 @@ public class RobotContainer
 
   
 
- /*  public Command getAutonomousCommand()
+  public Command getAutonomousCommand()
   {
-    // Pass in the selected auto from the SmartDashboard as our desired autnomous commmand 
+    // Pass in the selected auto from the SmartDashboard as our desired autonomous command.
     return autoChooser.getSelected();
-  } */
+  }
 
   private void configureDriveToPose() {
     // driverXbox.y().whileTrue(drivebase.driveToPosePID(drivebase.getClosestPoint()));

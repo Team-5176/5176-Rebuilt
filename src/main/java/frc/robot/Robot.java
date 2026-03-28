@@ -60,15 +60,15 @@ public class Robot extends TimedRobot
   @Override
   public void robotInit()
   {
-    // Instantiate our RobotContainer. This will put our autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
-
-    // Instantiate subsystems and IO here (after RobotContainer and WPILib are initialized)
+    // Instantiate subsystems before any command registration touches static Robot references.
     spindexerSubsystem = new SpindexerSubsystem();
     intakeSubsystem = new IntakeSubsystem();
     shooterSubsystem = new ShooterSubsystem();
     transportSubsystem = new TransportSubsystem();
     towerClimbSubsystem = new TowerClimbSubsystem();
+
+    // Instantiate our RobotContainer after subsystem construction so named commands can safely reference them.
+    m_robotContainer = new RobotContainer();
     io = new IO();
 
     // Create a timer to disable motor brake a few seconds after disable.  This will let the robot stop
@@ -124,6 +124,8 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousInit()
   {
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null)
     {
