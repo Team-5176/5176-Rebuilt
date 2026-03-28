@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.560156626506024,
-        "y": 4.7453012048192775
+        "x": 3.5929397590361445,
+        "y": 5.390036144578313
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.9552865649006694,
-        "y": 4.616897264488986
+        "x": 3.8577368727849284,
+        "y": 5.46327594857694
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.647807228915532,
-        "y": 4.483036144578291
+        "x": 1.942855421686747,
+        "y": 4.373759036144579
       },
       "prevControl": {
-        "x": 1.7397658618593181,
-        "y": 4.7155089598215145
+        "x": 2.2109844331980546,
+        "y": 4.567321712687606
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Center POS shoot"
     }
   ],
   "rotationTargets": [],
@@ -33,24 +33,24 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "First Shoot Start",
-      "waypointRelativePos": 0.6779156327543355,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "First Shoot Start"
-        }
-      }
-    },
-    {
       "name": "Intake Out",
-      "waypointRelativePos": 1.0,
+      "waypointRelativePos": 0.6,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
           "name": "Intake Out"
+        }
+      }
+    },
+    {
+      "name": "First Shoot Start",
+      "waypointRelativePos": 0.9975186104218351,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "First Shoot Start"
         }
       }
     }
