@@ -163,7 +163,7 @@ public final class Constants
     // public static final double kFlippersV = 0;
     // public static final double kFlippersA = 0;
 
-    public static final double kCLIMB_P = 0.5;
+    public static final double kCLIMB_P = 0.35;
     public static final double kCLIMB_I = 0;
     public static final double kCLIMB_D = 0;
 

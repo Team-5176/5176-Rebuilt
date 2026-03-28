@@ -70,8 +70,8 @@ public class RobotContainer
 
 
   SwerveInputStream driveAngularVelocity = SwerveInputStream.of(drivebase.getSwerveDrive(),
-                                                                    () -> driverXbox.getLeftY() * 1.0,
-                                                                    () -> driverXbox.getLeftX() * 1.0)
+                                                                    () -> driverXbox.getLeftY() * -1.0,
+                                                                    () -> driverXbox.getLeftX() * -1.0)
                                                                     .withControllerRotationAxis(() -> driverXbox.getRightX())
                                                                     .deadband(OperatorConstants.DEADBAND)
                                                                     .scaleTranslation(0.8)
@@ -94,27 +94,27 @@ public class RobotContainer
   }
 
   private void configureDriveToPose() {
-    // driverXbox.y().whileTrue(drivebase.driveToPosePID(drivebase.getClosestPoint()));
+    // driverXbox.y().whileTrue(drivebase.driveToPose(drivebase.getClosestPoint()));
     if(drivebase.isRedAlliance()) {
 
       driverXbox.x().whileTrue(
           drivebase.driveToPosePID(new Pose2d(new Translation2d(14, 2), Rotation2d.fromDegrees(-50)))
           .alongWith(Commands.runOnce(() -> {
-              // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 1000;
+              Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 1000;
               SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
           }))
       );
       driverXbox.y().whileTrue(
-          drivebase.driveToPosePID(new Pose2d(new Translation2d(14, 4), Rotation2d.fromDegrees(0)))
+          drivebase.driveToPosePID(new Pose2d(new Translation2d(15, 4), Rotation2d.fromDegrees(0)))
           .alongWith(Commands.runOnce(() -> {
-              // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 500;
+              Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 500;
               SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
           }))
       );
       driverXbox.b().whileTrue(
           drivebase.driveToPosePID(new Pose2d(new Translation2d(14, 6), Rotation2d.fromDegrees(50)))
           .alongWith(Commands.runOnce(() -> {
-              // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 700;
+              Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 700;
               SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
           }))
       );
