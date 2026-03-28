@@ -47,7 +47,13 @@ public class RebuiltCommands {
     }
 
     public static Command getStopIntake() {
-        return Commands.runOnce(() -> Robot.intakeSubsystem.spinIntake(0.0), Robot.intakeSubsystem);
+        return Commands.runOnce(
+            () -> Robot.intakeSubsystem.spinIntake(0.0), Robot.intakeSubsystem);
+    }
+
+    public static Command getReverseIntake() {
+        return Commands.runOnce(
+            () -> Robot.intakeSubsystem.spinIntake(Constants.IntakeConstants.INTAKE_ROLLER_VELOCITY_RPM), Robot.intakeSubsystem);
     }
     // public static final Command startIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(Constants.IntakeConstants.INTAKE_ROLLER_VELOCITY_RPM), Robot.intakeSubsystem);
     // public static final Command stopIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(0.0), Robot.intakeSubsystem);
@@ -69,12 +75,19 @@ public class RebuiltCommands {
     // );
 
     public static Command getToggleIntake() {
-    return new ConditionalCommand(
-        getStopIntake(),
-        getStartIntake(),
-        Robot.intakeSubsystem::isIntaking
-    );
-}
+        return new ConditionalCommand(
+            getStopIntake(),
+            getStartIntake(),
+            Robot.intakeSubsystem::isIntaking
+        );
+    }
+    public static Command getToggleReverseIntake() {
+        return new ConditionalCommand(
+            getStopIntake(), 
+            getReverseIntake(), 
+            Robot.intakeSubsystem::isIntaking
+            );
+    }
     
 
     public static final ConditionalCommand angleIntake = new ConditionalCommand(
