@@ -30,7 +30,7 @@ public class IO {
   // JoystickButton ledoff = new JoystickButton(operatorXbox, 4)    .whenPressed(m_turnOnLEDsCommand);
     
   public IO() {
-    shootButton.onTrue(RebuiltCommands.toggleShoot);
+    shootButton.onTrue(RebuiltCommands.getToggleShoot());
     // Run intake only while the intake button is held.
     // intakeButton.whileTrue(RebuiltCommands.toggleIntake);
     reverseIntakeButton.onTrue(RebuiltCommands.getToggleReverseIntake());
@@ -42,7 +42,7 @@ public class IO {
 
     intakeAngleButton.onTrue(RebuiltCommands.angleIntake);
       
-      // shootButton.onFalse(RebuiltCommands.toggleShoot);
+      // shootButton.onFalse(RebuiltCommands.getToggleShoot());
       // toggleIntakeButton.toggleOnTrue(RebuiltCommands.startIntake);
       // toggleTransporButton.toggleOnTrue(RebuiltCommands.toggleTransport);
       // toggleSpindexerButton.toggleOnTrue(RebuiltCommands.toggleSpindex);

@@ -60,11 +60,13 @@ public class RebuiltCommands {
 
 
     // Cannot stop shooting on button press until WaitCommands finish
-    public static final ConditionalCommand toggleShoot = new ConditionalCommand(
-        stopShoot.andThen(stopTransport).andThen(stopSpindexer),
-        shootFuel.andThen(new WaitCommand(2.0)).andThen(startTransport).andThen(new WaitCommand(1.0)).andThen(startSpindexer),
-        Robot.shooterSubsystem::isShooting
-    );
+    public static Command getToggleShoot() {
+        return new ConditionalCommand(
+            stopShoot.andThen(stopTransport).andThen(stopSpindexer),
+            shootFuel.andThen(new WaitCommand(2.0)).andThen(startTransport).andThen(new WaitCommand(1.0)).andThen(startSpindexer),
+            Robot.shooterSubsystem::isShooting
+        );
+    }
 
     // Run the intake rollers while the button is held.
     // does this work for starting and stopping the intake?  

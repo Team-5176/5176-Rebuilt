@@ -59,8 +59,8 @@ public class RobotContainer
     configureDriveToPose();
     drivebase.setDefaultCommand(driveFieldOrientedAngularVelocity);
     DriverStation.silenceJoystickConnectionWarning(true);
-    NamedCommands.registerCommand("First Shoot Start", RebuiltCommands.toggleShoot);
-    NamedCommands.registerCommand("First Shoot Stop", RebuiltCommands.toggleShoot);
+    NamedCommands.registerCommand("First Shoot Start", RebuiltCommands.getToggleShoot());
+    NamedCommands.registerCommand("First Shoot Stop", RebuiltCommands.getToggleShoot());
     NamedCommands.registerCommand("Intake Out", RebuiltCommands.angleIntake);
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
@@ -98,7 +98,7 @@ public class RobotContainer
       Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = shooterTargetRpm;
       SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
     }).andThen(drivebase.driveToPosePID(targetPose))
-      .andThen(RebuiltCommands.toggleShoot)
+      .andThen(RebuiltCommands.getToggleShoot())
       .finallyDo(() -> {
         Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM =
             Constants.ShooterConstants.DEFAULT_SHOOTER_TARGET_VELOCITY_RPM;
