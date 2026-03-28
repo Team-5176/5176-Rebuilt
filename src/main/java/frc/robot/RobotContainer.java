@@ -50,6 +50,8 @@ public class RobotContainer
     // Establish a Sendable Chooser that will be able to be sent to the SmartDashboard, allowing selection of desired auto
   private final SendableChooser<Command> autoChooser;
   // The container for the robot. Contains subsystems, OI devices, and commands.
+
+  
   
 
   
@@ -60,9 +62,6 @@ public class RobotContainer
     DriverStation.silenceJoystickConnectionWarning(true);
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
-    NamedCommands.registerCommand("First Shoot Start", RebuiltCommands.toggleShoot);
-    NamedCommands.registerCommand("First Shoot Stop", RebuiltCommands.toggleShoot);
-    NamedCommands.registerCommand("Intake Out", RebuiltCommands.angleIntake);
     drivebase.zeroGyroWithAlliance();
   }
 
