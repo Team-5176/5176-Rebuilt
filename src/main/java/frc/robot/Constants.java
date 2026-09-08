@@ -27,7 +27,7 @@ public final class Constants
   public static final double ROBOT_MASS = (148 - 20.3) * 0.453592; // 32lbs * kg per pound
   public static final Matter CHASSIS    = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
   public static final double LOOP_TIME  = 0.13; //s, 20ms + 110ms sprk max velocity lag
-  public static final double MAX_SPEED  = Units.feetToMeters(19.5);// Maximum speed of the robot in meters per second, used to limit acceleration.
+  public static final double MAX_SPEED  = Units.feetToMeters(19);// Maximum speed of the robot in meters per second, used to limit acceleration.
 
   public static final class DrivebaseConstants
   {
@@ -47,7 +47,7 @@ public final class Constants
   public static class ShooterConstants // Keep in mind these values affect 2 motors working together
   {
     // Target Shooter Velocity in RPM - May be removed later if using a function to calculate distance then velocity of the ball
-    public static double SHOOTER_TARGET_VELOCITY_RPM = 1800.0;//3000
+    public static double SHOOTER_TARGET_VELOCITY_RPM = 1250.0; //1800.0;//3000
 
     // shooter speeds: right(B): middle(Y): left(X):
 
@@ -80,7 +80,7 @@ public final class Constants
     public static final double kRollerI = 0;
     public static final double kRollerD = 0;
 
-    public static final double INTAKE_ROLLER_VELOCITY_RPM = 800.0;
+    public static final double INTAKE_ROLLER_VELOCITY_RPM = 300.0;
 
     public static final double kArmV = 0.91;
     public static final double kArmA = 0.042;
@@ -140,7 +140,7 @@ public final class Constants
 
     public static final int SPINDEXERID = 31;
 
-    public static final double SPINDEXER_TARGET_VELOCITY_RPM = 4000;
+    public static final double SPINDEXER_TARGET_VELOCITY_RPM = 3500;
   }
 
   public static class TowerConstants {
@@ -209,13 +209,13 @@ public final class Constants
     public static final Pose2d BLUEBACKLEFTPOSE2D = new Pose2d(BlueBackLeftTranslation, BlueBackLeftRotation);
 
     public static final Translation2d RedLeftTranslation = new Translation2d(Meter.of(14),Meter.of(3));
-    public static final Translation2d RedCenterTranslation = new Translation2d(Meter.of(14),Meter.of(4));
+    public static final Translation2d RedCenterTranslation = new Translation2d(Meter.of(14),Meter.of(3.20));
     public static final Translation2d RedRightTranslation = new Translation2d(Meter.of(14),Meter.of(5));
     public static final Translation2d RedBackRightTranslation = new Translation2d(Meter.of(15),Meter.of(6));
     public static final Translation2d RedBackLeftTranslation = new Translation2d(Meter.of(15),Meter.of(2));
 
     public static final Rotation2d RedLeftRotation = new Rotation2d(0);
-    public static final Rotation2d RedCenterRotation = new Rotation2d(0);
+    public static final Rotation2d RedCenterRotation = new Rotation2d(180);
     public static final Rotation2d RedRightRotation = new Rotation2d(0);
     public static final Rotation2d RedBackRightRotation = new Rotation2d(0);
     public static final Rotation2d RedBackLeftRotation = new Rotation2d(0);
