@@ -62,11 +62,13 @@ public class RebuiltCommands {
 
 
     // Cannot stop shooting on button press until WaitCommands finish
-    public static final ConditionalCommand toggleShoot = new ConditionalCommand(
-        stopShoot.andThen(stopTransport).andThen(stopSpindexer),
-        shootFuel.andThen(new WaitCommand(2.0)).andThen(startTransport).andThen(new WaitCommand(1.0)).andThen(startSpindexer),
-        Robot.shooterSubsystem::isShooting
-    );
+    public static final Command toggleShoot = stopShoot.andThen(stopTransport).andThen(stopSpindexer);
+
+    public static final ConditionalCommand reverseTransportAndSpin = new ConditionalCommand(
+        stopSpindexer.andThen(stopTransport),
+        reverseSpindexer.andThen(reverseTransport),
+        null
+        );
 
     public static Command getReverse() {
         return Commands.runOnce(

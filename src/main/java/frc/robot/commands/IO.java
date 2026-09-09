@@ -17,6 +17,7 @@ public class IO {
   Trigger reverseIntakeButton = new Trigger(() -> driverXbox.getLeftTriggerAxis() > 0.5);
   JoystickButton intakeDeployButton = new JoystickButton(driverXbox, 5);
   JoystickButton intakeRetractButton = new JoystickButton(driverXbox, 6);
+  JoystickButton reverseTransportAndSpin = new JoystickButton(driverXbox, 3);
   //JoystickButton intakeAngleButton = new JoystickButton(driverXbox, 6);
 
   Trigger position1Button = new Trigger(() -> driverXbox.getPOV() == 0);
@@ -33,6 +34,7 @@ public class IO {
     shootButton.onTrue(RebuiltCommands.toggleShoot);
     // Run intake only while the intake button is held.
     // intakeButton.whileTrue(RebuiltCommands.toggleIntake);
+    reverseTransportAndSpin.onTrue(RebuiltCommands.reverseTransportAndSpin);
     reverseIntakeButton.onTrue(RebuiltCommands.getToggleReverseIntake());
     intakeButton.onTrue(RebuiltCommands.getToggleIntake());
     position1Button.onTrue(RebuiltCommands.topPos);

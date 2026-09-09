@@ -97,8 +97,8 @@ public class RobotContainer
     // driverXbox.y().whileTrue(drivebase.driveToPose(drivebase.getClosestPoint()));
     if(drivebase.isRedAlliance()) {
 
-      driverXbox.x().whileTrue(
-          drivebase.driveToPosePID(new Pose2d(new Translation2d(15, 7), Rotation2d.fromDegrees(27.2)))
+      driverXbox.y().whileTrue(
+          drivebase.driveToPosePID(new Pose2d(new Translation2d(14.5, 3.6), Rotation2d.fromDegrees(0)))
           .alongWith(Commands.runOnce(() -> {
               Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 1800;
               SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
@@ -111,8 +111,8 @@ public class RobotContainer
               SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
           }))
       );
-      driverXbox.b().whileTrue(
-          drivebase.driveToPosePID(new Pose2d(new Translation2d(14, 2.12), Rotation2d.fromDegrees(-30)))
+      driverXbox.y().whileTrue(
+          drivebase.driveToPosePID(new Pose2d(new Translation2d(14.5, 3.6), Rotation2d.fromDegrees(0)))
           .alongWith(Commands.runOnce(() -> {
               Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 1800;
               SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
