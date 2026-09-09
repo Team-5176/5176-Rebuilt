@@ -18,9 +18,11 @@ public class RebuiltCommands {
     public static final Command stopShoot = new InstantCommand(()-> Robot.shooterSubsystem.setShooterVelocity(0), Robot.shooterSubsystem);
     
     public static final Command startTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(Constants.TransportConstants.TRANSPORT_VELOCITY_RPM), Robot.transportSubsystem);
+    public static final Command reverseTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(-Constants.TransportConstants.TRANSPORT_VELOCITY_RPM), Robot.transportSubsystem);
     public static final Command stopTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(0), Robot.transportSubsystem);
 
     public static final Command startSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(Constants.SpindexerConstants.SPINDEXER_TARGET_VELOCITY_RPM), Robot.spindexerSubsystem);
+    public static final Command reverseSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(-Constants.SpindexerConstants.SPINDEXER_TARGET_VELOCITY_RPM), Robot.spindexerSubsystem);
     public static final Command stopSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(0.0), Robot.spindexerSubsystem);
 
     public static final Command deployIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(Constants.IntakeConstants.kArmRotations) ,Robot.intakeSubsystem);
@@ -65,6 +67,11 @@ public class RebuiltCommands {
         shootFuel.andThen(new WaitCommand(2.0)).andThen(startTransport).andThen(new WaitCommand(1.0)).andThen(startSpindexer),
         Robot.shooterSubsystem::isShooting
     );
+
+    public static Command getReverse() {
+        return Commands.runOnce(
+            () -> Robot.intakeSubsystem.spinIntake(-Constants.IntakeConstants.INTAKE_ROLLER_VELOCITY_RPM), Robot.intakeSubsystem);
+    }
 
     // Run the intake rollers while the button is held.
     // does this work for starting and stopping the intake?  
