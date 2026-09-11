@@ -72,3 +72,13 @@ Found and fixed two instances of this pattern in [RebuiltCommands.java](src/main
 Updated call sites: `IO.java` (button bindings) and `RobotContainer.java` (PathPlanner `NamedCommands.registerCommand` calls). Compiles clean (`./gradlew compileJava`).
 
 **Note**: `shootFuel`, `stopShoot`, `startTransport`, `reverseTransport`, `stopTransport`, `startSpindexer`, `reverseSpindexer`, `stopSpindexer` (lines 17-26) are now unused dead fields — left in place since they're harmless (never composed with anything now) and might still be wanted for individual test bindings. Not committed yet — same "test on robot first" agreement applies, and this now needs a fresh deploy + reboot-loop retest before committing.
+
+## 9. Button remapping round 2 (2026-09-11, still uncommitted, still not tested on robot)
+
+User requested: Y-only drive-to-pose (drop the left/right X and B variants), and repurpose X as a hold-to-reverse for the spindexer/transport (to clear jams) that resumes whatever the shoot toggle (A) was already doing when released.
+
+- [RobotContainer.java](src/main/java/frc/robot/RobotContainer.java) `configureDriveToPose()`: removed the `driverXbox.x()` and `driverXbox.b()` triggers (left/right poses). Only `driverXbox.y()` remains, driving to `centerPose`.
+- [RebuiltCommands.java](src/main/java/frc/robot/commands/RebuiltCommands.java): added `getReverseSpindexAndTransport()` (runs spindexer + transport backward) and `getResumeSpindexAndTransport()` (a `ConditionalCommand` keyed on `Robot.shooterSubsystem.isShooting()` — resumes forward if the shoot toggle is currently on, stops if it's off). Both build fresh `InstantCommand` instances per call, following the composed-command safety pattern from section 8 above.
+- [IO.java](src/main/java/frc/robot/commands/IO.java): added `reverseSpindexTransportButton` on physical button 3 (X), bound `.whileTrue(getReverseSpindexAndTransport())` / `.onFalse(getResumeSpindexAndTransport())`.
+- Left the existing Back-button (7) `reverseTransportAndSpin` *toggle* binding untouched — user didn't ask to remove it, so both a toggle (Back) and a hold (X) reverse control currently exist for the same two subsystems. Worth asking the user if that's intentional or if Back's binding should go away now that X covers it.
+- Compiles clean. Not tested on robot, not committed.
