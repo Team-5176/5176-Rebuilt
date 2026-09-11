@@ -447,24 +447,22 @@ public class Vision extends SubsystemBase {
      */
     public Optional<PhotonPipelineResult> getBestResult()
     {
-      if (resultsList.isEmpty())
-      {
-        return Optional.empty();
-      }
-
-      PhotonPipelineResult bestResult       = resultsList.get(0);
-      double               amiguity         = bestResult.getBestTarget().getPoseAmbiguity();
-      double               currentAmbiguity = 0;
+      PhotonPipelineResult bestResult = null;
+      double               amiguity   = Double.MAX_VALUE;
       for (PhotonPipelineResult result : resultsList)
       {
-        currentAmbiguity = result.getBestTarget().getPoseAmbiguity();
-        if (currentAmbiguity < amiguity && currentAmbiguity > 0)
+        if (!result.hasTargets())
+        {
+          continue;
+        }
+        double currentAmbiguity = result.getBestTarget().getPoseAmbiguity();
+        if (bestResult == null || (currentAmbiguity < amiguity && currentAmbiguity > 0))
         {
           bestResult = result;
           amiguity = currentAmbiguity;
         }
       }
-      return Optional.of(bestResult);
+      return Optional.ofNullable(bestResult);
     }
 
     /**

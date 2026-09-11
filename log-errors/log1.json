@@ -1,0 +1,810 @@
+[
+    {
+        "messageType": 2,
+        "timestamp": 0,
+        "seqNumber": 206,
+        "line": "********** Robot program starting **********"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 0.0252685546875,
+        "seqNumber": 207,
+        "line": "NT: Listening on NT3 port 1735, NT4 port 5810"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 0.093994140625,
+        "seqNumber": 208,
+        "line": "NT: Got a NT4 connection from 10.51.76.11 port 56368"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 0.0972900390625,
+        "seqNumber": 209,
+        "line": "NT: CONNECTED NT4 client 'rubikPiPhotonVision@1' (from 10.51.76.11:56368)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 0.34942626953125,
+        "seqNumber": 210,
+        "line": "NT: Got a NT4 connection from 10.51.76.20 port 60052"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 0.35333251953125,
+        "seqNumber": 211,
+        "line": "NT: CONNECTED NT4 client 'Elastic@2' (from 10.51.76.20:60052)"
+    },
+    {
+        "timestamp": 0.41802978515625,
+        "seqNumber": 212,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "StatusLogger: It is not recommended to log to RoboRIO internal storage. Plug in a flash drive.",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "messageType": 2,
+        "timestamp": 0.418701171875,
+        "seqNumber": 213,
+        "line": "StatusLogger: Logging REVLOG to '/home/lvuser/logs/REV_TBD_0129446a909d7da3.revlog'"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 0.41998291015625,
+        "seqNumber": 214,
+        "line": "StatusLogger: Renamed REVLOG from 'REV_TBD_0129446a909d7da3.revlog' to 'REV_20260911_214141.revlog' at '/home/lvuser/logs/REV_20260911_214141.revlog'"
+    },
+    {
+        "timestamp": 0.42022705078125,
+        "seqNumber": 215,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "StatusLogger: Log storage device has 71 MB of free space remaining. REVLOGs will get deleted below 50 MB of free space. Consider deleting logs off the storage device.",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "messageType": 2,
+        "timestamp": 0.83221435546875,
+        "seqNumber": 216,
+        "line": "NT: Got a NT4 connection from 10.51.76.20 port 60055"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 0.83258056640625,
+        "seqNumber": 217,
+        "line": "NT: CONNECTED RTT client (from 10.51.76.20:60055)"
+    },
+    {
+        "timestamp": 5.20355224609375,
+        "seqNumber": 218,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix] Library initialization is complete.",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.46185302734375,
+        "seqNumber": 219,
+        "line": "StudicaLib: Starting NavX3 CAN-2.0 Communication"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.46307373046875,
+        "seqNumber": 220,
+        "line": "StudicaLib: NavX3 Status: Connected"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.46624755859375,
+        "seqNumber": 221,
+        "line": "StudicaLib: NavX3 Firmware Version: 5.0.6"
+    },
+    {
+        "timestamp": 7.260498046875,
+        "seqNumber": 222,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix-diagnostics] Server 2026.1.0 (Jan  7 2026, 19:24:14) running on port: 1250",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "timestamp": 7.2884521484375,
+        "seqNumber": 223,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix] Signal Logger: Available disk space (71 MB) is low; at 50 MB, old hoot logs will be deleted. Use Tuner X to download and delete hoot logs.",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "timestamp": 7.57281494140625,
+        "seqNumber": 224,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix] Signal Logger Started (Network: rio)",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "timestamp": 10.297607421875,
+        "seqNumber": 225,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix] Signal Logger: Available disk space (70 MB) is low; at 50 MB, old hoot logs will be deleted. Use Tuner X to download and delete hoot logs.",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "timestamp": 10.67803955078125,
+        "seqNumber": 226,
+        "numOccur": 1,
+        "errorCode": 1,
+        "flags": 1,
+        "details": "Unhandled exception: java.lang.IllegalArgumentException: Commands that have been composed may not be added to another composition or scheduled individually!\njava.lang.Exception: Originally composed at:\n\tat edu.wpi.first.wpilibj2.command.Command.andThen(Command.java:288)\n\tat frc.robot.commands.RebuiltCommands.<clinit>(RebuiltCommands.java:66)\n\tat frc.robot.RobotContainer.<init>(RobotContainer.java:61)\n\tat frc.robot.Robot.robotInit(Robot.java:71)\n\tat edu.wpi.first.wpilibj.TimedRobot.startCompetition(TimedRobot.java:126)\n\tat edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:436)\n\tat edu.wpi.first.wpilibj.RobotBase.startRobot(RobotBase.java:527)\n\tat frc.robot.Main.main(Main.java:27)\n",
+        "location": "frc.robot.commands.RebuiltCommands.<clinit>(RebuiltCommands.java:77)",
+        "callStack": "\tat edu.wpi.first.wpilibj2.command.Command.andThen(Command.java:287)\n\tat frc.robot.commands.RebuiltCommands.<clinit>(RebuiltCommands.java:77)\n\tat frc.robot.RobotContainer.<init>(RobotContainer.java:61)\n\tat frc.robot.Robot.robotInit(Robot.java:71)\n\tat edu.wpi.first.wpilibj.TimedRobot.startCompetition(TimedRobot.java:126)\n\tat edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:436)\n\tat edu.wpi.first.wpilibj.RobotBase.startRobot(RobotBase.java:527)\n\tat frc.robot.Main.main(Main.java:27)\n",
+        "messageType": 0
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.67877197265625,
+        "seqNumber": 227,
+        "line": "Error at frc.robot.commands.RebuiltCommands.<clinit>(RebuiltCommands.java:77): Unhandled exception: java.lang.IllegalArgumentException: Commands that have been composed may not be added to another composition or scheduled individually!"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.67962646484375,
+        "seqNumber": 228,
+        "line": "java.lang.Exception: Originally composed at:"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.68170166015625,
+        "seqNumber": 229,
+        "line": "\tat edu.wpi.first.wpilibj2.command.Command.andThen(Command.java:288)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.68194580078125,
+        "seqNumber": 230,
+        "line": "\tat frc.robot.commands.RebuiltCommands.<clinit>(RebuiltCommands.java:66)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.68212890625,
+        "seqNumber": 231,
+        "line": "\tat frc.robot.RobotContainer.<init>(RobotContainer.java:61)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.682373046875,
+        "seqNumber": 232,
+        "line": "\tat frc.robot.Robot.robotInit(Robot.java:71)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.68255615234375,
+        "seqNumber": 233,
+        "line": "\tat edu.wpi.first.wpilibj.TimedRobot.startCompetition(TimedRobot.java:126)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.68316650390625,
+        "seqNumber": 234,
+        "line": "\tat edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:436)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.6834716796875,
+        "seqNumber": 235,
+        "line": "\tat edu.wpi.first.wpilibj.RobotBase.startRobot(RobotBase.java:527)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.6837158203125,
+        "seqNumber": 236,
+        "line": "\tat frc.robot.Main.main(Main.java:27)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.68414306640625,
+        "seqNumber": 237,
+        "line": ""
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.68438720703125,
+        "seqNumber": 238,
+        "line": "\tat edu.wpi.first.wpilibj2.command.Command.andThen(Command.java:287)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.68475341796875,
+        "seqNumber": 239,
+        "line": "\tat frc.robot.commands.RebuiltCommands.<clinit>(RebuiltCommands.java:77)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.68499755859375,
+        "seqNumber": 240,
+        "line": "\tat frc.robot.RobotContainer.<init>(RobotContainer.java:61)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.68536376953125,
+        "seqNumber": 241,
+        "line": "\tat frc.robot.Robot.robotInit(Robot.java:71)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.68560791015625,
+        "seqNumber": 242,
+        "line": "\tat edu.wpi.first.wpilibj.TimedRobot.startCompetition(TimedRobot.java:126)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.685791015625,
+        "seqNumber": 243,
+        "line": "\tat edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:436)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.6861572265625,
+        "seqNumber": 244,
+        "line": "\tat edu.wpi.first.wpilibj.RobotBase.startRobot(RobotBase.java:527)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.68701171875,
+        "seqNumber": 245,
+        "line": "\tat frc.robot.Main.main(Main.java:27)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.6900634765625,
+        "seqNumber": 246,
+        "line": ""
+    },
+    {
+        "timestamp": 10.7022705078125,
+        "seqNumber": 247,
+        "numOccur": 1,
+        "errorCode": 1,
+        "flags": 0,
+        "details": "The robot program quit unexpectedly. This is usually due to a code error.\n  The above stacktrace can help determine where the error occurred.\n  See https://wpilib.org/stacktrace for more information.",
+        "location": "edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:450)",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.704345703125,
+        "seqNumber": 248,
+        "line": "Warning at edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:450): The robot program quit unexpectedly. This is usually due to a code error."
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.70489501953125,
+        "seqNumber": 249,
+        "line": "  The above stacktrace can help determine where the error occurred."
+    },
+    {
+        "timestamp": 10.70513916015625,
+        "seqNumber": 250,
+        "numOccur": 1,
+        "errorCode": 1,
+        "flags": 1,
+        "details": "The startCompetition() method (or methods called by it) should have handled the exception above.",
+        "location": "edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:457)",
+        "callStack": "",
+        "messageType": 0
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.70538330078125,
+        "seqNumber": 251,
+        "line": "  See https://wpilib.org/stacktrace for more information."
+    },
+    {
+        "messageType": 2,
+        "timestamp": 10.71240234375,
+        "seqNumber": 252,
+        "line": "Error at edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:457): The startCompetition() method (or methods called by it) should have handled the exception above."
+    },
+    {
+        "messageType": 2,
+        "timestamp": 13.33978271484375,
+        "seqNumber": 253,
+        "line": "********** Robot program starting **********"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 13.365966796875,
+        "seqNumber": 254,
+        "line": "NT: Listening on NT3 port 1735, NT4 port 5810"
+    },
+    {
+        "timestamp": 13.7110595703125,
+        "seqNumber": 255,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "StatusLogger: It is not recommended to log to RoboRIO internal storage. Plug in a flash drive.",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "messageType": 2,
+        "timestamp": 13.72845458984375,
+        "seqNumber": 256,
+        "line": "StatusLogger: Logging REVLOG to '/home/lvuser/logs/REV_TBD_47d86ef243acf056.revlog'"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 13.729736328125,
+        "seqNumber": 257,
+        "line": "StatusLogger: Renamed REVLOG from 'REV_TBD_47d86ef243acf056.revlog' to 'REV_20260911_214154.revlog' at '/home/lvuser/logs/REV_20260911_214154.revlog'"
+    },
+    {
+        "timestamp": 13.73004150390625,
+        "seqNumber": 258,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "StatusLogger: Log storage device has 70 MB of free space remaining. REVLOGs will get deleted below 50 MB of free space. Consider deleting logs off the storage device.",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "messageType": 2,
+        "timestamp": 13.84466552734375,
+        "seqNumber": 259,
+        "line": "NT: Got a NT4 connection from 10.51.76.20 port 60064"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 13.8486328125,
+        "seqNumber": 260,
+        "line": "NT: CONNECTED NT4 client 'Elastic@1' (from 10.51.76.20:60064)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 14.09637451171875,
+        "seqNumber": 261,
+        "line": "NT: Got a NT4 connection from 10.51.76.11 port 41036"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 14.09759521484375,
+        "seqNumber": 262,
+        "line": "NT: CONNECTED NT4 client 'rubikPiPhotonVision@2' (from 10.51.76.11:41036)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 14.32281494140625,
+        "seqNumber": 263,
+        "line": "NT: Got a NT4 connection from 10.51.76.20 port 60065"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 14.32342529296875,
+        "seqNumber": 264,
+        "line": "NT: CONNECTED RTT client (from 10.51.76.20:60065)"
+    },
+    {
+        "timestamp": 18.48223876953125,
+        "seqNumber": 265,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix] Library initialization is complete.",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "messageType": 2,
+        "timestamp": 19.7060546875,
+        "seqNumber": 266,
+        "line": "StudicaLib: Starting NavX3 CAN-2.0 Communication"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 19.70928955078125,
+        "seqNumber": 267,
+        "line": "StudicaLib: NavX3 Status: Connected"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 19.71142578125,
+        "seqNumber": 268,
+        "line": "StudicaLib: NavX3 Firmware Version: 5.0.6"
+    },
+    {
+        "timestamp": 20.539794921875,
+        "seqNumber": 269,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix-diagnostics] Server 2026.1.0 (Jan  7 2026, 19:24:14) running on port: 1250",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "timestamp": 20.56683349609375,
+        "seqNumber": 270,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix] Signal Logger: Available disk space (70 MB) is low; at 50 MB, old hoot logs will be deleted. Use Tuner X to download and delete hoot logs.",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "timestamp": 20.5682373046875,
+        "seqNumber": 271,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix] Signal Logger Started (Network: rio)",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "timestamp": 23.74737548828125,
+        "seqNumber": 272,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix] Signal Logger: Available disk space (70 MB) is low; at 50 MB, old hoot logs will be deleted. Use Tuner X to download and delete hoot logs.",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "timestamp": 23.79541015625,
+        "seqNumber": 273,
+        "numOccur": 1,
+        "errorCode": 1,
+        "flags": 1,
+        "details": "Unhandled exception: java.lang.IllegalArgumentException: Commands that have been composed may not be added to another composition or scheduled individually!\njava.lang.Exception: Originally composed at:\n\tat edu.wpi.first.wpilibj2.command.Command.andThen(Command.java:288)\n\tat frc.robot.commands.RebuiltCommands.<clinit>(RebuiltCommands.java:66)\n\tat frc.robot.RobotContainer.<init>(RobotContainer.java:61)\n\tat frc.robot.Robot.robotInit(Robot.java:71)\n\tat edu.wpi.first.wpilibj.TimedRobot.startCompetition(TimedRobot.java:126)\n\tat edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:436)\n\tat edu.wpi.first.wpilibj.RobotBase.startRobot(RobotBase.java:527)\n\tat frc.robot.Main.main(Main.java:27)\n",
+        "location": "frc.robot.commands.RebuiltCommands.<clinit>(RebuiltCommands.java:77)",
+        "callStack": "\tat edu.wpi.first.wpilibj2.command.Command.andThen(Command.java:287)\n\tat frc.robot.commands.RebuiltCommands.<clinit>(RebuiltCommands.java:77)\n\tat frc.robot.RobotContainer.<init>(RobotContainer.java:61)\n\tat frc.robot.Robot.robotInit(Robot.java:71)\n\tat edu.wpi.first.wpilibj.TimedRobot.startCompetition(TimedRobot.java:126)\n\tat edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:436)\n\tat edu.wpi.first.wpilibj.RobotBase.startRobot(RobotBase.java:527)\n\tat frc.robot.Main.main(Main.java:27)\n",
+        "messageType": 0
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.79620361328125,
+        "seqNumber": 274,
+        "line": "Error at frc.robot.commands.RebuiltCommands.<clinit>(RebuiltCommands.java:77): Unhandled exception: java.lang.IllegalArgumentException: Commands that have been composed may not be added to another composition or scheduled individually!"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.79840087890625,
+        "seqNumber": 275,
+        "line": "java.lang.Exception: Originally composed at:"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.7987060546875,
+        "seqNumber": 276,
+        "line": "\tat edu.wpi.first.wpilibj2.command.Command.andThen(Command.java:288)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.7989501953125,
+        "seqNumber": 277,
+        "line": "\tat frc.robot.commands.RebuiltCommands.<clinit>(RebuiltCommands.java:66)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.79913330078125,
+        "seqNumber": 278,
+        "line": "\tat frc.robot.RobotContainer.<init>(RobotContainer.java:61)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.79931640625,
+        "seqNumber": 279,
+        "line": "\tat frc.robot.Robot.robotInit(Robot.java:71)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.799560546875,
+        "seqNumber": 280,
+        "line": "\tat edu.wpi.first.wpilibj.TimedRobot.startCompetition(TimedRobot.java:126)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.79974365234375,
+        "seqNumber": 281,
+        "line": "\tat edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:436)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.79998779296875,
+        "seqNumber": 282,
+        "line": "\tat edu.wpi.first.wpilibj.RobotBase.startRobot(RobotBase.java:527)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.80023193359375,
+        "seqNumber": 283,
+        "line": "\tat frc.robot.Main.main(Main.java:27)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.80035400390625,
+        "seqNumber": 284,
+        "line": ""
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.80084228515625,
+        "seqNumber": 285,
+        "line": "\tat edu.wpi.first.wpilibj2.command.Command.andThen(Command.java:287)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.8016357421875,
+        "seqNumber": 286,
+        "line": "\tat frc.robot.commands.RebuiltCommands.<clinit>(RebuiltCommands.java:77)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.80194091796875,
+        "seqNumber": 287,
+        "line": "\tat frc.robot.RobotContainer.<init>(RobotContainer.java:61)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.8052978515625,
+        "seqNumber": 288,
+        "line": "\tat frc.robot.Robot.robotInit(Robot.java:71)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.8055419921875,
+        "seqNumber": 289,
+        "line": "\tat edu.wpi.first.wpilibj.TimedRobot.startCompetition(TimedRobot.java:126)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.8057861328125,
+        "seqNumber": 290,
+        "line": "\tat edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:436)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.8060302734375,
+        "seqNumber": 291,
+        "line": "\tat edu.wpi.first.wpilibj.RobotBase.startRobot(RobotBase.java:527)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.806640625,
+        "seqNumber": 292,
+        "line": "\tat frc.robot.Main.main(Main.java:27)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.80682373046875,
+        "seqNumber": 293,
+        "line": ""
+    },
+    {
+        "timestamp": 23.8101806640625,
+        "seqNumber": 294,
+        "numOccur": 1,
+        "errorCode": 1,
+        "flags": 0,
+        "details": "The robot program quit unexpectedly. This is usually due to a code error.\n  The above stacktrace can help determine where the error occurred.\n  See https://wpilib.org/stacktrace for more information.",
+        "location": "edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:450)",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.81072998046875,
+        "seqNumber": 295,
+        "line": "Warning at edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:450): The robot program quit unexpectedly. This is usually due to a code error."
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.81109619140625,
+        "seqNumber": 296,
+        "line": "  The above stacktrace can help determine where the error occurred."
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.81134033203125,
+        "seqNumber": 297,
+        "line": "  See https://wpilib.org/stacktrace for more information."
+    },
+    {
+        "timestamp": 23.81463623046875,
+        "seqNumber": 298,
+        "numOccur": 1,
+        "errorCode": 1,
+        "flags": 1,
+        "details": "The startCompetition() method (or methods called by it) should have handled the exception above.",
+        "location": "edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:457)",
+        "callStack": "",
+        "messageType": 0
+    },
+    {
+        "messageType": 2,
+        "timestamp": 23.8154296875,
+        "seqNumber": 299,
+        "line": "Error at edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:457): The startCompetition() method (or methods called by it) should have handled the exception above."
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.43798828125,
+        "seqNumber": 300,
+        "line": "********** Robot program starting **********"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.46026611328125,
+        "seqNumber": 301,
+        "line": "NT: Listening on NT3 port 1735, NT4 port 5810"
+    },
+    {
+        "timestamp": 26.816650390625,
+        "seqNumber": 302,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "StatusLogger: It is not recommended to log to RoboRIO internal storage. Plug in a flash drive.",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.81768798828125,
+        "seqNumber": 303,
+        "line": "StatusLogger: Logging REVLOG to '/home/lvuser/logs/REV_TBD_2bbd6bbf6012c458.revlog'"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.81890869140625,
+        "seqNumber": 304,
+        "line": "StatusLogger: Renamed REVLOG from 'REV_TBD_2bbd6bbf6012c458.revlog' to 'REV_20260911_214207.revlog' at '/home/lvuser/logs/REV_20260911_214207.revlog'"
+    },
+    {
+        "timestamp": 26.8192138671875,
+        "seqNumber": 305,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "StatusLogger: Log storage device has 70 MB of free space remaining. REVLOGs will get deleted below 50 MB of free space. Consider deleting logs off the storage device.",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.82568359375,
+        "seqNumber": 306,
+        "line": "NT: Got a NT4 connection from 10.51.76.20 port 60085"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.82855224609375,
+        "seqNumber": 307,
+        "line": "NT: CONNECTED NT4 client 'Elastic@1' (from 10.51.76.20:60085)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.8583984375,
+        "seqNumber": 308,
+        "line": "NT: Got a NT4 connection from 10.51.76.11 port 41036"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.85882568359375,
+        "seqNumber": 309,
+        "line": "NT: CONNECTED NT4 client 'rubikPiPhotonVision@2' (from 10.51.76.11:41036)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 27.31817626953125,
+        "seqNumber": 310,
+        "line": "NT: Got a NT4 connection from 10.51.76.20 port 60086"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 27.32763671875,
+        "seqNumber": 311,
+        "line": "NT: CONNECTED RTT client (from 10.51.76.20:60086)"
+    },
+    {
+        "timestamp": 31.61004638671875,
+        "seqNumber": 312,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix] Library initialization is complete.",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "messageType": 2,
+        "timestamp": 32.82135009765625,
+        "seqNumber": 313,
+        "line": "StudicaLib: Starting NavX3 CAN-2.0 Communication"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 32.82244873046875,
+        "seqNumber": 314,
+        "line": "StudicaLib: NavX3 Status: Connected"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 32.824951171875,
+        "seqNumber": 315,
+        "line": "StudicaLib: NavX3 Firmware Version: 5.0.6"
+    },
+    {
+        "timestamp": 33.66650390625,
+        "seqNumber": 316,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix-diagnostics] Server 2026.1.0 (Jan  7 2026, 19:24:14) running on port: 1250",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "timestamp": 33.696533203125,
+        "seqNumber": 317,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix] Signal Logger: Available disk space (70 MB) is low; at 50 MB, old hoot logs will be deleted. Use Tuner X to download and delete hoot logs.",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "timestamp": 33.86431884765625,
+        "seqNumber": 318,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix] Signal Logger Started (Network: rio)",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    }
+]

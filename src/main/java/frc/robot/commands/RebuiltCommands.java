@@ -61,18 +61,53 @@ public class RebuiltCommands {
     // public static final Command stopIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(0.0), Robot.intakeSubsystem);
 
 
+    public static Command getStartShootSequence() {
+        return new InstantCommand(()-> Robot.shooterSubsystem.setShooterVelocity(Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM), Robot.shooterSubsystem)
+            .andThen(new InstantCommand(()-> Robot.transportSubsystem.setTransport(Constants.TransportConstants.TRANSPORT_VELOCITY_RPM), Robot.transportSubsystem))
+            .andThen(new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(Constants.SpindexerConstants.SPINDEXER_TARGET_VELOCITY_RPM), Robot.spindexerSubsystem));
+    }
+
     // Cannot stop shooting on button press until WaitCommands finish
-    public static final Command toggleShoot = stopShoot.andThen(stopTransport).andThen(stopSpindexer);
+    public static Command getStopShootSequence() {
+        return new InstantCommand(()-> Robot.shooterSubsystem.setShooterVelocity(0), Robot.shooterSubsystem)
+            .andThen(new InstantCommand(()-> Robot.transportSubsystem.setTransport(0), Robot.transportSubsystem))
+            .andThen(new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(0.0), Robot.spindexerSubsystem));
+    }
 
-    public static final ConditionalCommand reverseTransportAndSpin = new ConditionalCommand(
-        stopSpindexer.andThen(stopTransport),
-        reverseSpindexer.andThen(reverseTransport),
-        null
+    public static Command getToggleShoot() {
+        return new ConditionalCommand(
+            getStopShootSequence(),
+            getStartShootSequence(),
+            Robot.shooterSubsystem::isShooting
         );
+    }
 
-    public static Command getReverse() {
-        return Commands.runOnce(
-            () -> Robot.intakeSubsystem.spinIntake(-Constants.IntakeConstants.INTAKE_ROLLER_VELOCITY_RPM), Robot.intakeSubsystem);
+    // Held while jam-clearing: runs spindexer + transport backward. On release,
+    // getResumeSpindexAndTransport() decides whether to resume forward (shoot toggle
+    // was on) or stop (it wasn't), so this never leaves the motors stuck in reverse.
+    public static Command getReverseSpindexAndTransport() {
+        return new InstantCommand(() -> Robot.spindexerSubsystem.runSpindexer(-Constants.SpindexerConstants.SPINDEXER_TARGET_VELOCITY_RPM), Robot.spindexerSubsystem)
+            .andThen(new InstantCommand(() -> Robot.transportSubsystem.setTransport(-Constants.TransportConstants.TRANSPORT_VELOCITY_RPM), Robot.transportSubsystem));
+    }
+
+    public static Command getResumeSpindexAndTransport() {
+        return new ConditionalCommand(
+            new InstantCommand(() -> Robot.spindexerSubsystem.runSpindexer(Constants.SpindexerConstants.SPINDEXER_TARGET_VELOCITY_RPM), Robot.spindexerSubsystem)
+                .andThen(new InstantCommand(() -> Robot.transportSubsystem.setTransport(Constants.TransportConstants.TRANSPORT_VELOCITY_RPM), Robot.transportSubsystem)),
+            new InstantCommand(() -> Robot.spindexerSubsystem.runSpindexer(0.0), Robot.spindexerSubsystem)
+                .andThen(new InstantCommand(() -> Robot.transportSubsystem.setTransport(0), Robot.transportSubsystem)),
+            Robot.shooterSubsystem::isShooting
+        );
+    }
+
+    public static Command getReverseTransportAndSpin() {
+        return new ConditionalCommand(
+            new InstantCommand(() -> Robot.spindexerSubsystem.runSpindexer(0.0), Robot.spindexerSubsystem)
+                .andThen(new InstantCommand(() -> Robot.transportSubsystem.setTransport(0), Robot.transportSubsystem)),
+            new InstantCommand(() -> Robot.spindexerSubsystem.runSpindexer(-Constants.SpindexerConstants.SPINDEXER_TARGET_VELOCITY_RPM), Robot.spindexerSubsystem)
+                .andThen(new InstantCommand(() -> Robot.transportSubsystem.setTransport(-Constants.TransportConstants.TRANSPORT_VELOCITY_RPM), Robot.transportSubsystem)),
+            () -> Robot.spindexerSubsystem.isSpindexing() || Robot.transportSubsystem.isTransporting()
+            );
     }
 
     // Run the intake rollers while the button is held.
@@ -99,11 +134,13 @@ public class RebuiltCommands {
     }
     
 
-    public static final ConditionalCommand angleIntake = new ConditionalCommand(
-        retractIntake,
-        deployIntake,
-        Robot.intakeSubsystem::isDeployed
-    );
+    public static Command getAngleIntake() {
+        return new ConditionalCommand(
+            new InstantCommand(()-> Robot.intakeSubsystem.retractIntake(Constants.IntakeConstants.kArmRetractPos), Robot.intakeSubsystem),
+            new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(Constants.IntakeConstants.kArmRotations), Robot.intakeSubsystem),
+            Robot.intakeSubsystem::isDeployed
+        );
+    }
 
     //  public static final ConditionalCommand toggleSpindex = new ConditionalCommand(
     //     stopSpindexer,
