@@ -33,6 +33,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -152,6 +153,13 @@ public class SwerveSubsystem extends SubsystemBase
       swerveDrive.updateOdometry();
       vision.updatePoseEstimation(swerveDrive);
     }
+
+    // Temporary: exact pose readout for measuring field positions (e.g. drive-to-pose targets)
+    // by hand. Safe to remove once the hub/tower center pose constants are set.
+    Pose2d pose = getPose();
+    SmartDashboard.putNumber("Robot Pose X (m)", pose.getX());
+    SmartDashboard.putNumber("Robot Pose Y (m)", pose.getY());
+    SmartDashboard.putNumber("Robot Pose Heading (deg)", pose.getRotation().getDegrees());
   }
 
   @Override
