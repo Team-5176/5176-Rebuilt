@@ -191,8 +191,8 @@ public final class Constants
 
   public static class driveToPoseConstants {
     public static final Translation2d BlueLeftTranslation = new Translation2d(Meter.of(3),Meter.of(6));
-    public static final Translation2d BlueCenterTranslation = new Translation2d(Meter.of(3),Meter.of(4));
-    public static final Translation2d BlueRightTranslation = new Translation2d(Meter.of(3),Meter.of(2));
+    public static final Translation2d BlueCenterTranslation = new Translation2d(Meter.of(2.04),Meter.of(4.42));
+    public static final Translation2d BlueRightTranslation = new Translation2d(Meter.of(3),Meter.of (2));
     public static final Translation2d BlueBackRightTranslation = new Translation2d(Meter.of(16),Meter.of(2));
     public static final Translation2d BlueBackLeftTranslation = new Translation2d(Meter.of(16),Meter.of(6));
 
@@ -209,7 +209,7 @@ public final class Constants
     public static final Pose2d BLUEBACKLEFTPOSE2D = new Pose2d(BlueBackLeftTranslation, BlueBackLeftRotation);
 
     public static final Translation2d RedLeftTranslation = new Translation2d(Meter.of(14),Meter.of(3));
-    public static final Translation2d RedCenterTranslation = new Translation2d(Meter.of(14),Meter.of(3.20));
+    public static final Translation2d RedCenterTranslation = new Translation2d(Meter.of(14.5),Meter.of(3.6));
     public static final Translation2d RedRightTranslation = new Translation2d(Meter.of(14),Meter.of(5));
     public static final Translation2d RedBackRightTranslation = new Translation2d(Meter.of(15),Meter.of(6));
     public static final Translation2d RedBackLeftTranslation = new Translation2d(Meter.of(15),Meter.of(2));
