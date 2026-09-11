@@ -63,6 +63,7 @@ public class RebuiltCommands {
 
     public static Command getStartShootSequence() {
         return new InstantCommand(()-> Robot.shooterSubsystem.setShooterVelocity(Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM), Robot.shooterSubsystem)
+            .andThen(new WaitCommand(Constants.ShooterConstants.SHOOTER_SPINUP_DELAY_SECONDS))
             .andThen(new InstantCommand(()-> Robot.transportSubsystem.setTransport(Constants.TransportConstants.TRANSPORT_VELOCITY_RPM), Robot.transportSubsystem))
             .andThen(new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(Constants.SpindexerConstants.SPINDEXER_TARGET_VELOCITY_RPM), Robot.spindexerSubsystem));
     }

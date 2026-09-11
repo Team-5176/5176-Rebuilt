@@ -24,7 +24,7 @@ public class SpindexerSubsystem extends SubsystemBase {
         SparkMaxConfig spindexerConfig  = new SparkMaxConfig();
         FeedForwardConfig spindexerFeedForwardConfig = new FeedForwardConfig();
 
-        spindexerConfig.idleMode(IdleMode.kBrake);
+        spindexerConfig.idleMode(IdleMode.kCoast);
         spindexerConfig.smartCurrentLimit(Constants.SpindexerConstants.SPINDEX_MOTORS_CURRENT_LIMIT);
         spindexerConfig.voltageCompensation(Constants.SpindexerConstants.SPINDEX_MOTORS_VOLTAGE);
         spindexerConfig.encoder.uvwMeasurementPeriod(10);
@@ -50,19 +50,29 @@ public class SpindexerSubsystem extends SubsystemBase {
         spindexer.configure(spindexerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
     
+    // velocityRPM is real/output-shaft RPM; converted below to motor-shaft RPM for the
+    // closed-loop controller, which reads the motor's encoder directly (pre-gear-reduction).
     public void runSpindexer(double velocityRPM) {
-        spindexer.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
+        if (velocityRPM == 0) {
+            // Let the motor coast to a stop instead of actively PID-holding 0 RPM,
+            // which was fighting small perturbations and clicking as it hunted around zero.
+            spindexer.stopMotor();
+        } else {
+            double motorRPM = velocityRPM * Constants.SpindexerConstants.SPINDEXER_GEAR_REDUCTION;
+            spindexer.getClosedLoopController().setSetpoint(motorRPM, ControlType.kVelocity);
+        }
     }
 
     // added temporly to test Spindexer
      public double getVelocity()
     {
-        return spindexer.getEncoder().getVelocity();
+        // Real/output-shaft RPM
+        return spindexer.getEncoder().getVelocity() / Constants.SpindexerConstants.SPINDEXER_GEAR_REDUCTION;
     }
 
     public boolean isSpindexing()
     {
-        return  Math.abs(spindexer.getEncoder().getVelocity()) > 2000;
+        return  Math.abs(getVelocity()) > 400; // real-RPM equivalent of the old 2000 motor-RPM threshold
     }
 
    }

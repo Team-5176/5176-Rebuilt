@@ -49,6 +49,9 @@ public final class Constants
     // Target Shooter Velocity in RPM - May be removed later if using a function to calculate distance then velocity of the ball
     public static double SHOOTER_TARGET_VELOCITY_RPM = 1050.0; //1800.0;//3000
 
+    // Time to let the shooter wheel spin up to speed before feeding balls into it, for consistent shots
+    public static final double SHOOTER_SPINUP_DELAY_SECONDS = 0.75;
+
     // shooter speeds: right(B): middle(Y): left(X):
 
     // Shooter PID Constants
@@ -140,7 +143,11 @@ public final class Constants
 
     public static final int SPINDEXERID = 31;
 
-    public static final double SPINDEXER_TARGET_VELOCITY_RPM = 3500;
+    // Motor-shaft rotations per one spindexer (output-shaft) rotation
+    public static final double SPINDEXER_GEAR_REDUCTION = 5.0;
+
+    // Real/output-shaft RPM (was 3500 motor-shaft RPM before the gear ratio was accounted for)
+    public static final double SPINDEXER_TARGET_VELOCITY_RPM = 1000;
   }
 
   public static class TowerConstants {

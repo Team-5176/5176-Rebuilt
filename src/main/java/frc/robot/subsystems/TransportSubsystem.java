@@ -25,7 +25,7 @@ public class TransportSubsystem extends SubsystemBase {
       SparkFlexConfig transportConfig = new SparkFlexConfig();
       FeedForwardConfig transportFeedForwardConfig = new FeedForwardConfig();
 
-      transportConfig.idleMode(IdleMode.kBrake);
+      transportConfig.idleMode(IdleMode.kCoast);
       transportConfig.voltageCompensation(Constants.TransportConstants.Transport_MOTORS_VOLTAGE);
       transportConfig.smartCurrentLimit(Constants.TransportConstants.Transport_MOTORS_CURRENT_LIMIT);
 
@@ -50,8 +50,12 @@ public class TransportSubsystem extends SubsystemBase {
 
     /** This is a method that makes the roller spin */
     public void setTransport(double velocityRPM) {
-
-      transport.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
+      if (velocityRPM == 0) {
+        // Let the motor coast to a stop instead of actively PID-holding 0 RPM.
+        transport.stopMotor();
+      } else {
+        transport.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
+      }
     }
 
     // added temporly to test transport
