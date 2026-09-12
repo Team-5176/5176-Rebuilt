@@ -47,7 +47,7 @@ public final class Constants
   public static class ShooterConstants // Keep in mind these values affect 2 motors working together
   {
     // Target Shooter Velocity in RPM - May be removed later if using a function to calculate distance then velocity of the ball
-    public static double SHOOTER_TARGET_VELOCITY_RPM = 1050.0; //1800.0;//3000
+    public static double SHOOTER_TARGET_VELOCITY_RPM = 890.0; //1800.0;//3000
 
     // Time to let the shooter wheel spin up to speed before feeding balls into it, for consistent shots
     public static final double SHOOTER_SPINUP_DELAY_SECONDS = 0.75;
