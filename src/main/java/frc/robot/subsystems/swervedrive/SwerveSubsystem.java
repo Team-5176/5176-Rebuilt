@@ -86,13 +86,17 @@ public class SwerveSubsystem extends SubsystemBase
    */
    public SwerveSubsystem(File directory)
   { 
-    boolean blueAlliance = DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Blue;
-    Pose2d startingPose = blueAlliance ? new Pose2d(new Translation2d(Meter.of(3),
+    // Default to blue when alliance isn't known yet (matches isRedAlliance()'s convention) --
+    // DriverStation.getAlliance() races against the DS actually connecting/reporting at this
+    // point in robotInit(), and disagreeing with isRedAlliance() here caused the starting
+    // pose/heading to mismatch the alliance-based gyro zero applied moments later.
+    boolean redAlliance = DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red;
+    Pose2d startingPose = redAlliance ? new Pose2d(new Translation2d(Meter.of(13.5),
                                                                       Meter.of(4)),
-                                                    Rotation2d.fromDegrees(180))
-                                       : new Pose2d(new Translation2d(Meter.of(13.5),
+                                                    Rotation2d.fromDegrees(0))
+                                      : new Pose2d(new Translation2d(Meter.of(3),
                                                                       Meter.of(4)),
-                                                    Rotation2d.fromDegrees(0));
+                                                    Rotation2d.fromDegrees(180));
     // Configure the Telemetry before creating the SwerveDrive to avoid unnecessary objects being created.
     SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
     try
