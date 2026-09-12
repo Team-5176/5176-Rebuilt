@@ -332,7 +332,11 @@ public class SwerveSubsystem extends SubsystemBase
                   currentPose.getRotation().getRadians(), targetPose.getRotation().getRadians()),
               -swerveDrive.getMaximumChassisAngularVelocity(),
               swerveDrive.getMaximumChassisAngularVelocity());
-          swerveDrive.drive(new ChassisSpeeds(xSpeed, ySpeed, thetaSpeed));
+          // xSpeed/ySpeed are field-relative (computed from absolute field-coordinate error),
+          // so they must go through driveFieldOriented rather than drive(), which expects
+          // robot-relative speeds -- feeding them to drive() directly sent the robot off in the
+          // wrong direction any time heading wasn't 0.
+          swerveDrive.driveFieldOriented(new ChassisSpeeds(xSpeed, ySpeed, thetaSpeed));
         }
     ).finallyDo(() -> swerveDrive.drive(new ChassisSpeeds(0, 0, 0)));
   }
