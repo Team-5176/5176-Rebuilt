@@ -13,6 +13,7 @@ import com.revrobotics.spark.config.FeedForwardConfig;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -54,7 +55,9 @@ public class IntakeSubsystem extends SubsystemBase  {
         intakeRollerClosedLoopConfig.apply(intakeRollerFeedForwardConfig);
         intakeRollerConfig.apply(intakeRollerClosedLoopConfig);
 
-    intakeArmConfig.idleMode(IdleMode.kCoast);
+    // Brake so the gravity-loaded arm holds its position (deployed or retracted)
+    // instead of sagging/falling when disabled or between setpoint commands.
+    intakeArmConfig.idleMode(IdleMode.kBrake);
     //intakeArmConfig.smartCurrentLimit(Constants.IntakeConstants.INTAKE_ARM_MOTORS_CURRENT_LIMIT);
     // Use the voltage constant (was incorrectly passing the current limit)
     intakeArmConfig.voltageCompensation(Constants.IntakeConstants.INTAKE_ARM_MOTORS_VOLTAGE);
@@ -62,11 +65,14 @@ public class IntakeSubsystem extends SubsystemBase  {
 
 
         
-        // intakeArmFeedForwardConfig
-        //                     .kV(Constants.IntakeConstants.kArmV)
-        //                     .kA(Constants.IntakeConstants.kArmA)
-        //                     .kG(Constants.IntakeConstants.kArmG);
-        
+        // Gravity/velocity/accel feedforward so the position PID isn't the only thing
+        // fighting the arm's weight on the way down — without this, a P-only loop lets
+        // gravity accelerate the arm and it arrives (and stops) too fast, i.e. slams.
+        intakeArmFeedForwardConfig
+                            .kV(Constants.IntakeConstants.kArmV)
+                            .kA(Constants.IntakeConstants.kArmA)
+                            .kG(Constants.IntakeConstants.kArmG);
+
         
         intakeArmConfig.closedLoop
                     .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
@@ -102,6 +108,19 @@ public class IntakeSubsystem extends SubsystemBase  {
     public double getVelocity()
     {
         return intakeRoller.getEncoder().getVelocity();
+    }
+
+    public double getArmPosition()
+    {
+        return intakeArm.getEncoder().getPosition();
+    }
+
+    @Override
+    public void periodic()
+    {
+        // Live readout for calibrating kArmRotations/kArmRetractPos against the arm's
+        // actual resting positions instead of guessing and redeploying.
+        SmartDashboard.putNumber("Intake Arm Position (rot)", getArmPosition());
     }
 
     public boolean isIntaking()
