@@ -198,7 +198,7 @@ public final class Constants
 
   public static class driveToPoseConstants {
     public static final Translation2d BlueLeftTranslation = new Translation2d(Meter.of(3),Meter.of(6));
-    public static final Translation2d BlueCenterTranslation = new Translation2d(Meter.of(1.9),Meter.of(4.1));
+    public static final Translation2d BlueCenterTranslation = new Translation2d(Meter.of(1.12),Meter.of(4.33));
     public static final Translation2d BlueRightTranslation = new Translation2d(Meter.of(3),Meter.of (2));
     public static final Translation2d BlueBackRightTranslation = new Translation2d(Meter.of(16),Meter.of(2));
     public static final Translation2d BlueBackLeftTranslation = new Translation2d(Meter.of(16),Meter.of(6));

@@ -6,6 +6,7 @@ package frc.robot;
 
 
 import java.io.File;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -94,11 +95,16 @@ public class RobotContainer
   private void configureDriveToPose() {
     // Y is the only drive-to-pose button; left/right variants (previously X/B) were removed
     // so X is free to control the spindexer/transport reverse-while-held binding in IO.java.
-    boolean isRed = drivebase.isRedAlliance();
-    Pose2d  centerPose = isRed ? Constants.driveToPoseConstants.REDCENTERPOSE2D : Constants.driveToPoseConstants.BLUECENTERPOSE2D;
-
+    // Alliance is looked up when the button is pressed (via Commands.defer), not when this
+    // method runs at RobotContainer construction -- the DS may not have reported an alliance
+    // yet at construction time, which would otherwise permanently lock the target to blue.
     driverXbox.y().whileTrue(
-        drivebase.driveToPosePID(centerPose)
+        Commands.defer(() -> {
+            Pose2d centerPose = drivebase.isRedAlliance()
+                ? Constants.driveToPoseConstants.REDCENTERPOSE2D
+                : Constants.driveToPoseConstants.BLUECENTERPOSE2D;
+            return drivebase.driveToPosePID(centerPose);
+        }, Set.of(drivebase))
         .alongWith(Commands.runOnce(() -> {
             Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 1800;
             SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);

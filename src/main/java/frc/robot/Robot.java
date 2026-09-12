@@ -4,9 +4,11 @@
 
 package frc.robot;
 
+import edu.wpi.first.hal.AllianceStationID;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.simulation.DriverStationSim;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -47,6 +49,15 @@ public class Robot extends TimedRobot
   public Robot()
   {
     instance = this;
+
+    // Force Blue1 in simulation, before RobotContainer (and the SwerveSubsystem/gyro-zero
+    // alliance reads inside it) run in robotInit(). Real matches always get their alliance
+    // from the FMS/DS instead, so this only ever applies to sim runs.
+    if (isSimulation())
+    {
+      DriverStationSim.setAllianceStationId(AllianceStationID.Blue1);
+      DriverStationSim.notifyNewData();
+    }
   }
 
   public static Robot getInstance()
