@@ -147,7 +147,7 @@ public final class Constants
     public static final double SPINDEXER_GEAR_REDUCTION = 5.0;
 
     // Real/output-shaft RPM (was 3500 motor-shaft RPM before the gear ratio was accounted for)
-    public static final double SPINDEXER_TARGET_VELOCITY_RPM = 1000;
+    public static final double SPINDEXER_TARGET_VELOCITY_RPM = 2000;
   }
 
   public static class TowerConstants {
