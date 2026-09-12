@@ -170,7 +170,9 @@ out/
 
 # Simulation GUI and other tools window save file
 networktables.json
-simgui.json
+# simgui.json is tracked on purpose so the whole team shares Field2d display
+# settings (arrow styles, field size). simgui-window.json (docking/window
+# positions) stays personal/per-monitor.
 *-window.json
 
 # Simulation data log directory
